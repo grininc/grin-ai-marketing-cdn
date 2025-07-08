@@ -202,6 +202,20 @@ jQuery(document).ready(function ($) {
                     thankYouPage = "/inbound-thank-you";
                   }
                 }
+                if (jQuery(target).hasClass("get-report")) {
+                  // Get the brand website input value
+                  var websiteInput = $form
+                    .find('input[name="brand_website"]')
+                    .val()
+                    .trim();
+
+                  if (websiteInput) {
+                    // Safely encode and append as query parameter
+                    thankYouPage +=
+                      "?website=" + encodeURIComponent(websiteInput);
+                  }
+                }
+
                 window.location.href = thankYouPage;
               } else {
                 if (jQuery(target).hasClass("toggle-switch")) {
