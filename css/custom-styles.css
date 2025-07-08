@@ -11,3 +11,869 @@
   border: solid white 2px;
   border-radius: 4px;
 }
+
+.italic {
+  font-style: italic;
+}
+
+/*Hubspot Forms */
+
+.hs-form {
+  width: 100%;
+}
+
+.hs_error_rollup {
+  display: none;
+}
+
+form.hs-form fieldset,
+.hs-form .form-columns-1 .hs-form-field {
+  width: 100%;
+  max-width: 100%;
+}
+
+.hs-form-field {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.smaller .hs-form-field {
+  margin-bottom: 18px;
+}
+
+.hs-form fieldset.form-columns-2 .hs-form-field.field {
+  width: 100%;
+}
+
+.form-target input[type="submit"]:disabled {
+  cursor: default;
+}
+
+.form-target .custom-error,
+.dark-theme .separated-last-page .last-page-form-container p.custom-error {
+  font-size: 14px;
+  line-height: 18px;
+  color: #ea5662;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.form-target:not(.blog-subscription) ::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: transparent;
+}
+.form-target:not(.blog-subscription) :-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: transparent;
+}
+.form-target:not(.blog-subscription) ::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: transparent;
+}
+.form-target:not(.blog-subscription) :-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: transparent;
+}
+.form-target:not(.blog-subscription) input::placeholder {
+  color: transparent;
+}
+
+form.hs-form fieldset.form-columns-1 .input,
+form.hs-form fieldset.form-columns-2 .input,
+form.hs-form fieldset.form-columns-1 .input .hs-input {
+  margin-right: unset;
+  width: 100%;
+}
+
+.form-target .submitted-message {
+  font-size: 20px;
+  font-weight: 600;
+}
+.toggle-block.active {
+  display: block;
+}
+.toggle-block:not(.active) {
+  display: none;
+}
+
+.hs-form-field.hs-fieldtype-text label:not(.hs-error-msg),
+.hs-form-field.hs-fieldtype-number label:not(.hs-error-msg),
+.hs-form-field.hs-fieldtype-phonenumber label:not(.hs-error-msg) {
+  font-size: 16px;
+  line-height: 20px;
+  color: #757575;
+  padding: 0;
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  transition-duration: 0.5s;
+}
+
+.smaller .hs-form-field.hs-fieldtype-text label:not(.hs-error-msg),
+.smaller .hs-form-field.hs-fieldtype-number label:not(.hs-error-msg),
+.smaller .hs-form-field.hs-fieldtype-phonenumber label:not(.hs-error-msg) {
+  font-size: 15px;
+  line-height: 19px;
+}
+
+.hs-form-field.hs-fieldtype-text.float-label label:not(.hs-error-msg),
+.hs-form-field.hs-fieldtype-number.float-label label:not(.hs-error-msg),
+.hs-form-field.hs-fieldtype-phonenumber.float-label label:not(.hs-error-msg) {
+  font-size: 13px;
+  line-height: 14px;
+  padding: 2px 6px;
+  background: #ffffff;
+  top: -9px;
+  left: 11px;
+  border-radius: 3px;
+}
+
+.hs-hs_lead_status label:not(.hs-error-msg),
+.hs_what_best_describes_you_dropdown label:not(.hs-error-msg),
+.hs-input[type="radio"] + span {
+  color: #757575;
+  font-size: 14px;
+}
+
+.hs-error-msgs {
+  display: flex !important;
+  justify-content: center;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.hs-error-msg,
+.hs-error-msgs {
+  font-size: 14px;
+  line-height: 18px;
+  color: #ea5662;
+}
+
+.hs_email,
+.hs_what_best_describes_you_,
+.hs_submit {
+  width: 100%;
+}
+
+.hs-input[type="text"],
+.hs-input[type="email"],
+.hs-input[type="tel"],
+.hs-form-field select,
+.hs-input[type="number"] {
+  font-size: 16px;
+  font-family: inherit;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #e9e9f5;
+  border-radius: 4px;
+  transition-duration: 0.5s;
+}
+
+.smaller .hs-input[type="text"],
+.smaller .hs-input[type="email"],
+.smaller .hs-input[type="tel"],
+.smaller .hs-form-field select,
+.smaller .hs-input[type="number"] {
+  font-size: 15px;
+}
+
+.hs-input[type="text"]:focus,
+.hs-input[type="email"]:focus,
+.hs-input[type="tel"]:focus,
+.hs-input[type="number"]:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.extra-required {
+  display: none;
+}
+
+.choices .select-wrapper {
+  display: block !important;
+}
+
+/* closed dropdown field */
+.hs-form-field .choices__inner {
+  background-color: transparent;
+  color: #fff;
+  padding-right: 2.5em; /* room for your arrow */
+  background-image: url("/wp-content/uploads/2024/12/ArrowDown-1.webp");
+  background-repeat: no-repeat;
+  background-position: right 0.75em center;
+  background-size: 10px;
+  border-radius: 4px;
+  border-width: 1px;
+  border: 1px solid #fff;
+}
+.case-studies-template-default .hs-form-field .choices__inner {
+  color: #757575;
+  border: 1px solid #e9e9f5;
+}
+
+.is-open .choices__list--dropdown,
+.is-open .choices__list[aria-expanded] {
+  border-color: white;
+}
+
+/* open list */
+.hs-form-field .choices__list--dropdown {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  margin-top: 0.25em;
+  z-index: 1000;
+}
+
+/* each choice */
+.hs-form-field .choices__list--dropdown .choices__list-item {
+  background-color: #1e1e1e;
+  color: #fff;
+  transition-duration: 0.4s;
+}
+
+.purple-select .hs-form-field .choices__list--dropdown,
+.purple-select .hs-form-field .choices__list--dropdown .choices__list-item {
+  background-image: linear-gradient(180deg, var(--cc-color-1) 0%, #000000 100%);
+  border: 1px solid #fff;
+}
+.purple-select
+  .choices__list--dropdown
+  .choices__item--selectable.is-highlighted,
+.purple-select
+  .choices__list[aria-expanded]
+  .choices__item--selectable.is-highlighted {
+  background-color: #1e1e1e;
+  color: #e8fd95;
+}
+
+/* hover / highlighted */
+.choices__list--dropdown .choices__item--selectable.is-highlighted,
+.choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
+  background-color: #444;
+  color: #fff;
+}
+
+.choices__placeholder {
+  opacity: 1;
+}
+
+.choices[data-type*="select-one"]::after {
+  display: none;
+}
+
+.choices__list--single .choices__item {
+  font-size: 15px;
+}
+
+.hs_how_did_you_hear_about_us {
+  display: none;
+}
+.hs_how_did_you_hear_about_us.active {
+  display: block;
+}
+
+.hs-form-field select.is-placeholder {
+  color: #757575; /* Color for the first option */
+}
+
+.form-target:not(.demo):not(.three-minute-quick-demo):not(.mini-demo-form)
+  .hs-form
+  fieldset.form-columns-2
+  .hs-form-field.hs_email,
+.hs-form
+  fieldset.form-columns-2
+  .hs-form-field.hs_what_best_describes_you_dropdown {
+  width: 100%;
+}
+
+.hs-form ul {
+  list-style: none;
+  display: flex;
+  gap: 12px;
+}
+
+.hs-form ul li label {
+  display: flex;
+  gap: 4px;
+}
+.hs-form ul li label.hs-form-radio-display input.hs-input[type="radio"] {
+  margin: 0;
+  width: 0;
+}
+
+.hs-form-radio-display {
+  cursor: pointer;
+}
+
+.hs-input[type="radio"],
+form.hs-form .input .hs-form-booleancheckbox .hs-input[type="checkbox"] {
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.hs-input[type="radio"] + span {
+  display: flex;
+  align-items: center;
+}
+
+.hs-input[type="radio"] + span:before {
+  content: "";
+  border: #757575 solid 1px;
+  width: 12px;
+  height: 12px;
+  transition-duration: 0.4s;
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+/* Style the custom radio button when checked */
+.hs-input[type="radio"]:checked + span:before {
+  background-color: #696eff;
+  border-color: #696eff;
+}
+
+/* Style the label to show a custom checkbox */
+.hs-form-booleancheckbox-display {
+  position: relative;
+  padding-left: 15px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #272746;
+}
+
+.smaller .hs-form-booleancheckbox-display {
+  font-size: 10px;
+  line-height: 13px;
+}
+
+.hs-form-booleancheckbox-display a {
+  color: #696eff;
+}
+
+.hs-input[type="checkbox"] {
+  cursor: default;
+}
+
+.hs-input[type="checkbox"] .hs-form-booleancheckbox-display a,
+.hs-input[type="checkbox"] + span:before {
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.hs-input[type="checkbox"] + span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #757575;
+  background-color: #fff;
+  background-size: cover;
+  transition:
+    background-image 0.2s,
+    border-color 0.2s;
+  border-radius: 2px;
+}
+
+/* Change the background image when checked */
+.hs-input[type="checkbox"]:checked + span:before {
+  background-image: url("/wp-content/uploads/2022/09/custom-checkbox.svg");
+  border-color: #696eff;
+  background-position: center;
+  background-size: 15px;
+}
+
+.hs_submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hs_submit input {
+  border: none;
+  background: #696eff;
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 25px 25px 25px 0;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+.hs_submit input:hover {
+  border-radius: 25px;
+}
+
+/* .hs-form-field:nth-child(odd) input, .hs-form-field:nth-child(odd) select {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+      }
+      .hs-form-field:nth-child(even) input, .hs-form-field:nth-child(even) select {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+      } */
+
+.form-target:not(.demo):not(.three-minute-quick-demo):not(.mini-demo-form)
+  .hs-form-field
+  input.hs-input[type="email"],
+.hs-form-field .input select {
+  border-radius: 4px;
+}
+
+.podcast-subscription
+  .hs-form
+  fieldset.form-columns-2
+  .hs-form-field.hs-firstname {
+  width: 100%;
+}
+.podcast-subscription
+  .hs-form
+  fieldset.form-columns-2
+  .hs-form-field.hs-firstname
+  .input
+  input {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.newsletter-subscription .hs-compliance_explicit_opt_in__c span {
+  color: white;
+}
+
+.newsletter-subscription.footer-form form {
+  position: relative;
+}
+
+.newsletter-subscription.footer-form .hs_submit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
+  height: 50px;
+}
+
+.newsletter-subscription.footer-form .hs_submit input {
+  height: 50px;
+  border-radius: 0 4px 4px 0;
+}
+
+@media screen and (max-width: 576px) {
+  .newsletter-subscription.footer-form .hs_submit input {
+    height: 52px;
+  }
+}
+
+.newsletter-subscription.footer-form .hs-form-booleancheckbox-display a,
+.newsletter-subscription.modal-form .hs-form-booleancheckbox-display a {
+  color: #e8fd95;
+}
+
+.newsletter-subscription.footer-form .hs-form-booleancheckbox-display span {
+  font-size: 11px;
+  line-height: 14px;
+  color: #cfcfcf;
+}
+
+.newsletter-subscription.footer-form
+  .hs-form-field.hs-fieldtype-text.float-label
+  label:not(.hs-error-msg),
+.newsletter-subscription.modal-form
+  .hs-form-field.hs-fieldtype-text.float-label
+  label:not(.hs-error-msg) {
+  pointer-events: none;
+  opacity: 0;
+  top: 14px;
+}
+
+.newsletter-subscription.modal-form
+  .hs-form-field.hs-fieldtype-text.float-label
+  label:not(.hs-error-msg) {
+  background: transparent;
+}
+
+.newsletter-subscription.modal-form .hs-form-booleancheckbox-display {
+  font-size: 10px;
+}
+
+.newsletter-subscription.modal-form .hs-input[type="email"] {
+  background: rgba(235, 235, 255, 0.5);
+  border: none;
+  color: white;
+}
+
+.newsletter-subscription.modal-form .hs_submit .actions {
+  position: relative;
+  margin-right: auto;
+}
+
+.newsletter-subscription.modal-form .hs_submit .actions input {
+  width: 130px;
+  border-radius: 25px;
+}
+
+.newsletter-subscription.modal-form .hs-input[type="checkbox"] + span:before {
+  background-color: #d0d2ff;
+  border: none;
+  border-radius: 3px;
+}
+.newsletter-subscription.modal-form
+  .hs-input[type="checkbox"]:checked
+  + span:before {
+  background-size: 16px;
+}
+
+.newsletter-subscription.modal-form .hs_submit .actions::after {
+  content: "Subscribe";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #696eff;
+  border-radius: 3px;
+  pointer-events: none;
+  font-size: 18px;
+  z-index: 1;
+  font-weight: 500;
+  color: white;
+  width: 80%;
+  text-align: center;
+}
+
+.newsletter-subscription.modal-form
+  .hs-form-field.hs-fieldtype-text
+  label:not(.hs-error-msg) {
+  color: white;
+}
+
+.blue-bg-form.newsletter-subscription.footer-form .hs_submit .actions::after {
+  display: none;
+}
+.blue-bg-form.newsletter-subscription.footer-form .hs_submit .actions input {
+  width: auto;
+  color: #000;
+  background-color: #e8fd95 !important;
+}
+
+.dark-theme .separated-last-page .download-header {
+  color: white;
+  font-size: 35px;
+  line-height: normal;
+  margin-bottom: 10px;
+}
+
+.dark-theme .separated-last-page .last-page-form-container p {
+  color: white;
+  margin-bottom: 30px;
+}
+
+.dark-theme .separated-last-page .last-page-form-container {
+  padding: 0;
+}
+
+.dark-theme .separated-last-page .hs_what_best_describes_you_ label span,
+.dark-theme .separated-last-page .hs-form-radio label span,
+.dark-theme .separated-last-page .hs-form-booleancheckbox label span {
+  color: white;
+}
+
+.dark-theme .separated-last-page .hs-form-radio label span::before {
+  border-color: white;
+}
+
+.dark-theme .separated-last-page .hs_submit input {
+  background-color: #f95717;
+}
+
+.blue-bg-form .hs_what_best_describes_you_ label span,
+.blue-bg-form .hs-form-booleancheckbox-display span,
+.blue-bg-form .hs-fieldtype-number label span,
+.blue-bg-form .hs-fieldtype-select label span {
+  color: white;
+}
+
+.blue-bg-form .hs-fieldtype-number.float-label label span {
+  color: black;
+}
+
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.blue-bg-form .hs-input[type="radio"] + span:before {
+  background-color: white;
+}
+.blue-bg-form .hs-input[type="radio"]:checked + span:before {
+  background-color: #696eff;
+}
+.blue-bg-form .hs_submit input.hs-button.primary.large {
+  background-color: #f95717;
+}
+.blue-bg-form .hs_submit .actions {
+  position: relative;
+}
+.blue-bg-form .hs_submit .actions input {
+  width: 200px;
+  padding: 15px;
+}
+.smaller.blue-bg-form .hs_submit .actions input {
+  width: 160px;
+  font-size: 15px;
+}
+.blue-bg-form .hs_submit .actions::after {
+  content: "Book a Demo";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f95717;
+  padding: 2px 5px;
+  border-radius: 3px;
+  pointer-events: none;
+  font-size: 16px;
+  z-index: 1;
+  font-weight: 500;
+  color: white;
+  width: 80%;
+  text-align: center;
+}
+
+.blue-bg-form .hs-form-booleancheckbox-display a {
+  color: #a8eafe;
+}
+
+.blue-bg-form .hs-input[type="text"],
+.blue-bg-form .hs-input[type="email"],
+.blue-bg-form .hs-input[type="tel"],
+.blue-bg-form .hs-form-field select,
+.blue-bg-form .hs-input[type="number"] {
+  background-color: transparent;
+  border-color: white;
+  color: white;
+}
+
+.blue-bg-form .hs-form-field.hs-fieldtype-text label:not(.hs-error-msg),
+.blue-bg-form .hs-form-field.hs-fieldtype-number label:not(.hs-error-msg),
+.blue-bg-form .hs-form-field.hs-fieldtype-phonenumber label:not(.hs-error-msg) {
+  color: white;
+}
+
+.blue-bg-form .hs-input[type="text"]:focus,
+.blue-bg-form .hs-input[type="email"]:focus,
+.blue-bg-form .hs-input[type="tel"]:focus,
+.hs-form-field select:focus,
+.blue-bg-form .hs-input[type="number"]:focus {
+  border-color: white;
+}
+
+.blue-bg-form
+  .hs-form-field.hs-fieldtype-text.float-label
+  label:not(.hs-error-msg),
+.blue-bg-form
+  .hs-form-field.hs-fieldtype-number.float-label
+  label:not(.hs-error-msg),
+.blue-bg-form
+  .hs-form-field.hs-fieldtype-phonenumber.float-label
+  label:not(.hs-error-msg) {
+  color: black;
+}
+@media (max-width: 400px),
+  (min-device-width: 320px) and (max-device-width: 480px) {
+  .hs-form-field:nth-child(odd) input,
+  .hs-form-field:nth-child(odd) select {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  .hs-form-field:nth-child(even) input,
+  .hs-form-field:nth-child(even) select {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+  form.hs-form:not(.hs-video-form)
+    .form-columns-2
+    .hs-form-field
+    input.hs-input {
+    width: 100%;
+  }
+}
+
+.creator-referral.blue-bg-form .hs_submit input.hs-button.primary.large {
+  background-color: #e8fd95 !important;
+}
+
+.creator-referral.blue-bg-form .hs_submit .actions::after {
+  background-color: #e8fd95 !important;
+  content: "Submit" !important;
+  color: black;
+}
+
+.creator-referral.blue-bg-form .hs-form-field label span {
+  color: white;
+}
+
+.creator-referral.blue-bg-form .hs-input[type="checkbox"] + span {
+  position: relative;
+}
+
+.creator-referral.blue-bg-form .hs-input[type="checkbox"] + span:before {
+  left: -20px;
+  top: 4px;
+}
+
+.creator-referral.blue-bg-form .hs-form ul {
+  flex-direction: column;
+}
+
+.creator-referral.blue-bg-form
+  .hs-form-field.hs-fieldtype-text.float-label
+  label:not(.hs-error-msg)
+  span,
+.creator-referral.blue-bg-form
+  .hs-form-field.hs-fieldtype-number.float-label
+  label:not(.hs-error-msg)
+  span,
+.creator-referral.blue-bg-form
+  .hs-form-field.hs-fieldtype-phonenumber.float-label
+  label:not(.hs-error-msg)
+  span {
+  color: black;
+}
+
+.creator-referral.blue-bg-form .hs-fieldtype-checkbox .input,
+.creator-referral.blue-bg-form .hs-fieldtype-radio .input {
+  margin-top: 10px;
+}
+
+/* .jan-2025-design .hs-form .form-columns-1 .hs-form-field.field,
+    .jan-2025-design .hs-form .form-columns-2 .hs-form-field.field {
+      width: 50%;
+    } */
+
+.jan-2025-design .hs-form-field .choices__inner {
+  background-color: white;
+  color: black;
+}
+
+.jan-2025-design .hs-form .form-columns-2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.jan-2025-design
+  .hs-form-field.hs-fieldtype-phonenumber
+  label:not(.hs-error-msg),
+.jan-2025-design .hs-form-field.hs-fieldtype-text label:not(.hs-error-msg),
+.jan-2025-design .hs-form-field.hs-fieldtype-select label:not(.hs-error-msg),
+.jan-2025-design .hs-form-field.hs-fieldtype-number label:not(.hs-error-msg),
+.jan-2025-design .hs-form .form-columns-1 .hs-fieldtype-radio label {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  position: relative;
+  top: unset;
+  left: unset;
+}
+
+.jan-2025-design .hs-form .form-columns-1 .hs-fieldtype-radio li label {
+  font-weight: 400;
+  color: white;
+  font-size: 14px;
+  line-height: 22px;
+}
+.jan-2025-design .hs-input[type="radio"] + span {
+  color: white;
+  text-transform: none;
+}
+.jan-2025-design .hs-input[type="radio"] + span:before {
+  background-color: white;
+}
+.jan-2025-design .hs-input[type="checkbox"] + span:before {
+  background-color: transparent;
+}
+.jan-2025-design .hs-input[type="radio"]:checked + span:before {
+  background-color: #696eff;
+}
+.jan-2025-design .hs-form-booleancheckbox-display {
+  color: white;
+}
+.jan-2025-design .hs-form-booleancheckbox-display a {
+  color: #a8eafe;
+}
+
+.jan-2025-design .hs-form-field.hs_how_did_you_hear_about_us label::before {
+  content: "How did you hear about us?";
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.jan-2025-design .hs-form-field select.is-placeholder {
+  color: transparent;
+}
+
+.jan-2025-design .hs_submit input {
+  background-color: #e8fd95;
+  color: black;
+  border-radius: 25px;
+}
+
+.jan-2025-design
+  .hs-form-field.hs-fieldtype-phonenumber.float-label
+  label:not(.hs-error-msg),
+.jan-2025-design
+  .hs-form-field.hs-fieldtype-text.float-label
+  label:not(.hs-error-msg),
+.jan-2025-design
+  .hs-form-field.hs-fieldtype-select.float-label
+  label:not(.hs-error-msg),
+.jan-2025-design
+  .hs-form-field.hs-fieldtype-number.float-label
+  label:not(.hs-error-msg) {
+  padding: 0;
+  background-color: transparent;
+}
+
+.jan-2025-design
+  .hs-form
+  .form-columns-1
+  .hs-form-field.hs_compliance_explicit_opt_in__c,
+.jan-2025-design
+  .hs-form
+  .form-columns-1
+  .hs-form-field.hs_what_best_describes_you_ {
+  width: 100%;
+}
+
+@media screen and (max-width: 992px) {
+  .jan-2025-design .hs-form .form-columns-1 .hs-form-field.field,
+  .jan-2025-design .hs-form .form-columns-2 .hs-form-field.field {
+    width: 100%;
+  }
+}
+
+.index-assessment .hs-form .form-columns-2 {
+  display: grid;
+  gap: 0 20px;
+  grid-template-columns: auto auto;
+}
+
+.index-assessment fieldset.form-columns-1 .input select.hs-input {
+  margin-top: 5px;
+}
+
+.form-target.index-assessment .submitted-message {
+  color: white;
+}
+/*End Hubspot forms*/
