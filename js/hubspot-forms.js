@@ -59,6 +59,7 @@ jQuery(document).ready(function ($) {
           if (websiteValue) {
             // Store it for later use, e.g., in a data attribute or variable
             $(form).data("brandWebsiteValue", websiteValue);
+            console.log(websiteValue);
           } else {
             $(form).removeData("brandWebsiteValue");
           }
