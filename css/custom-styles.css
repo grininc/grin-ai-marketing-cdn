@@ -856,6 +856,82 @@ input::-webkit-inner-spin-button {
   width: 100%;
 }
 
+.get-report {
+  margin: 10px 0;
+}
+.get-report .hs-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+}
+.get-report .hs-form .hs-form-field {
+  margin-bottom: 0;
+}
+.get-report .hs-form .hs-form-field label {
+  display: none;
+}
+.get-report .hs-form .hs-form-field label.hs-error-msg {
+  display: flex;
+  margin-bottom: 0;
+}
+.get-report .hs-form .hs-form-field .hs-error-msgs {
+  padding-left: 0;
+}
+.get-report .hs-input[type="text"],
+.get-report .hs-input[type="email"],
+.get-report .hs-input[type="tel"],
+.get-report .hs-form-field select,
+.get-report .hs-input[type="number"] {
+  background: #1e1e1e;
+  border: 1px solid #b2b2b2;
+  border-radius: 50px;
+  color: white;
+  padding-left: 50px;
+}
+.form-target.get-report:not(.blog-subscription) input::placeholder,
+.form-target.get-report:not(.blog-subscription) ::-webkit-input-placeholder {
+  color: #b2b2b2;
+}
+
+.get-report .hs_brand_website .input {
+  position: relative;
+}
+
+.get-report .hs_brand_website .input::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  width: 25px;
+  height: 25px;
+  background-image: url("https://cdn.prod.website-files.com/686bf8b543c9e02cde4ff419/686c6de5c94358c370c9f866_globe.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.get-report .hs_submit {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.get-report .hs_submit input {
+  background: #e8fd95;
+  font-weight: 300;
+  padding: 15px 25px;
+  color: black;
+  border-radius: 25px;
+  transition-duration: 0.4s;
+}
+.get-report .hs_submit input:hover {
+  background: #fff;
+}
+@media screen and (max-width: 767px) {
+  .get-report .hs-form {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media screen and (max-width: 992px) {
   .jan-2025-design .hs-form .form-columns-1 .hs-form-field.field,
   .jan-2025-design .hs-form .form-columns-2 .hs-form-field.field {
