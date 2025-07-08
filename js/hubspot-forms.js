@@ -52,6 +52,17 @@ jQuery(document).ready(function ($) {
         } else {
           $(this).closest(".hs-form-field").removeClass("float-label");
         }
+
+        // ✅ Custom logic for brand_website input
+        if ($(this).attr("name") === "brand_website") {
+          var websiteValue = $(this).val().trim();
+          if (websiteValue) {
+            // Store it for later use, e.g., in a data attribute or variable
+            $(form).data("brandWebsiteValue", websiteValue);
+          } else {
+            $(form).removeData("brandWebsiteValue");
+          }
+        }
       }
     );
 
@@ -202,15 +213,13 @@ jQuery(document).ready(function ($) {
                     thankYouPage = "/inbound-thank-you";
                   }
                 }
+
                 if (jQuery(target).hasClass("get-report")) {
-                  var websiteField = $form.find('input[name="brand_website"]');
-                  if (websiteField.length > 0) {
-                    var websiteInput = websiteField.val().trim();
-                    console.log("input: " + websiteInput);
-                    if (websiteInput) {
-                      thankYouPage +=
-                        "?website=" + encodeURIComponent(websiteInput);
-                    }
+                  var websiteInput = $form.data("brandWebsiteValue");
+                  if (websiteInput) {
+                    const separator = thankYouPage.includes("?") ? "&" : "?";
+                    thankYouPage +=
+                      separator + "website=" + encodeURIComponent(websiteInput);
                   }
                 }
 
