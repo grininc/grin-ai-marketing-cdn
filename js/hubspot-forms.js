@@ -203,16 +203,14 @@ jQuery(document).ready(function ($) {
                   }
                 }
                 if (jQuery(target).hasClass("get-report")) {
-                  // Get the brand website input value
-                  var websiteInput = $form
-                    .find('input[name="brand_website"]')
-                    .val()
-                    .trim();
-
-                  if (websiteInput) {
-                    // Safely encode and append as query parameter
-                    thankYouPage +=
-                      "?website=" + encodeURIComponent(websiteInput);
+                  var websiteField = $form.find('input[name="brand_website"]');
+                  if (websiteField.length > 0) {
+                    var websiteInput = websiteField.val().trim();
+                    console.log("input: " + websiteInput);
+                    if (websiteInput) {
+                      thankYouPage +=
+                        "?website=" + encodeURIComponent(websiteInput);
+                    }
                   }
                 }
 
