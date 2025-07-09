@@ -1,4 +1,5 @@
 jQuery(document).ready(function ($) {
+  console.log("test");
   // Open modal
   $('[class^="open-modal-"]').on("click", function () {
     var classList = $(this).attr("class").split(/\s+/);
