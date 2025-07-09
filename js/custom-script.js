@@ -1,12 +1,8 @@
 jQuery(document).ready(function ($) {
-  console.log("test");
-
   // Open modal
   $(document).on("click", "[class*='open-modal-']", function () {
     var classList = $(this).attr("class").split(/\s+/);
     var modalNumber;
-
-    console.log("clicked", classList);
 
     classList.forEach(function (className) {
       var match = className.match(/^open-modal-(\d+)$/);
@@ -20,8 +16,15 @@ jQuery(document).ready(function ($) {
     }
   });
 
-  // Close modal
+  // Close modal via close button
   $(document).on("click", ".modal .close", function () {
     $(this).closest(".modal").removeClass("active");
+  });
+
+  // Close modal via click outside form-div
+  $(document).on("click", ".modal", function (e) {
+    if (!$(e.target).closest(".form-div").length) {
+      $(this).removeClass("active");
+    }
   });
 });
