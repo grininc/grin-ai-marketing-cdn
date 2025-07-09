@@ -26,6 +26,15 @@
   display: none;
 }
 
+form.hs-form fieldset.form-columns-2 {
+  display: flex;
+  gap: 10px;
+}
+
+.hs-form fieldset.form-columns-2 .hs-form-field.field {
+  width: calc(50% - 5px);
+}
+
 form.hs-form fieldset,
 .hs-form .form-columns-1 .hs-form-field {
   width: 100%;
@@ -39,10 +48,6 @@ form.hs-form fieldset,
 
 .smaller .hs-form-field {
   margin-bottom: 18px;
-}
-
-.hs-form fieldset.form-columns-2 .hs-form-field.field {
-  width: 100%;
 }
 
 .form-target input[type="submit"]:disabled {
@@ -616,7 +621,6 @@ input::-webkit-inner-spin-button {
 }
 .dark-rounded-form .hs-form {
   display: grid;
-  grid-template-columns: 2fr 1fr;
   gap: 10px;
 }
 .dark-rounded-form .hs-form .hs-form-field {
@@ -641,8 +645,8 @@ input::-webkit-inner-spin-button {
   border: 1px solid #b2b2b2;
   border-radius: 50px;
   color: white;
-  padding-left: 50px;
 }
+
 .form-target.dark-rounded-form:not(.blog-subscription) input::placeholder,
 .form-target.dark-rounded-form:not(.blog-subscription)
   ::-webkit-input-placeholder {
@@ -653,7 +657,10 @@ input::-webkit-inner-spin-button {
   position: relative;
 }
 
-.dark-rounded-form .hs_brand_website .input::before {
+.dark-rounded-form .get-report .hs_brand_website .input {
+  padding-left: 50px;
+}
+.dark-rounded-form .get-report .hs_brand_website .input::before {
   content: "";
   position: absolute;
   left: 15px;
