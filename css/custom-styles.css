@@ -16,6 +16,19 @@
   font-style: italic;
 }
 
+.modal {
+  display: flex;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 0;
+  transition-duration: 0.4s;
+}
+.modal.active {
+  pointer-events: unset;
+  opacity: 1;
+  z-index: 100;
+}
+
 /*Hubspot Forms */
 
 .hs-form {
