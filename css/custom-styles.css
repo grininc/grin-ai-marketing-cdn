@@ -856,48 +856,49 @@ input::-webkit-inner-spin-button {
   width: 100%;
 }
 
-.get-report {
+.dark-rounded-form {
   margin: 10px 0;
 }
-.get-report .hs-form {
+.dark-rounded-form .hs-form {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 10px;
 }
-.get-report .hs-form .hs-form-field {
+.dark-rounded-form .hs-form .hs-form-field {
   margin-bottom: 0;
 }
-.get-report .hs-form .hs-form-field label {
+.dark-rounded-form .hs-form .hs-form-field label {
   display: none;
 }
-.get-report .hs-form .hs-form-field label.hs-error-msg {
+.dark-rounded-form .hs-form .hs-form-field label.hs-error-msg {
   display: flex;
   margin-bottom: 0;
 }
-.get-report .hs-form .hs-form-field .hs-error-msgs {
+.dark-rounded-form .hs-form .hs-form-field .hs-error-msgs {
   padding-left: 0;
 }
-.get-report .hs-input[type="text"],
-.get-report .hs-input[type="email"],
-.get-report .hs-input[type="tel"],
-.get-report .hs-form-field select,
-.get-report .hs-input[type="number"] {
+.dark-rounded-form .hs-input[type="text"],
+.dark-rounded-form .hs-input[type="email"],
+.dark-rounded-form .hs-input[type="tel"],
+.dark-rounded-form .hs-form-field select,
+.dark-rounded-form .hs-input[type="number"] {
   background: #1e1e1e;
   border: 1px solid #b2b2b2;
   border-radius: 50px;
   color: white;
   padding-left: 50px;
 }
-.form-target.get-report:not(.blog-subscription) input::placeholder,
-.form-target.get-report:not(.blog-subscription) ::-webkit-input-placeholder {
+.form-target.dark-rounded-form:not(.blog-subscription) input::placeholder,
+.form-target.dark-rounded-form:not(.blog-subscription)
+  ::-webkit-input-placeholder {
   color: #b2b2b2;
 }
 
-.get-report .hs_brand_website .input {
+.dark-rounded-form .hs_brand_website .input {
   position: relative;
 }
 
-.get-report .hs_brand_website .input::before {
+.dark-rounded-form .hs_brand_website .input::before {
   content: "";
   position: absolute;
   left: 15px;
@@ -910,12 +911,12 @@ input::-webkit-inner-spin-button {
   transform: translateY(-50%);
   pointer-events: none;
 }
-.get-report .hs_submit {
+.dark-rounded-form .hs_submit {
   justify-content: flex-start;
   align-items: flex-start;
 }
 
-.get-report .hs_submit input {
+.dark-rounded-form .hs_submit input {
   background: #e8fd95;
   font-weight: 300;
   padding: 15px 25px;
@@ -923,11 +924,11 @@ input::-webkit-inner-spin-button {
   border-radius: 25px;
   transition-duration: 0.4s;
 }
-.get-report .hs_submit input:hover {
+.dark-rounded-form .hs_submit input:hover {
   background: #fff;
 }
 @media screen and (max-width: 767px) {
-  .get-report .hs-form {
+  .dark-rounded-form .hs-form {
     grid-template-columns: 1fr;
   }
 }
