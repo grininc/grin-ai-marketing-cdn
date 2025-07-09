@@ -4,6 +4,8 @@ jQuery(document).ready(function ($) {
     var classList = $(this).attr("class").split(/\s+/);
     var modalNumber;
 
+    console.log("clicked" + classList);
+
     classList.forEach(function (className) {
       var match = className.match(/^open-modal-(\d+)$/);
       if (match) {
