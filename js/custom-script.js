@@ -1,7 +1,7 @@
 jQuery(document).ready(function ($) {
   console.log("test");
   // Open modal
-  $('[class^="open-modal-"]').on("click", function () {
+  $(document).on("click", "[class^='open-modal-']", function () {
     var classList = $(this).attr("class").split(/\s+/);
     var modalNumber;
 
