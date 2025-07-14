@@ -160,7 +160,8 @@ jQuery(document).ready(function ($) {
           //SUCCESSFUL SUBMISSION
 
           gaDataPushForHubspotForm(formId, data);
-          window.dispatchEvent(new Event("hubspotFormSubmitted"));
+
+          webflowDataPushForHubspotForm(formId);
 
           if (
             formId == "f33b536d-0861-486a-b700-d64d5c811821" ||
@@ -214,6 +215,20 @@ jQuery(document).ready(function ($) {
     }
   });
 });
+
+function webflowDataPushForHubspotForm(formId) {
+  const goalMap = {
+    "745d5fcf-e7fd-4007-b63f-32d3e35f2211": "goal-waitlist-form",
+    "cfd14c16-675a-447e-aaf1-eea4ebba1006": "goal-get-report-form",
+  };
+
+  const linkId = goalMap[formId];
+
+  if (linkId) {
+    const link = document.getElementById(linkId);
+    if (link) link.click(); // trigger Webflow Analyze Goal
+  }
+}
 
 //function for pushing to dataLayer for Google Analytics
 function gaDataPushForHubspotForm(formId, data) {
