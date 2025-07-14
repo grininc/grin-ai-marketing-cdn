@@ -159,7 +159,7 @@ jQuery(document).ready(function ($) {
         onFormSubmitted: function ($form, data) {
           //SUCCESSFUL SUBMISSION
 
-          //gaDataPushForHubspotForm(formId, data);
+          gaDataPushForHubspotForm(formId, data);
           window.dispatchEvent(new Event("hubspotFormSubmitted"));
 
           if (
@@ -279,6 +279,14 @@ function gaDataPushForHubspotForm(formId, data) {
     "f586fbb0-bc6a-4f6d-9b9c-c275fc77b0d9": {
       name: "2024 Preference Opt In",
       type: "subscription",
+    },
+    "745d5fcf-e7fd-4007-b63f-32d3e35f2211": {
+      name: "Join Waitlist (Phase 1)",
+      type: "waitlist",
+    },
+    "cfd14c16-675a-447e-aaf1-eea4ebba1006": {
+      name: "Get Report Form",
+      type: "get report",
     },
   };
   console.log("HS form_submission dataLayer push");
