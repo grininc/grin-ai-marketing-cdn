@@ -133,21 +133,6 @@ jQuery(document).ready(function ($) {
           addFilledInClass(form);
           handleInputChanges(form);
 
-          // Delay Chili Piper deploy to ensure form is fully rendered
-          //   setTimeout(function () {
-          //     // Check if this is the form that needs Chili Piper deploy
-          //     if (form.id.includes("f33b536d-0861-486a-b700-d64d5c811821")) {
-          //       ChiliPiper.deploy("grin", "inbound-demo", {
-          //         query: 'form[id*="f33b536d-0861-486a-b700-d64d5c811821"]',
-          //       });
-          //     }
-          //     if (form.id.includes("1c127825-94d4-4152-8ca1-62d8bf73699f")) {
-          //       ChiliPiper.deploy("grin", "jerrell-router", {
-          //         query: 'form[id*="1c127825-94d4-4152-8ca1-62d8bf73699f"]',
-          //       });
-          //     }
-          //   }, 500); // Adjust delay as needed
-
           populateUtmParameters(form);
           populateLiFatId(form); //populate linked in id from url param
 
@@ -175,6 +160,7 @@ jQuery(document).ready(function ($) {
           //SUCCESSFUL SUBMISSION
 
           //gaDataPushForHubspotForm(formId, data);
+          window.dispatchEvent(new Event("hubspotFormSubmitted"));
 
           if (
             formId == "f33b536d-0861-486a-b700-d64d5c811821" ||
