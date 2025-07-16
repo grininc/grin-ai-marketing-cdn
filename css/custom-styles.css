@@ -708,6 +708,25 @@ input::-webkit-inner-spin-button {
 .dark-rounded-form .hs_submit input:hover {
   background: #fff;
 }
+
+.dark-rounded-form
+  .hs-form
+  .hs-form-field.hs-fieldtype-booleancheckbox
+  .hs-form-booleancheckbox-display {
+  display: flex;
+  color: white;
+  font-weight: 100;
+}
+.dark-rounded-form .hs-form .hs-form-field.hs-fieldtype-booleancheckbox ul {
+  padding-left: 5px;
+}
+.dark-rounded-form .hs-input[type="checkbox"]:checked + span:before {
+  background-image: url(https://cdn.prod.website-files.com/686bf8b543c9e02cde4ff419/6877ce7980f4b4d0c84e0ff4_yellow-check.svg);
+  border-color: #e8fd95;
+}
+.dark-rounded-form .hs-form-booleancheckbox-display a {
+  color: #e8fd95;
+}
 @media screen and (max-width: 767px) {
   .dark-rounded-form .hs-form {
     grid-template-columns: 1fr;
