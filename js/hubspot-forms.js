@@ -197,7 +197,7 @@ jQuery(document).ready(function ($) {
                     const separator = thankYouPage.includes("?") ? "&" : "?";
                     thankYouPage +=
                       separator +
-                      "website=" +
+                      "brandUrl=" +
                       encodeURIComponent(websiteInput.trim());
                   }
                 }
