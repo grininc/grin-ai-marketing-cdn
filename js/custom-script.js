@@ -64,12 +64,12 @@ jQuery(document).ready(function ($) {
   });
 
   var wordsArray = [
-    "See how you show up online.",
     "Compare your brand against competitors.",
     "Uncover top keywords across your market.",
     "Identify customer feedback trends.",
     "Learn how affiliate marketing can grow your brand. ",
     "Discover what Gia can do for you today.",
+    "See how you show up online.",
   ];
 
   if ($(".rotation-text").length > 0) {
@@ -88,5 +88,5 @@ function executeTextRotation(wordsArray) {
         .html(wordsArray[count % wordsArray.length])
         .fadeIn(400);
     });
-  }, 4000);
+  }, 3500);
 }
