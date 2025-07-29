@@ -62,4 +62,31 @@ jQuery(document).ready(function ($) {
 
     observer.observe(this);
   });
+
+  var wordsArray = [
+    "See how you show up online.",
+    "Compare your brand against competitors.",
+    "Uncover top keywords across your market.",
+    "Identify customer feedback trends.",
+    "Learn how affiliate marketing can grow your brand. ",
+    "Discover what Gia can do for you today.",
+  ];
+
+  if ($(".rotation-text").length > 0) {
+    executeTextRotation(wordsArray);
+  }
 });
+
+function executeTextRotation(wordsArray) {
+  var count = 0;
+
+  // Rotation text
+  setInterval(function () {
+    count++;
+    $(".rotation-text").fadeOut(600, function () {
+      $(this)
+        .html(wordsArray[count % wordsArray.length])
+        .fadeIn(400);
+    });
+  }, 4000);
+}
