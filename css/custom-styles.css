@@ -676,6 +676,10 @@ input::-webkit-inner-spin-button {
   position: relative;
 }
 
+.dark-rounded-form .get-report .hs-form {
+  grid-template-columns: 1fr 0.35fr;
+}
+
 .dark-rounded-form .get-report .hs_brand_website .input {
   padding-left: 50px;
 }
