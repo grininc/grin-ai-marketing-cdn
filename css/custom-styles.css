@@ -742,6 +742,9 @@ input::-webkit-inner-spin-button {
   .hs-form fieldset.form-columns-2 .hs-form-field.field {
     width: 100%;
   }
+  .dark-rounded-form.get-report .hs-form {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (max-width: 992px) {
