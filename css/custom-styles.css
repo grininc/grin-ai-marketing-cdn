@@ -680,7 +680,7 @@ input::-webkit-inner-spin-button {
   grid-template-columns: 1fr 0.35fr;
 }
 
-.dark-rounded-form.get-report .hs_brand_website .input {
+.dark-rounded-form.get-report .hs_brand_website input {
   padding-left: 50px;
 }
 .dark-rounded-form.get-report .hs_brand_website .input::before {
