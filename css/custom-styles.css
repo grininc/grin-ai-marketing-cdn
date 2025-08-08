@@ -640,10 +640,10 @@ input::-webkit-inner-spin-button {
 }
 .dark-rounded-form .hs-form {
   display: grid;
-  gap: 10px;
+  gap: 0px;
 }
 .dark-rounded-form .hs-form .hs-form-field {
-  margin-bottom: 0;
+  margin-bottom: 12px;
 }
 .dark-rounded-form .hs-form .hs-form-field label {
   display: none;
