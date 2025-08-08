@@ -642,6 +642,9 @@ input::-webkit-inner-spin-button {
   display: grid;
   gap: 0px;
 }
+.dark-rounded-form.get-report .hs-form {
+  gap: 0 10px;
+}
 .dark-rounded-form .hs-form .hs-form-field {
   margin-bottom: 12px;
 }
