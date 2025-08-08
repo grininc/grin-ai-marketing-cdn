@@ -702,15 +702,16 @@ input::-webkit-inner-spin-button {
 }
 
 .dark-rounded-form .hs_submit input {
-  background: #e8fd95;
+  /* background: #e8fd95; */
   font-weight: 300;
   padding: 15px 25px;
-  color: black;
+  /* color: black; */
   border-radius: 25px;
   transition-duration: 0.4s;
 }
 .dark-rounded-form .hs_submit input:hover {
   background: #fff;
+  color: black;
 }
 
 .dark-rounded-form
