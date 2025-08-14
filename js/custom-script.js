@@ -64,13 +64,11 @@ jQuery(document).ready(function ($) {
   });
 
   var wordsArray = [
-    "See how you show up online.",
-    "Compare your brand against competitors.",
-    "Uncover top keywords across your market.",
-    "Identify customer feedback trends.",
-    "Learn how affiliate marketing can grow your brand. ",
+    "Get your free affiliate marketing proposal.",
+    "Access brand, audience, and competitor insights.",
+    "See how Gia would run your program for maximum impact.",
+    "Uncover your fastest paths to growth.",
     "Discover what Gia can do for you today.",
-    "Get early access to Gia.",
   ];
 
   if ($(".rotation-text").length > 0) {
