@@ -35,6 +35,15 @@
   z-index: 100;
 }
 
+.outward-arrow {
+  opacity: 0;
+  transition-duration: 0.3s;
+}
+
+.card-link:hover .outward-arrow {
+  opacity: 1;
+}
+
 /*Hubspot Forms */
 
 .hs-form {
