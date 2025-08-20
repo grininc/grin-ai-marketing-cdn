@@ -1,0 +1,396 @@
+/* ================================================================================== */
+/* Grin IMC
+/* ================================================================================== */
+[v-cloak] {
+  display: none;
+}
+
+#grin-imc {
+  width: 100%;
+}
+
+#lottie-controls.toolbar {
+  display: none;
+}
+
+.imc-form-wrapper .hs-form-booleancheckbox-display {
+  color: white;
+}
+
+.imc-form-wrapper {
+  display: none;
+  clear: both;
+  max-width: 600px;
+  background-image: linear-gradient(#696eff, #000);
+  padding: 40px 30px;
+  margin: 40px 0;
+  border-radius: 12px;
+}
+
+.imc-form-wrapper p,
+.imc-form-wrapper h4 {
+  color: #fff;
+  text-align: center;
+  line-height: 1.2em;
+}
+.imc-form-wrapper p {
+  font-size: 18px;
+  font-weight: 100;
+  margin: 15px 0;
+}
+.imc-form-wrapper h4 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.imc-form-wrapper .form-target .submitted-message div {
+  color: white;
+}
+
+.imc-field {
+  display: flex;
+}
+
+.display-wrapper {
+  margin-top: 50px;
+}
+
+#grin-imc input.imc-query {
+  flex: 1 0 8em;
+  height: 60px;
+  font-size: 18px;
+  color: #000;
+  background-color: #f9fafb;
+  border-radius: 35px;
+  padding-left: 15px;
+  border: none;
+}
+
+input.imc-query::placeholder {
+  color: rgba(128, 128, 128, 0.4);
+  font-weight: 100;
+}
+
+.imc-button {
+  height: 60px;
+  background-color: #e8fd95;
+  color: #000;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 35px;
+  width: 15%;
+  min-width: 120px;
+  text-transform: uppercase;
+  margin-left: 8px;
+  transition-duration: 0.4s;
+}
+
+.imc-button:hover {
+  background-color: #fff;
+}
+
+.imc-button:disabled,
+.imc-button:disabled:hover {
+  background-color: #677294;
+  cursor: not-allowed;
+}
+
+.imc-profile-picture {
+  border-radius: 50%;
+}
+
+.imc-profile-picture.default {
+  width: 100px;
+}
+
+.imc-profile-picture.medium {
+  width: 50px;
+}
+
+.imc-profile-picture.small {
+  width: 30px;
+}
+
+/* Loader */
+.imc-loader-wrapper {
+  text-align: center;
+}
+
+.imc-loader-wrapper img {
+  max-width: 100px;
+}
+
+.imc-profile {
+  float: left;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.imc-profile-picture-wrapper {
+  float: left;
+  width: 12%;
+}
+
+.imc-profile-info {
+  float: left;
+  margin-left: 25px;
+  margin-top: 12px;
+  width: 80%;
+}
+
+.imc-profile.medium .imc-profile-info {
+  margin-top: -10px;
+}
+
+.imc-profile-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+}
+.imc-profile-bio {
+  color: #fff;
+}
+
+.imc-list-user,
+.imc-user-list-profile a,
+.imc-list-stat {
+  display: flex;
+  align-items: center;
+}
+
+.imc-list-user {
+  margin-bottom: 15px;
+}
+
+.imc-user-list-profile {
+  width: 375px;
+  display: inline-block;
+}
+
+.imc-user-list .imc-profile-picture {
+  margin-right: 10px;
+}
+
+.imc-user-list-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-right: 10px;
+  text-overflow: ellipsis;
+  max-width: 290px;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1;
+  height: 15px;
+}
+
+.imc-list-stat {
+  margin-right: 20px;
+  width: 100px;
+}
+
+.imc-list-stat-num {
+  font-weight: 500;
+  color: #fff;
+  font-size: 16px;
+  display: inline-block;
+}
+
+.imc-list-stat-label {
+  font-weight: 400;
+  font-size: 12px;
+  margin-left: 4px;
+  opacity: 0.75;
+  display: inline-block;
+  color: #fff;
+}
+
+.imc-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.imc-charts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.imc-chart {
+  flex: 1;
+  max-width: 32%;
+  padding: 5px;
+}
+
+.imc-stat {
+  flex: 1;
+  max-width: 32%;
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+}
+.imc-stat-value {
+  font-size: 40px;
+  font-weight: 600;
+  display: block;
+  color: #fff;
+}
+.imc-stat-label {
+  display: block;
+  color: #fff;
+}
+
+.imc-report-link {
+  display: block;
+  width: 340px;
+  padding: 25px 20px;
+  font-size: 18px;
+  background-color: #696eff;
+  border-radius: 5px;
+  border: 0;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 600;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.imc-report-link:hover {
+  background-color: #263b5e;
+  color: #ffffff;
+}
+
+.compare-wrapper {
+  clear: both;
+  padding: 30px 30px 20px 30px;
+  background-color: #1e1e1e;
+  border-radius: 5px;
+}
+
+.imc-compare-stat {
+  margin-bottom: 7px;
+}
+.imc-compare-stat-label {
+  font-weight: 400;
+  font-size: 16px;
+  opacity: 0.75;
+  display: inline-block;
+  width: 90px;
+  color: #fff;
+}
+.imc-compare-stat-num {
+  font-weight: 500;
+  color: #fff;
+  font-size: 20px;
+  display: inline-block;
+}
+
+#grin-imc .imc-field.sticky {
+  position: relative;
+}
+
+#grin-imc[data-tool-id="influencer-comparison-tool"] .display-wrapper {
+  margin-top: 25px;
+}
+
+@media screen and (max-width: 992.98px) {
+  .blurred-content-spz #grin-imc .imc-field input.imc-query {
+    flex: 1 0 8em;
+  }
+}
+
+@media (max-width: 768px) {
+  .imc-profile.default {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .imc-profile.medium,
+  .imc-profile.small {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .compare-wrapper {
+    padding: 15px;
+  }
+
+  .imc-profile-picture-wrapper {
+    width: unset;
+  }
+
+  .imc-profile-info {
+    margin-left: unset;
+    margin-top: 12px;
+    width: unset;
+  }
+
+  .imc-profile-picture.default {
+    width: 75px;
+  }
+
+  .imc-profile-picture.medium {
+    width: 60px;
+    margin-bottom: 15px;
+  }
+
+  .imc-profile-picture.small {
+    width: 30px;
+  }
+
+  .imc-field {
+    display: block;
+  }
+
+  #grin-imc input.imc-query {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  #grin-imc button.imc-button {
+    font-size: 12px;
+    display: block;
+    margin: 10px auto;
+  }
+
+  #grin-imc .thetool {
+    flex-direction: column;
+  }
+  #grin-imc .thetool .tool-left {
+    margin-bottom: 20px;
+  }
+
+  .imc-stat {
+    margin-bottom: 10px;
+  }
+
+  .imc-stat {
+    padding: 15px;
+    text-align: center;
+  }
+  .imc-stat-value {
+    font-size: 24px;
+  }
+  .imc-stat-label {
+    font-size: 15px;
+  }
+  .imc-list-user {
+    margin-bottom: 30px;
+    width: 50%;
+  }
+
+  .imc-user-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .imc-list-user,
+  .imc-user-list-profile a {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
