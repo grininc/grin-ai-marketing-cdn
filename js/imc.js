@@ -266,7 +266,6 @@ var imcMixin = {
           }
           self.loading = false;
           self.onDataLoad();
-          trackSuccessfulToolUse(toolId);
         })
 
         .catch(function (error) {
@@ -384,8 +383,6 @@ var imcMixinCompare = {
           // Store the result in the corresponding data field
           self["data" + number] = result.data;
           self["loading" + number] = false;
-
-          trackSuccessfulToolUse(toolId);
         })
         .catch((error) => {
           console.log("Caught an error:", error);
@@ -507,20 +504,3 @@ Vue.component("imc-compare-stat", {
     '  <span class="imc-compare-stat-num">{{ stat | nn }}{{ percent ? "%" : ""}}</span>' +
     "</div>",
 });
-
-function trackSuccessfulToolUse(locationID) {
-  jQuery.ajax({
-    url: imc_ajax_object.ajax_url,
-    type: "POST",
-    data: {
-      action: "custom_site_tracking_store_entry",
-      location_id: locationID,
-    },
-    success: function (response) {
-      console.log("data saved successfully.");
-    },
-    error: function (error) {
-      console.log("Error saving data:", error);
-    },
-  });
-}
