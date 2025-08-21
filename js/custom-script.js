@@ -74,6 +74,19 @@ jQuery(document).ready(function ($) {
   if ($(".rotation-text").length > 0) {
     executeTextRotation(wordsArray);
   }
+
+  // This determines if the click was outside the popup box for gated links
+  $(".gated-link-popup").click(function (event) {
+    if ($(event.target).hasClass("gated-link-popup")) {
+      closeCustomPopup(".gated-link-popup");
+    }
+  });
+  // This determines if the click was outside the custom popup
+  $(".custom-popup").click(function (event) {
+    if ($(event.target).hasClass("custom-popup")) {
+      closeCustomPopup(".custom-popup");
+    }
+  });
 });
 
 function executeTextRotation(wordsArray) {
@@ -88,4 +101,12 @@ function executeTextRotation(wordsArray) {
         .fadeIn(400);
     });
   }, 3500);
+}
+
+function openCustomPopup(popupQuery) {
+  jQuery(popupQuery).addClass("open");
+}
+
+function closeCustomPopup(popupQuery) {
+  jQuery(popupQuery).removeClass("open");
 }

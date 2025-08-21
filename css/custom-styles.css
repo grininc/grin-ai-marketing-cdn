@@ -43,6 +43,105 @@
   opacity: 1;
 }
 
+/* Gated Link Popup and Custom Popup*/
+.gated-link-popup,
+.custom-popup {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+.gated-link-popup.open,
+.custom-popup.open {
+  display: flex;
+}
+.gated-link-inner,
+.custom-popup-inner {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  width: 50vw;
+  position: relative;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  max-width: 700px;
+}
+
+.gated-link-popup-exit,
+.custom-popup-exit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  font-weight: 900;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.custom-popup-button {
+  color: #696eff;
+  cursor: pointer;
+  transition-duration: 0.25s;
+}
+
+span.gated-link-button:hover,
+.custom-popup-button:hover {
+  color: #2c2c51;
+}
+
+.popup-halves {
+  display: flex;
+}
+
+.popup-halves .popup-left {
+  width: 65%;
+}
+.popup-halves .popup-right {
+  width: 35%;
+}
+
+.popup-halves h2 {
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.custom-popup .popup-inner-warning h2 {
+  font-size: 1.2em;
+  text-align: center;
+}
+.custom-popup .popup-inner-warning p {
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .gated-link-inner,
+  .custom-popup-inner {
+    width: 91vw;
+  }
+  .popup-halves {
+    flex-direction: column-reverse;
+  }
+  .popup-halves .half {
+    width: 100%;
+  }
+  .popup-halves .popup-right {
+    width: 50%;
+    margin: auto;
+  }
+  .popup-halves h2,
+  .popup-halves p {
+    text-align: center;
+  }
+}
+
+/* End Gated Link Popup and custom popup*/
+
 /*Hubspot Forms */
 
 .hs-form {
