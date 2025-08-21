@@ -194,7 +194,7 @@ var imcMixin = {
         document.getElementById("grin-imc").getAttribute("data-tool-id") ||
         "default_tool";
       const uri =
-        "https://grin.co/wp-admin/admin-ajax.php?action=fetch_profile_data&url=" +
+        "https://wordpress-1356320-4998917.cloudwaysapps.com/wp-admin/admin-ajax.php?action=fetch_profile_data&url=" +
         self.url +
         "&tool_id=" +
         encodeURIComponent(toolId);
@@ -312,7 +312,7 @@ var imcMixinCompare = {
       }
 
       const uri =
-        "https://grin.co/wp-admin/admin-ajax.php?action=fetch_profile_data&url=" +
+        "https://wordpress-1356320-4998917.cloudwaysapps.com/wp-admin/admin-ajax.php?action=fetch_profile_data&url=" +
         encodeURIComponent(urlParam) +
         "&tool_id=" +
         encodeURIComponent(toolId);
@@ -418,7 +418,7 @@ Vue.filter("nn", function (value) {
 
 Vue.component("imc-loader", {
   template:
-    '<div class="imc-loader-wrapper"><img src="https://grin.co/wp-content/uploads/imc/spin2.gif" /></div>',
+    '<div class="imc-loader-wrapper"><img src="https://wordpress-1356320-4998917.cloudwaysapps.com/wp-content/uploads/imc/spin2.gif" /></div>',
 });
 
 Vue.component("imc-user-list", {
