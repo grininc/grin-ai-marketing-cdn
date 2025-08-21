@@ -14,34 +14,6 @@
     "https://cdn.prod.website-files.com/686bf8b543c9e02cde4ff419/68a7998709105b554a757a63_SliderArrow.webp";
 
   // ---------- tiny utilities ----------
-  // Worker-safe loader with Safari fallback
-  async function loadDoc(pdfjsLib, url) {
-    try {
-      // Fast path (worker enabled)
-      return await pdfjsLib.getDocument({ url }).promise;
-    } catch (e) {
-      console.warn("PDF worker failed, retrying with disableWorker=true", e);
-      // Fallback: disable worker (slower, but unblocks Safari)
-      pdfjsLib.disableWorker = true;
-      return await pdfjsLib.getDocument({ url }).promise;
-    }
-  }
-
-  // Wait until the element has a real width (avoids tiny -> scaled-up canvases)
-  async function waitForLayout(el, min = 16, timeout = 4000) {
-    const start = performance.now();
-    return new Promise((resolve) => {
-      function tick() {
-        const w = Math.floor(el.getBoundingClientRect().width);
-        if (w >= min) return resolve(w);
-        if (performance.now() - start > timeout)
-          return resolve(Math.max(w, 800));
-        requestAnimationFrame(tick);
-      }
-      tick();
-    });
-  }
-
   function loadScript(src) {
     return new Promise((resolve, reject) => {
       // avoid duplicates
@@ -53,6 +25,22 @@
       s.onerror = reject;
       document.head.appendChild(s);
     });
+  }
+
+  // Worker-safe loader with Safari fallback
+  async function getDocSafe(pdfjsLib, url) {
+    try {
+      // Try normally with worker
+      return await pdfjsLib.getDocument({ url }).promise;
+    } catch (e) {
+      console.warn(
+        "[pdf-viewer] Worker load failed, retrying with disableWorker=true",
+        e
+      );
+      // Fallback: single-threaded mode (slower but reliable on Safari)
+      pdfjsLib.disableWorker = true;
+      return await pdfjsLib.getDocument({ url }).promise;
+    }
   }
 
   function loadStyle(href) {
@@ -105,42 +93,45 @@
     const style = document.createElement("style");
     style.id = STYLE_ID;
     style.textContent = `
-    #pdf-viewer, .pdf-viewer-shell { width: 100%; height: 100%; position: relative; padding-bottom: 35px; }
-    .textLayer{ display:none; }
-    .pdf-page-canvas { display:block; margin:6px auto; border-radius:8px; }
-    .slick-slider .pdf-page-canvas { cursor:grab; margin:0 auto; }
-    .slick-slider .pdf-page-canvas:active { cursor:grab; }
-    .pdf-viewer-shell .slick-list{ margin:0 20px; overflow-y:visible; overflow-x:hidden; box-shadow:0 4px 12px rgb(0 0 0 / 25%); border-radius:8px; }
-    .slick-arrow img{ width:20px; transition:.3s; }
-    .slick-arrow img:hover, .slick-arrow.slick-disabled img{ opacity:.5; }
-    .shadow-arrows .slick-arrow img{ background:#33333322; box-shadow:0 0 12px 9px #33333322; }
-    .slick-next img{ transform:rotate(180deg); }
-    .slick-dots{ position:absolute; bottom:10px; left:50%; transform:translate(-50%,0); display:flex; list-style:none; }
-    .slick-dots li{ width:20px; display:flex; justify-content:center; margin:0 5px; }
-    .slick-dots li button{ background-color:rgba(98,103,255,.6); border-radius:20px; transition:.3s; width:8px; height:8px; }
-    .slick-dots li.slick-active button, .slick-dots li:hover button{ background-color:rgba(98,103,255,1); }
-    .last-page-form-container{ display:none; flex-direction:column; position:absolute; top:0; left:0; width:100%; align-items:center; padding:20px; z-index:10; overflow:auto; }
-    .background-blur{ z-index:8; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); background:rgba(255,255,255,.67); position:absolute; top:0; left:0; width:100%; height:100%; }
-    .last-page-form-container p{ font-size:14px; line-height:18px; text-align:center; margin-bottom:20px; }
-    .last-page-form-container h1, .last-page-form-container h3{ text-align:center; font-weight:600; }
-    .slick-slide.last-preview-page{ position:relative; overflow:hidden; background:rgba(255,255,255,.67) }
-    .screen-reader-pdf-text{ position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
-    .pdf-download-link{ display:none; }
+#pdf-viewer, .pdf-viewer-shell { width: 100%; height: 100%; position: relative; padding-bottom: 35px; }
+.textLayer{ display:none; }
+.pdf-page-canvas { display:block; margin:6px auto; border-radius:8px; }
+.slick-slider .pdf-page-canvas { cursor:grab; margin:0 auto; }
+.slick-slider .pdf-page-canvas:active { cursor:grab; }
+.pdf-viewer-shell .slick-list{ margin:0 20px; overflow-y:visible; overflow-x:hidden; box-shadow:0 4px 12px rgb(0 0 0 / 25%); border-radius:8px; }
+.slick-arrow img{ width:20px; transition:.3s; }
+.slick-arrow img:hover, .slick-arrow.slick-disabled img{ opacity:.5; }
+.shadow-arrows .slick-arrow img{ background:#33333322; box-shadow:0 0 12px 9px #33333322; }
+.slick-next img{ transform:rotate(180deg); }
+.slick-dots{ position:absolute; bottom:10px; left:50%; transform:translate(-50%,0); display:flex; list-style:none; }
+.slick-dots li{ width:20px; display:flex; justify-content:center; margin:0 5px; }
+.slick-dots li button{ background-color:rgba(98,103,255,.6); border-radius:20px; transition:.3s; width:8px; height:8px; }
+.slick-dots li.slick-active button, .slick-dots li:hover button{ background-color:rgba(98,103,255,1); }
+.last-page-form-container{ display:none; flex-direction:column; position:absolute; top:0; left:0; width:100%; align-items:center; padding:20px; z-index:10; overflow:auto; }
+.background-blur{ z-index:8; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); background:rgba(255,255,255,.67); position:absolute; top:0; left:0; width:100%; height:100%; }
+.last-page-form-container p{ font-size:14px; line-height:18px; text-align:center; margin-bottom:20px; }
+.last-page-form-container h1, .last-page-form-container h3{ text-align:center; font-weight:600; }
+.slick-slide.last-preview-page{ position:relative; overflow:hidden; background:rgba(255,255,255,.67) }
+.screen-reader-pdf-text{ position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
+.pdf-download-link{ display:none; }
 
-    /* media-query logic previously keyed by form_id */
-    @media screen and (max-width: 650px){
-      .last-page-form-container{ height:unset; }
-    }
-    @media screen and (min-width: 992px) and (max-width: 1180px){
-      .last-page-form-container{ height:unset; }
-    }
+/* media-query logic previously keyed by form_id */
+@media screen and (max-width: 650px){
+  .last-page-form-container{ height:unset; }
+}
+@media screen and (min-width: 992px) and (max-width: 1180px){
+  .last-page-form-container{ height:unset; }
+}
     `;
     document.head.appendChild(style);
   }
 
   // ---------- core renderer ----------
   async function ensureDeps() {
-    // PDF.js only
+    // Slick
+    await loadStyle(SLICK_CSS);
+    await loadScript(SLICK_JS);
+    // PDF.js
     await loadScript(PDF_JS_URL);
     if (window["pdfjsLib"]) {
       window["pdfjsLib"].GlobalWorkerOptions.workerSrc = PDF_WORKER_URL;
@@ -194,12 +185,7 @@
 
     await ensureDeps();
     const pdfjsLib = window["pdfjsLib"];
-
-    // Wait until the shell actually has width
-    await waitForLayout(shell);
-
-    // Load doc with Safari-safe fallback
-    const doc = await loadDoc(pdfjsLib, url);
+    const doc = await getDocSafe(pdfjsLib, url);
 
     // resolve page limit
     let pagesAreLimited = true;
@@ -211,90 +197,34 @@
       pageLimit = Math.max(1, Math.min(pageLimit, doc.numPages));
     }
 
-    function renderPage(pageNumber, canvas) {
+    // render pages
+    const viewerWidth = shell.clientWidth || el.clientWidth || 900;
+    let resolutionMultiplier = viewerWidth <= 850 ? 4 : 1; // match your heuristic
+    const scaleBase = 3;
+
+    function renderPage(pageNumber, canvas, mult) {
       return doc.getPage(pageNumber).then((page) => {
-        const dpr = Math.max(1, window.devicePixelRatio || 1);
-
-        // Measure current CSS width every time (so rerenders adapt)
-        const cssW = Math.floor(
-          shell.getBoundingClientRect().width || el.clientWidth || 900
-        );
-
-        // Get a unit viewport to compute scale
-        const unit = page.getViewport({ scale: 1 });
-
-        // Keep your base scale + small-screen multiplier, but apply DPR
-        const smallScreenMult = cssW <= 850 ? 4 : 1;
-        const targetScale = (cssW / unit.width) * 3 * smallScreenMult * dpr;
-
-        const viewport = page.getViewport({ scale: targetScale });
-        const cssH = Math.round((cssW * viewport.height) / viewport.width);
-
-        // Set backing store size in device pixels, and CSS size in CSS pixels
-        canvas.width = Math.round(cssW * dpr);
-        canvas.height = Math.round(cssH * dpr);
-        canvas.style.width = cssW + "px";
-        canvas.style.height = cssH + "px";
-
-        const ctx = canvas.getContext("2d", { alpha: false });
-        return page.render({ canvasContext: ctx, viewport }).promise;
+        let viewport = page.getViewport({ scale: scaleBase });
+        viewport = page.getViewport({
+          scale: (viewerWidth / viewport.width) * scaleBase * mult,
+        });
+        const hMult = viewport.height / viewport.width;
+        canvas.width = viewerWidth * mult;
+        canvas.height = viewerWidth * hMult * mult;
+        canvas.style.width = "100%";
+        return page.render({ canvasContext: canvas.getContext("2d"), viewport })
+          .promise;
       });
     }
 
     // add canvases
-    const canvases = [];
     for (let p = 1; p <= pageLimit; p++) {
       const canvas = document.createElement("canvas");
       canvas.className = "pdf-page-canvas";
       shell.appendChild(canvas);
-      canvases.push(canvas);
+      // fire and forget; sequencing not required
+      renderPage(p, canvas, resolutionMultiplier);
     }
-
-    // Render page 1 first for perceived speed
-    await renderPage(1, canvases[0]);
-
-    // Queue the rest without blocking
-    for (let p = 2; p <= pageLimit; p++) {
-      renderPage(p, canvases[p - 1]);
-    }
-
-    // Re-render pages when size changes meaningfully
-    const rerenderAll = debounce(async () => {
-      const w = Math.floor(shell.getBoundingClientRect().width);
-      if (!w) return; // avoid zero-width states
-      for (let p = 1; p <= canvases.length; p++) {
-        await renderPage(p, canvases[p - 1]);
-      }
-    }, 150);
-
-    // ResizeObserver (modern Safari supported)
-    const ro = new ResizeObserver(rerenderAll);
-    ro.observe(shell);
-
-    // If you use Slick, hook into events that can change widths
-    if (
-      typeof jQuery !== "undefined" &&
-      typeof jQuery(shell).slick === "function"
-    ) {
-      jQuery(shell)
-        .on("setPosition", rerenderAll)
-        .on("afterChange", rerenderAll);
-    }
-
-    window.addEventListener("orientationchange", rerenderAll);
-    window.addEventListener("resize", rerenderAll);
-
-    // If the viewer starts hidden (tabs/modals), re-render when it becomes visible
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          io.disconnect();
-          rerenderAll();
-        }
-      },
-      { threshold: [0.01] }
-    );
-    io.observe(shell);
 
     // After last page: add overlay, init slick, add a11y text
     const finalize = async () => {
@@ -366,20 +296,23 @@
 
       // a11y text extraction (lightweight version)
       try {
-        const max = Math.min(pageLimit, doc.numPages);
-        for (let j = 1; j <= max; j++) {
-          const page = await doc.getPage(j);
+        const textDoc = await pdfjsLib.getDocument(url).promise;
+        const texts = [];
+        for (let j = 1; j <= Math.min(pageLimit, textDoc.numPages); j++) {
+          const page = await textDoc.getPage(j);
           const tc = await page.getTextContent();
-          const text = tc.items.map((s) => s.str).join(" ");
+          texts.push(tc.items.map((s) => s.str).join(" "));
+        }
+        texts.forEach((t, idx) => {
           const h = document.createElement("h4");
           h.className = "screen-reader-pdf-text";
-          h.textContent = `PDF Page ${j}`;
+          h.textContent = `PDF Page ${idx + 1}`;
           const p = document.createElement("p");
           p.className = "screen-reader-pdf-text";
-          p.textContent = text;
+          p.textContent = t;
           shell.appendChild(h);
           shell.appendChild(p);
-        }
+        });
       } catch (e) {
         console.warn("Text extraction failed:", e);
       }
