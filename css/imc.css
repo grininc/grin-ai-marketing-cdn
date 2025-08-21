@@ -7,6 +7,9 @@
 
 #grin-imc {
   width: 100%;
+  background-color: #000000bf;
+  padding: 60px 30px;
+  border-radius: 20px;
 }
 
 #lottie-controls.toolbar {
@@ -59,15 +62,15 @@
   flex: 1 0 8em;
   height: 60px;
   font-size: 18px;
-  color: #000;
-  background-color: #f9fafb;
+  color: #fff;
+  background-color: #1e1e1e;
   border-radius: 35px;
   padding-left: 15px;
-  border: none;
+  border: solid 1px #b2b2b2;
 }
 
 input.imc-query::placeholder {
-  color: rgba(128, 128, 128, 0.4);
+  color: #b2b2b2;
   font-weight: 100;
 }
 
@@ -123,7 +126,10 @@ input.imc-query::placeholder {
 .imc-profile {
   float: left;
   width: 100%;
+  display: flex;
   margin-bottom: 40px;
+  align-items: center;
+  line-height: 2em;
 }
 
 .imc-profile-picture-wrapper {
@@ -133,8 +139,6 @@ input.imc-query::placeholder {
 
 .imc-profile-info {
   float: left;
-  margin-left: 25px;
-  margin-top: 12px;
   width: 80%;
 }
 
@@ -225,8 +229,8 @@ input.imc-query::placeholder {
 .imc-stat {
   flex: 1;
   max-width: 32%;
-  background-color: #1e1e1e;
-  border-radius: 5px;
+  background-color: #ebfda5;
+  border-radius: 10px;
   padding: 20px;
   text-align: center;
 }
@@ -234,11 +238,12 @@ input.imc-query::placeholder {
   font-size: 40px;
   font-weight: 600;
   display: block;
-  color: #fff;
+  color: #1e1e1e;
+  line-height: 1.2em;
 }
 .imc-stat-label {
   display: block;
-  color: #fff;
+  color: #1e1e1e;
 }
 
 .imc-report-link {
@@ -264,7 +269,7 @@ input.imc-query::placeholder {
   clear: both;
   padding: 30px 30px 20px 30px;
   background-color: #1e1e1e;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .imc-compare-stat {
