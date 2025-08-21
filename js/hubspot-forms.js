@@ -235,7 +235,7 @@ function gaDataPushForHubspotForm(formId, data) {
   let formsData = {
     "f33b536d-0861-486a-b700-d64d5c811821": { name: "Demo", type: "demo" },
     "1c127825-94d4-4152-8ca1-62d8bf73699f": { name: "Demo", type: "demo" }, //this is the feb 2025 version of the demo form
-    "af00997b-b586-4eaa-81cc-a126f4f154cb": {
+    "5e2cda40-62c6-454a-a324-2b132f2aafee": {
       name: "Content",
       type: "resource download",
     },
