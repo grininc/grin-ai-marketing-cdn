@@ -1,8 +1,8 @@
 (function () {
   const BASE_PDFJS_URL =
     "https://cdn.jsdelivr.net/gh/grininc/grin-ai-marketing-cdn@69e34d2/js/pdfjs-3.11.174-dist/build/";
-  const PDF_JS_URL = `${BASE_PDFJS_URL}/pdf.min.js`;
-  const PDF_WORKER_URL = `${BASE_PDFJS_URL}/pdf.worker.min.js`;
+  const PDF_JS_URL = BASE_PDFJS_URL + "pdf.min.js";
+  const PDF_WORKER_URL = BASE_PDFJS_URL + "pdf.worker.min.js";
 
   // Slick (only if not already on the page)
   const SLICK_CSS =
@@ -15,10 +15,13 @@
 
   // ---------- tiny utilities ----------
   function loadScript(src) {
-    return new Promise((resolve, reject) => {
+    return new Promise(function (resolve, reject) {
       // avoid duplicates
-      if ([...document.scripts].some((s) => s.src === src)) return resolve();
-      const s = document.createElement("script");
+      var scripts = document.scripts;
+      for (var i = 0; i < scripts.length; i++) {
+        if (scripts[i].src === src) return resolve();
+      }
+      var s = document.createElement("script");
       s.src = src;
       s.async = true;
       s.onload = resolve;
@@ -27,32 +30,13 @@
     });
   }
 
-  // Worker-safe loader with Safari fallback
-  async function getDocSafe(pdfjsLib, url) {
-    try {
-      // Try normally with worker
-      return await pdfjsLib.getDocument({ url }).promise;
-    } catch (e) {
-      console.warn(
-        "[pdf-viewer] Worker load failed, retrying with disableWorker=true",
-        e
-      );
-      // Fallback: single-threaded mode (slower but reliable on Safari)
-      pdfjsLib.disableWorker = true;
-      return await pdfjsLib.getDocument({ url }).promise;
-    }
-  }
-
   function loadStyle(href) {
-    return new Promise((resolve, reject) => {
-      // avoid duplicates
-      if (
-        [...document.querySelectorAll('link[rel="stylesheet"]')].some(
-          (l) => l.href === href
-        )
-      )
-        return resolve();
-      const l = document.createElement("link");
+    return new Promise(function (resolve, reject) {
+      var links = document.querySelectorAll('link[rel="stylesheet"]');
+      for (var i = 0; i < links.length; i++) {
+        if (links[i].href === href) return resolve();
+      }
+      var l = document.createElement("link");
       l.rel = "stylesheet";
       l.href = href;
       l.onload = resolve;
@@ -62,28 +46,36 @@
   }
 
   function debounce(fn, wait) {
-    let t;
+    var t;
     return function () {
       clearTimeout(t);
       t = setTimeout(fn, wait);
     };
   }
 
-  // simple cookie helpers (replaces jQuery.cookie)
-  const Cookie = {
-    get(name) {
-      return document.cookie
-        .split("; ")
-        .find((r) => r.startsWith(name + "="))
-        ?.split("=")[1];
+  // simple cookie helpers (no optional chaining)
+  var Cookie = {
+    get: function (name) {
+      var parts = document.cookie.split("; ");
+      for (var i = 0; i < parts.length; i++) {
+        if (parts[i].indexOf(name + "=") === 0) {
+          return parts[i].split("=")[1];
+        }
+      }
+      return undefined;
     },
-    set(name, value, days = 7, path = "/") {
-      const d = new Date();
+    set: function (name, value, days, path) {
+      if (days == null) days = 7;
+      if (!path) path = "/";
+      var d = new Date();
       d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
-      document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=${path}`;
+      document.cookie =
+        name + "=" + value + "; expires=" + d.toUTCString() + "; path=" + path;
     },
-    remove(name, path = "/") {
-      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=${path}`;
+    remove: function (name, path) {
+      if (!path) path = "/";
+      document.cookie =
+        name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=" + path;
     },
   };
 
@@ -103,16 +95,30 @@
     return !isNaN(v) && parseInt(Number(v)) == v && !isNaN(parseInt(v, 10));
   }
 
+  // Worker-safe loader with Safari fallback (no optional chaining)
+  async function getDocSafe(pdfjsLib, url) {
+    try {
+      return await pdfjsLib.getDocument({ url: url }).promise;
+    } catch (e) {
+      console.warn(
+        "[pdf-viewer] Worker load failed; retrying disableWorker=true",
+        e
+      );
+      pdfjsLib.disableWorker = true;
+      return await pdfjsLib.getDocument({ url: url }).promise;
+    }
+  }
+
   async function buildViewer(el) {
-    const ds = el.dataset;
-    const url = ds.link || "";
-    let pageLimit = ds.pageLimit || "";
-    const formId = ds.formId || "";
-    const assetId = ds.assetId || "";
-    const thankYou = ds.thankYouPage || "";
-    const extraClasses = ds.classes || "";
-    const autoDownload = (ds.autoDownload || "false") === "true";
-    const arrowsInDots = (ds.arrowsInDots || "false") === "true";
+    var ds = el.dataset;
+    var url = ds.link || "";
+    var pageLimit = ds.pageLimit || "";
+    var formId = ds.formId || "";
+    var assetId = ds.assetId || "";
+    var thankYou = ds.thankYouPage || "";
+    var extraClasses = ds.classes || "";
+    var autoDownload = (ds.autoDownload || "false") === "true";
+    var arrowsInDots = (ds.arrowsInDots || "false") === "true";
 
     if (!url) {
       console.warn("pdf-viewer: missing data-link");
@@ -120,36 +126,47 @@
     }
 
     // shell structure
-    el.innerHTML = `
-      <a class="pdf-download-link" ${autoDownload ? "" : 'style="display:none"'} href="${url}" download></a>
-      <div class="pdf-viewer-shell"></div>
-      <div class="last-page-form-container">
-        <h3 class="download-header">Download Full Version</h3>
-        <p>You reached the end of the preview. It takes 10 seconds to download the full pdf.</p>
-        <div class="form-target content ${extraClasses}"
-             data-form-id="${formId}"
-             data-assetid="${assetId}"
-             data-thankyou="${thankYou}"></div>
-      </div>
-    `;
+    el.innerHTML =
+      '<a class="pdf-download-link"' +
+      (autoDownload ? "" : ' style="display:none"') +
+      ' href="' +
+      url +
+      '" download></a>' +
+      '<div class="pdf-viewer-shell"></div>' +
+      '<div class="last-page-form-container">' +
+      '  <h3 class="download-header">Download Full Version</h3>' +
+      "  <p>You reached the end of the preview. It takes 10 seconds to download the full pdf.</p>" +
+      '  <div class="form-target content ' +
+      extraClasses +
+      '"' +
+      '       data-form-id="' +
+      formId +
+      '"' +
+      '       data-assetid="' +
+      assetId +
+      '"' +
+      '       data-thankyou="' +
+      thankYou +
+      '"></div>' +
+      "</div>";
 
-    const shell = el.querySelector(".pdf-viewer-shell");
+    var shell = el.querySelector(".pdf-viewer-shell");
 
     // Auto-download if your cookie is present
     if (autoDownload) {
-      const dl = el.querySelector(".pdf-download-link");
+      var dl = el.querySelector(".pdf-download-link");
       if (Cookie.get("filled-pdf-form") !== undefined) {
-        dl?.click();
+        if (dl) dl.click(); // no optional chaining
         Cookie.remove("filled-pdf-form", "/");
       }
     }
 
     await ensureDeps();
-    const pdfjsLib = window["pdfjsLib"];
-    const doc = await getDocSafe(pdfjsLib, url);
+    var pdfjsLib = window["pdfjsLib"];
+    var doc = await getDocSafe(pdfjsLib, url);
 
     // resolve page limit
-    let pagesAreLimited = true;
+    var pagesAreLimited = true;
     if (!isInt(pageLimit)) {
       pageLimit = doc.numPages;
       pagesAreLimited = false;
@@ -159,28 +176,30 @@
     }
 
     // render pages
-    const viewerWidth = shell.clientWidth || el.clientWidth || 900;
-    let resolutionMultiplier = viewerWidth <= 850 ? 4 : 1; // match your heuristic
-    const scaleBase = 3;
+    var viewerWidth = shell.clientWidth || el.clientWidth || 900;
+    var resolutionMultiplier = viewerWidth <= 850 ? 4 : 1; // match your heuristic
+    var scaleBase = 3;
 
     function renderPage(pageNumber, canvas, mult) {
-      return doc.getPage(pageNumber).then((page) => {
-        let viewport = page.getViewport({ scale: scaleBase });
+      return doc.getPage(pageNumber).then(function (page) {
+        var viewport = page.getViewport({ scale: scaleBase });
         viewport = page.getViewport({
           scale: (viewerWidth / viewport.width) * scaleBase * mult,
         });
-        const hMult = viewport.height / viewport.width;
+        var hMult = viewport.height / viewport.width;
         canvas.width = viewerWidth * mult;
         canvas.height = viewerWidth * hMult * mult;
         canvas.style.width = "100%";
-        return page.render({ canvasContext: canvas.getContext("2d"), viewport })
-          .promise;
+        return page.render({
+          canvasContext: canvas.getContext("2d"),
+          viewport: viewport,
+        }).promise;
       });
     }
 
     // add canvases
-    for (let p = 1; p <= pageLimit; p++) {
-      const canvas = document.createElement("canvas");
+    for (var p = 1; p <= pageLimit; p++) {
+      var canvas = document.createElement("canvas");
       canvas.className = "pdf-page-canvas";
       shell.appendChild(canvas);
       // fire and forget; sequencing not required
@@ -188,28 +207,30 @@
     }
 
     // After last page: add overlay, init slick, add a11y text
-    const finalize = async () => {
+    var finalize = async function () {
       if (pagesAreLimited) {
-        const lastCanvas = shell.querySelector(".pdf-page-canvas:last-of-type");
+        var lastCanvas = shell.querySelector(".pdf-page-canvas:last-of-type");
         if (lastCanvas) {
-          const lastWrap = document.createElement("div");
+          var lastWrap = document.createElement("div");
           lastWrap.className = "last-preview-page";
           lastCanvas.insertAdjacentElement("afterend", lastWrap);
 
           // move overlay into the slide
-          const overlay = el.querySelector(".last-page-form-container");
+          var overlay = el.querySelector(".last-page-form-container");
           lastWrap.appendChild(overlay);
-          // show overlay if it's a real form
-          if (
-            (overlay.querySelector("form")?.getAttribute("data-formid") ||
-              formId) !== "form_id"
-          ) {
+
+          // show overlay if it's a real form (no optional chaining)
+          var overlayForm = overlay ? overlay.querySelector("form") : null;
+          var overlayFormId = overlayForm
+            ? overlayForm.getAttribute("data-formid")
+            : null;
+          if ((overlayFormId || formId) !== "form_id") {
             overlay.style.display = "flex";
           }
 
           // blur layer
-          setTimeout(() => {
-            const blur = document.createElement("div");
+          setTimeout(function () {
+            var blur = document.createElement("div");
             blur.className = "background-blur";
             lastWrap.appendChild(blur);
           }, 100);
@@ -225,55 +246,54 @@
               infinite: false,
               adaptiveHeight: true,
             });
-            jQuery(".slick-arrow").html(`<img src="${ARROW_IMG}"/>`);
+            jQuery(".slick-arrow").html('<img src="' + ARROW_IMG + '"/>');
             jQuery(".slick-dots button").html("");
             if (arrowsInDots) positionArrows(shell);
             window.addEventListener(
               "resize",
-              debounce(() => {
+              debounce(function () {
                 if (arrowsInDots) positionArrows(shell);
                 centerFormOnSlider(overlay, lastWrap);
               }, 250)
             );
-          } else {
-            // single page – nothing to init
           }
 
           // center form
           centerFormOnSlider(overlay, lastWrap);
 
-          // safari tweak (as in your code)
-          setTimeout(() => {
-            const isSafari = /^((?!chrome|android).)*safari/i.test(
+          // safari tweak
+          setTimeout(function () {
+            var isSafari = /^((?!chrome|android).)*safari/i.test(
               navigator.userAgent
             );
             if (isSafari) {
-              const bg = lastWrap.querySelector(".background-blur");
+              var bg = lastWrap.querySelector(".background-blur");
               if (bg) bg.style.webkitBackdropFilter = "blur(11px)";
             }
           }, 5000);
         }
       }
 
-      // a11y text extraction (lightweight version)
+      // a11y text extraction (reuse the same doc)
       try {
-        const textDoc = await pdfjsLib.getDocument(url).promise;
-        const texts = [];
-        for (let j = 1; j <= Math.min(pageLimit, textDoc.numPages); j++) {
-          const page = await textDoc.getPage(j);
-          const tc = await page.getTextContent();
-          texts.push(tc.items.map((s) => s.str).join(" "));
-        }
-        texts.forEach((t, idx) => {
-          const h = document.createElement("h4");
+        var max = Math.min(pageLimit, doc.numPages);
+        for (var j = 1; j <= max; j++) {
+          var page = await doc.getPage(j);
+          var tc = await page.getTextContent();
+          var text = tc.items
+            .map(function (s) {
+              return s.str;
+            })
+            .join(" ");
+          var h = document.createElement("h4");
           h.className = "screen-reader-pdf-text";
-          h.textContent = `PDF Page ${idx + 1}`;
-          const p = document.createElement("p");
-          p.className = "screen-reader-pdf-text";
-          p.textContent = t;
+          h.textContent = "PDF Page " + j;
+          var pEl = document.createElement("p");
+          pEl.className = "screen-reader-pdf-text";
+          pEl.textContent = text;
           shell.appendChild(h);
-          shell.appendChild(p);
-        });
+          shell.appendChild(pEl);
+        }
       } catch (e) {
         console.warn("Text extraction failed:", e);
       }
@@ -282,11 +302,11 @@
     // helper: center overlay
     function centerFormOnSlider(overlayEl, slideEl) {
       if (!overlayEl || !slideEl) return;
-      const sliderH = slideEl.getBoundingClientRect().height;
-      const formH = overlayEl.getBoundingClientRect().height;
+      var sliderH = slideEl.getBoundingClientRect().height;
+      var formH = overlayEl.getBoundingClientRect().height;
       if (!sliderH || !formH) return;
       if (formH < sliderH) {
-        const pad = (sliderH - formH) / 2;
+        var pad = (sliderH - formH) / 2;
         overlayEl.style.paddingTop = pad + "px";
         overlayEl.style.paddingBottom = pad + "px";
         overlayEl.style.height = "";
@@ -297,20 +317,15 @@
 
     // helper: arrows position near dots
     function positionArrows(scope) {
-      const dots = (
-        scope.closest(".pdf-viewer-shell") || document
-      ).querySelector(".slick-dots");
+      var container = scope.closest ? scope.closest(".pdf-viewer-shell") : null;
+      var dots = (container || document).querySelector(".slick-dots");
       if (!dots) return;
-      const dotsWidth = dots.getBoundingClientRect().width || 0;
-      const margin = 20;
-      const leftPos = `calc(50% - ${dotsWidth / 2 + margin}px)`;
-      const rightPos = `calc(50% - ${dotsWidth / 2 + margin}px)`;
-      const prev = (
-        scope.closest(".pdf-viewer-shell") || document
-      ).querySelector(".slick-prev");
-      const next = (
-        scope.closest(".pdf-viewer-shell") || document
-      ).querySelector(".slick-next");
+      var dotsWidth = dots.getBoundingClientRect().width || 0;
+      var margin = 20;
+      var leftPos = "calc(50% - " + (dotsWidth / 2 + margin) + "px)";
+      var rightPos = "calc(50% - " + (dotsWidth / 2 + margin) + "px)";
+      var prev = (container || document).querySelector(".slick-prev");
+      var next = (container || document).querySelector(".slick-next");
       if (prev) prev.style.left = leftPos;
       if (next) {
         next.style.left = "unset";
@@ -323,20 +338,22 @@
   }
 
   // ---------- Public API (your “shortcode” initializer) ----------
-  async function initPdfViewers(root = document) {
-    // If any viewer wants slick, make sure it’s available first (safe to call even if none exist)
+  async function initPdfViewers(root) {
+    if (!root) root = document;
+    // If any viewer wants slick, make sure it’s available first (safe even if none exist)
     await Promise.all([loadStyle(SLICK_CSS), loadScript(SLICK_JS)]);
-    const nodes = root.querySelectorAll("[data-pdf-viewer]");
-    for (const n of nodes) await buildViewer(n);
+    var nodes = root.querySelectorAll("[data-pdf-viewer]");
+    for (var i = 0; i < nodes.length; i++) {
+      await buildViewer(nodes[i]);
+    }
   }
 
   // Expose globally so you can call it after Webflow/HubsSpot scripts run, etc.
   window.initPdfViewers = initPdfViewers;
 
   // Auto-init on DOM ready if any viewers exist
-  document.addEventListener("DOMContentLoaded", () => {
-    const any = document.querySelector("[data-pdf-viewer]");
+  document.addEventListener("DOMContentLoaded", function () {
+    var any = document.querySelector("[data-pdf-viewer]");
     if (any) initPdfViewers();
-    // resize centering behavior is handled per-instance
   });
 })();
