@@ -87,45 +87,6 @@
     },
   };
 
-  // ---------- one-time CSS  ----------
-  const STYLE_ID = "pdf-viewer-core-style";
-  if (!document.getElementById(STYLE_ID)) {
-    const style = document.createElement("style");
-    style.id = STYLE_ID;
-    style.textContent = `
-#pdf-viewer, .pdf-viewer-shell { width: 100%; height: 100%; position: relative; padding-bottom: 35px; }
-.textLayer{ display:none; }
-.pdf-page-canvas { display:block; margin:6px auto; border-radius:8px; }
-.slick-slider .pdf-page-canvas { cursor:grab; margin:0 auto; }
-.slick-slider .pdf-page-canvas:active { cursor:grab; }
-.pdf-viewer-shell .slick-list{ margin:0 20px; overflow-y:visible; overflow-x:hidden; box-shadow:0 4px 12px rgb(0 0 0 / 25%); border-radius:8px; }
-.slick-arrow img{ width:20px; transition:.3s; }
-.slick-arrow img:hover, .slick-arrow.slick-disabled img{ opacity:.5; }
-.shadow-arrows .slick-arrow img{ background:#33333322; box-shadow:0 0 12px 9px #33333322; }
-.slick-next img{ transform:rotate(180deg); }
-.slick-dots{ position:absolute; bottom:10px; left:50%; transform:translate(-50%,0); display:flex; list-style:none; }
-.slick-dots li{ width:20px; display:flex; justify-content:center; margin:0 5px; }
-.slick-dots li button{ background-color:rgba(98,103,255,.6); border-radius:20px; transition:.3s; width:8px; height:8px; }
-.slick-dots li.slick-active button, .slick-dots li:hover button{ background-color:rgba(98,103,255,1); }
-.last-page-form-container{ display:none; flex-direction:column; position:absolute; top:0; left:0; width:100%; align-items:center; padding:20px; z-index:10; overflow:auto; }
-.background-blur{ z-index:8; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); background:rgba(255,255,255,.67); position:absolute; top:0; left:0; width:100%; height:100%; }
-.last-page-form-container p{ font-size:14px; line-height:18px; text-align:center; margin-bottom:20px; }
-.last-page-form-container h1, .last-page-form-container h3{ text-align:center; font-weight:600; }
-.slick-slide.last-preview-page{ position:relative; overflow:hidden; background:rgba(255,255,255,.67) }
-.screen-reader-pdf-text{ position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
-.pdf-download-link{ display:none; }
-
-/* media-query logic previously keyed by form_id */
-@media screen and (max-width: 650px){
-  .last-page-form-container{ height:unset; }
-}
-@media screen and (min-width: 992px) and (max-width: 1180px){
-  .last-page-form-container{ height:unset; }
-}
-    `;
-    document.head.appendChild(style);
-  }
-
   // ---------- core renderer ----------
   async function ensureDeps() {
     // Slick
