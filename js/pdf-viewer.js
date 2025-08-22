@@ -365,12 +365,19 @@
     }
   }
 
-  // Expose globally so you can call it after Webflow/HubsSpot scripts run, etc.
+  // Expose globally so you can call it after Webflow/HubSpot scripts run, etc.
   window.initPdfViewers = initPdfViewers;
 
-  // Auto-init on DOM ready if any viewers exist
-  document.addEventListener("DOMContentLoaded", function () {
+  // Robust auto-init whether DOM is already loaded or not
+  function bootPdfViewers() {
     var any = document.querySelector("[data-pdf-viewer]");
     if (any) initPdfViewers();
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootPdfViewers);
+  } else {
+    // DOM is already ready -> run now
+    bootPdfViewers();
+  }
 })();
