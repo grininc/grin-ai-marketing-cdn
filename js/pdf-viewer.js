@@ -119,10 +119,10 @@
     try {
       return await lib.getDocument(base).promise;
     } catch (e) {
-      console.warn(
-        "[pdf-viewer] first getDocument failed, retrying no-worker",
-        e
-      );
+      // console.warn(
+      //   "[pdf-viewer] first getDocument failed, retrying no-worker",
+      //   e
+      // );
       try {
         lib.disableWorker = true; // ensure fallback even if not Safari
         return await lib.getDocument(base).promise;
@@ -201,10 +201,10 @@
 
     // Load the document (uses Safari-safe options internally)
     var doc = await getDocSafe(url);
-    console.log("[pdf-viewer] loaded doc:", {
-      numPages: doc.numPages,
-      url: url,
-    });
+    // console.log("[pdf-viewer] loaded doc:", {
+    //   numPages: doc.numPages,
+    //   url: url,
+    // });
 
     // resolve page limit
     var pagesAreLimited = true;
@@ -219,11 +219,11 @@
     // render pages
     await new Promise((r) => setTimeout(r, 50));
     var viewerWidth = shell.clientWidth || el.clientWidth || 900;
-    var resolutionMultiplier = viewerWidth >= 850 ? 4 : 2; // match your heuristic
+    var resolutionMultiplier = viewerWidth >= 850 ? 4 : 3; // match your heuristic
     var scaleBase = 3;
 
     function renderPage(pageNumber, canvas, mult) {
-      console.log("[pdf-viewer] render page", pageNumber);
+      //console.log("[pdf-viewer] render page", pageNumber);
 
       return doc.getPage(pageNumber).then(function (page) {
         var viewport = page.getViewport({ scale: scaleBase });
@@ -234,10 +234,10 @@
         canvas.width = viewerWidth * mult;
         canvas.height = viewerWidth * hMult * mult;
         canvas.style.width = "100%";
-        console.log("[pdf-viewer] canvas size", {
-          viewerWidth: viewerWidth,
-          mult: mult,
-        });
+        // console.log("[pdf-viewer] canvas size", {
+        //   viewerWidth: viewerWidth,
+        //   mult: mult,
+        // });
 
         return page
           .render({
