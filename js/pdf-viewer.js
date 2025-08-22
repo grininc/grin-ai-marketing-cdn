@@ -219,7 +219,7 @@
     // render pages
     await new Promise((r) => setTimeout(r, 50));
     var viewerWidth = shell.clientWidth || el.clientWidth || 900;
-    var resolutionMultiplier = viewerWidth <= 850 ? 4 : 1; // match your heuristic
+    var resolutionMultiplier = viewerWidth >= 850 ? 4 : 2; // match your heuristic
     var scaleBase = 3;
 
     function renderPage(pageNumber, canvas, mult) {
