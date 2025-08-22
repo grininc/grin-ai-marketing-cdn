@@ -134,6 +134,11 @@
   }
 
   async function buildViewer(el) {
+    if (el.getAttribute("data-pdf-init") === "1") {
+      return; // already initialized
+    }
+    el.setAttribute("data-pdf-init", "1");
+
     var ds = el.dataset;
     var url = ds.link || "";
     var pageLimit = ds.pageLimit || "";
@@ -194,12 +199,12 @@
       return;
     }
 
-    // Load the document
+    // Load the document (uses Safari-safe options internally)
     var doc = await getDocSafe(url);
-    console.log("[pdf-viewer] loaded doc:", { numPages: doc.numPages, url });
-
-    // ✅ mark as initialized only after doc is open
-    el.setAttribute("data-pdf-init", "1");
+    console.log("[pdf-viewer] loaded doc:", {
+      numPages: doc.numPages,
+      url: url,
+    });
 
     // resolve page limit
     var pagesAreLimited = true;
