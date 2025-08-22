@@ -95,21 +95,35 @@
     return !isNaN(v) && parseInt(Number(v)) == v && !isNaN(parseInt(v, 10));
   }
 
-  // Worker-safe loader with Safari fallback (no optional chaining)
-  async function getDocSafe(pdfjsLib, url) {
+  // One place to get/guard pdfjsLib and handle Safari fallback
+  async function getDocSafe(url) {
+    var lib = window["pdfjsLib"];
+    if (!lib || typeof lib.getDocument !== "function") {
+      throw new Error("[pdf-viewer] pdfjsLib not available yet");
+    }
     try {
-      return await pdfjsLib.getDocument({ url: url }).promise;
+      return await lib.getDocument({ url: url }).promise;
     } catch (e) {
       console.warn(
         "[pdf-viewer] Worker load failed; retrying disableWorker=true",
         e
       );
-      pdfjsLib.disableWorker = true;
-      return await pdfjsLib.getDocument({ url: url }).promise;
+      try {
+        lib.disableWorker = true; // safe: lib is definitely defined here
+        return await lib.getDocument({ url: url }).promise;
+      } catch (e2) {
+        console.error("[pdf-viewer] getDocument failed after fallback", e2);
+        throw e2;
+      }
     }
   }
 
   async function buildViewer(el) {
+    if (el.getAttribute("data-pdf-init") === "1") {
+      return; // already initialized
+    }
+    el.setAttribute("data-pdf-init", "1");
+
     var ds = el.dataset;
     var url = ds.link || "";
     var pageLimit = ds.pageLimit || "";
@@ -162,9 +176,15 @@
     }
 
     await ensureDeps();
-    var pdfjsLib = window["pdfjsLib"];
+    if (
+      !window["pdfjsLib"] ||
+      typeof window["pdfjsLib"].getDocument !== "function"
+    ) {
+      console.error("[pdf-viewer] pdfjsLib failed to load");
+      return;
+    }
 
-    var doc = await getDocSafe(pdfjsLib, url);
+    var doc = await getDocSafe(url);
     console.log("[pdf-viewer] loaded doc:", {
       numPages: doc.numPages,
       url: url,
@@ -359,7 +379,9 @@
     if (!root) root = document;
     // If any viewer wants slick, make sure it’s available first (safe even if none exist)
     await Promise.all([loadStyle(SLICK_CSS), loadScript(SLICK_JS)]);
-    var nodes = root.querySelectorAll("[data-pdf-viewer]");
+    var nodes = root.querySelectorAll(
+      "[data-pdf-viewer]:not([data-pdf-init='1'])"
+    );
     for (var i = 0; i < nodes.length; i++) {
       await buildViewer(nodes[i]);
     }
