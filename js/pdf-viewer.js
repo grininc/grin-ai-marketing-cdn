@@ -163,6 +163,12 @@
 
     await ensureDeps();
     var pdfjsLib = window["pdfjsLib"];
+    // TEMP: force no-worker on Safari to diagnose worker issues
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    if (isSafari) {
+      pdfjsLib.disableWorker = true;
+    }
+
     var doc = await getDocSafe(pdfjsLib, url);
 
     // resolve page limit
