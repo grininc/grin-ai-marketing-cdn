@@ -96,21 +96,36 @@
   }
 
   // One place to get/guard pdfjsLib and handle Safari fallback
-  async function getDocSafe(url) {
+  async function getDocSafe(url, opts) {
     var lib = window["pdfjsLib"];
     if (!lib || typeof lib.getDocument !== "function") {
       throw new Error("[pdf-viewer] pdfjsLib not available yet");
     }
+
+    // Base options
+    var base = opts || { url: url };
+
+    // Safari compatibility: avoid cross-origin worker/range/stream issues
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    if (isSafari) {
+      // Prefer running without the worker on Safari (more reliable)
+      lib.disableWorker = true;
+      // Reduce CORS surface in Safari
+      base.disableRange = true;
+      base.disableStream = true;
+      base.nativeImageDecoderSupport = "none";
+    }
+
     try {
-      return await lib.getDocument({ url: url }).promise;
+      return await lib.getDocument(base).promise;
     } catch (e) {
       console.warn(
-        "[pdf-viewer] Worker load failed; retrying disableWorker=true",
+        "[pdf-viewer] first getDocument failed, retrying no-worker",
         e
       );
       try {
-        lib.disableWorker = true; // safe: lib is definitely defined here
-        return await lib.getDocument({ url: url }).promise;
+        lib.disableWorker = true; // ensure fallback even if not Safari
+        return await lib.getDocument(base).promise;
       } catch (e2) {
         console.error("[pdf-viewer] getDocument failed after fallback", e2);
         throw e2;
@@ -184,6 +199,7 @@
       return;
     }
 
+    // Load the document (uses Safari-safe options internally)
     var doc = await getDocSafe(url);
     console.log("[pdf-viewer] loaded doc:", {
       numPages: doc.numPages,
