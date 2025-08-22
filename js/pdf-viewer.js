@@ -86,8 +86,9 @@
     await loadScript(SLICK_JS);
     // PDF.js
     await loadScript(PDF_JS_URL);
-    if (window["pdfjsLib"]) {
-      window["pdfjsLib"].GlobalWorkerOptions.workerSrc = PDF_WORKER_URL;
+    var lib = resolvePdfLib();
+    if (lib && lib.GlobalWorkerOptions) {
+      lib.GlobalWorkerOptions.workerSrc = PDF_WORKER_URL;
     }
   }
 
@@ -97,7 +98,8 @@
 
   // One place to get/guard pdfjsLib and handle Safari fallback
   async function getDocSafe(url, opts) {
-    var lib = window["pdfjsLib"];
+    var lib = resolvePdfLib();
+
     if (!lib || typeof lib.getDocument !== "function") {
       throw new Error("[pdf-viewer] pdfjsLib not available yet");
     }
@@ -134,11 +136,6 @@
   }
 
   async function buildViewer(el) {
-    if (el.getAttribute("data-pdf-init") === "1") {
-      return; // already initialized
-    }
-    el.setAttribute("data-pdf-init", "1");
-
     var ds = el.dataset;
     var url = ds.link || "";
     var pageLimit = ds.pageLimit || "";
@@ -191,20 +188,18 @@
     }
 
     await ensureDeps();
-    if (
-      !window["pdfjsLib"] ||
-      typeof window["pdfjsLib"].getDocument !== "function"
-    ) {
+    var lib = resolvePdfLib();
+    if (!lib || typeof lib.getDocument !== "function") {
       console.error("[pdf-viewer] pdfjsLib failed to load");
       return;
     }
 
-    // Load the document (uses Safari-safe options internally)
+    // Load the document
     var doc = await getDocSafe(url);
-    console.log("[pdf-viewer] loaded doc:", {
-      numPages: doc.numPages,
-      url: url,
-    });
+    console.log("[pdf-viewer] loaded doc:", { numPages: doc.numPages, url });
+
+    // ✅ mark as initialized only after doc is open
+    el.setAttribute("data-pdf-init", "1");
 
     // resolve page limit
     var pagesAreLimited = true;
@@ -398,6 +393,7 @@
     var nodes = root.querySelectorAll(
       "[data-pdf-viewer]:not([data-pdf-init='1'])"
     );
+
     for (var i = 0; i < nodes.length; i++) {
       await buildViewer(nodes[i]);
     }
@@ -412,10 +408,38 @@
     if (any) initPdfViewers();
   }
 
+  function resolvePdfLib() {
+    return window["pdfjsLib"] || window["pdfjs-dist/build/pdf"] || null;
+  }
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", bootPdfViewers);
   } else {
     // DOM is already ready -> run now
     bootPdfViewers();
   }
+
+  // Build viewers that appear later (CMS, tabs, IX, etc.)
+  var mo = new MutationObserver(function (muts) {
+    for (var i = 0; i < muts.length; i++) {
+      var added = muts[i].addedNodes;
+      for (var j = 0; j < added.length; j++) {
+        var n = added[j];
+        if (n.nodeType !== 1) continue;
+        if (
+          n.matches &&
+          n.matches("[data-pdf-viewer]:not([data-pdf-init='1'])")
+        ) {
+          buildViewer(n);
+        }
+        var q =
+          n.querySelectorAll &&
+          n.querySelectorAll("[data-pdf-viewer]:not([data-pdf-init='1'])");
+        if (q && q.length) {
+          for (var k = 0; k < q.length; k++) buildViewer(q[k]);
+        }
+      }
+    }
+  });
+  mo.observe(document.documentElement, { childList: true, subtree: true });
 })();
