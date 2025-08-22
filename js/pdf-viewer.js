@@ -86,9 +86,8 @@
     await loadScript(SLICK_JS);
     // PDF.js
     await loadScript(PDF_JS_URL);
-    var lib = resolvePdfLib();
-    if (lib && lib.GlobalWorkerOptions) {
-      lib.GlobalWorkerOptions.workerSrc = PDF_WORKER_URL;
+    if (window["pdfjsLib"]) {
+      window["pdfjsLib"].GlobalWorkerOptions.workerSrc = PDF_WORKER_URL;
     }
   }
 
@@ -98,8 +97,7 @@
 
   // One place to get/guard pdfjsLib and handle Safari fallback
   async function getDocSafe(url, opts) {
-    var lib = resolvePdfLib();
-
+    var lib = window["pdfjsLib"];
     if (!lib || typeof lib.getDocument !== "function") {
       throw new Error("[pdf-viewer] pdfjsLib not available yet");
     }
@@ -188,8 +186,10 @@
     }
 
     await ensureDeps();
-    var lib = resolvePdfLib();
-    if (!lib || typeof lib.getDocument !== "function") {
+    if (
+      !window["pdfjsLib"] ||
+      typeof window["pdfjsLib"].getDocument !== "function"
+    ) {
       console.error("[pdf-viewer] pdfjsLib failed to load");
       return;
     }
@@ -393,7 +393,6 @@
     var nodes = root.querySelectorAll(
       "[data-pdf-viewer]:not([data-pdf-init='1'])"
     );
-
     for (var i = 0; i < nodes.length; i++) {
       await buildViewer(nodes[i]);
     }
@@ -408,38 +407,10 @@
     if (any) initPdfViewers();
   }
 
-  function resolvePdfLib() {
-    return window["pdfjsLib"] || window["pdfjs-dist/build/pdf"] || null;
-  }
-
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", bootPdfViewers);
   } else {
     // DOM is already ready -> run now
     bootPdfViewers();
   }
-
-  // Build viewers that appear later (CMS, tabs, IX, etc.)
-  var mo = new MutationObserver(function (muts) {
-    for (var i = 0; i < muts.length; i++) {
-      var added = muts[i].addedNodes;
-      for (var j = 0; j < added.length; j++) {
-        var n = added[j];
-        if (n.nodeType !== 1) continue;
-        if (
-          n.matches &&
-          n.matches("[data-pdf-viewer]:not([data-pdf-init='1'])")
-        ) {
-          buildViewer(n);
-        }
-        var q =
-          n.querySelectorAll &&
-          n.querySelectorAll("[data-pdf-viewer]:not([data-pdf-init='1'])");
-        if (q && q.length) {
-          for (var k = 0; k < q.length; k++) buildViewer(q[k]);
-        }
-      }
-    }
-  });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
 })();
