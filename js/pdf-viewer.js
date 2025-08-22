@@ -163,13 +163,12 @@
 
     await ensureDeps();
     var pdfjsLib = window["pdfjsLib"];
-    // TEMP: force no-worker on Safari to diagnose worker issues
-    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    if (isSafari) {
-      pdfjsLib.disableWorker = true;
-    }
 
     var doc = await getDocSafe(pdfjsLib, url);
+    console.log("[pdf-viewer] loaded doc:", {
+      numPages: doc.numPages,
+      url: url,
+    });
 
     // resolve page limit
     var pagesAreLimited = true;
@@ -182,11 +181,14 @@
     }
 
     // render pages
+    await new Promise((r) => setTimeout(r, 50));
     var viewerWidth = shell.clientWidth || el.clientWidth || 900;
     var resolutionMultiplier = viewerWidth <= 850 ? 4 : 1; // match your heuristic
     var scaleBase = 3;
 
     function renderPage(pageNumber, canvas, mult) {
+      console.log("[pdf-viewer] render page", pageNumber);
+
       return doc.getPage(pageNumber).then(function (page) {
         var viewport = page.getViewport({ scale: scaleBase });
         viewport = page.getViewport({
@@ -196,10 +198,19 @@
         canvas.width = viewerWidth * mult;
         canvas.height = viewerWidth * hMult * mult;
         canvas.style.width = "100%";
-        return page.render({
-          canvasContext: canvas.getContext("2d"),
-          viewport: viewport,
-        }).promise;
+        console.log("[pdf-viewer] canvas size", {
+          viewerWidth: viewerWidth,
+          mult: mult,
+        });
+
+        return page
+          .render({
+            canvasContext: canvas.getContext("2d"),
+            viewport: viewport,
+          })
+          .promise.catch(function (e) {
+            console.error("[pdf-viewer] render failed p" + pageNumber, e);
+          });
       });
     }
 

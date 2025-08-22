@@ -889,6 +889,9 @@ input::-webkit-inner-spin-button {
   position: relative;
   padding-bottom: 35px;
 }
+.pdf-viewer-shell {
+  min-height: 120px;
+}
 .textLayer {
   display: none;
 }
