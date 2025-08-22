@@ -95,56 +95,50 @@
     return !isNaN(v) && parseInt(Number(v)) == v && !isNaN(parseInt(v, 10));
   }
 
-  // Guard pdfjsLib + handle Safari; final fallback: fetch as ArrayBuffer and load via {data}
+  // One place to get/guard pdfjsLib and handle Safari fallback
   async function getDocSafe(url, opts) {
     var lib = window["pdfjsLib"];
     if (!lib || typeof lib.getDocument !== "function") {
       throw new Error("[pdf-viewer] pdfjsLib not available yet");
     }
 
+    // Base options
     var base = opts || { url: url };
+
+    // Safari compatibility: avoid cross-origin worker/range/stream issues
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     if (isSafari) {
-      // Most reliable path on Safari
+      // Prefer running without the worker on Safari (more reliable)
       lib.disableWorker = true;
+      // Reduce CORS surface in Safari
       base.disableRange = true;
       base.disableStream = true;
       base.nativeImageDecoderSupport = "none";
     }
 
-    // 1) Try normal (or Safari-safe) URL load
     try {
       return await lib.getDocument(base).promise;
     } catch (e) {
       console.warn(
-        "[pdf-viewer] URL load failed, will try no-worker/data fallback",
+        "[pdf-viewer] first getDocument failed, retrying no-worker",
         e
       );
-    }
-
-    // 2) Force no-worker + fetch as ArrayBuffer, then load via {data}
-    try {
-      lib.disableWorker = true;
-      var resp = await fetch(url, {
-        mode: "cors",
-        credentials: "omit",
-        cache: "default",
-      });
-      if (!resp.ok) throw new Error("fetch failed " + resp.status);
-      var ab = await resp.arrayBuffer();
-      return await lib.getDocument({
-        data: ab,
-        disableRange: true,
-        disableStream: true,
-        nativeImageDecoderSupport: "none",
-      }).promise;
-    } catch (e2) {
-      console.error("[pdf-viewer] data fallback failed", e2);
-      throw e2;
+      try {
+        lib.disableWorker = true; // ensure fallback even if not Safari
+        return await lib.getDocument(base).promise;
+      } catch (e2) {
+        console.error("[pdf-viewer] getDocument failed after fallback", e2);
+        throw e2;
+      }
     }
   }
 
   async function buildViewer(el) {
+    if (el.getAttribute("data-pdf-init") === "1") {
+      return; // already initialized
+    }
+    el.setAttribute("data-pdf-init", "1");
+
     var ds = el.dataset;
     var url = ds.link || "";
     var pageLimit = ds.pageLimit || "";
@@ -211,9 +205,6 @@
       numPages: doc.numPages,
       url: url,
     });
-
-    // ✅ Mark as initialized only after doc is open
-    el.setAttribute("data-pdf-init", "1");
 
     // resolve page limit
     var pagesAreLimited = true;
