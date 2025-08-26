@@ -1,4 +1,6 @@
 jQuery(document).ready(function ($) {
+  navScrollingBehavior();
+
   // Open modal
   $(document).on("click", "[class*='open-modal-']", function () {
     var classList = $(this).attr("class").split(/\s+/);
@@ -109,4 +111,28 @@ function openCustomPopup(popupQuery) {
 
 function closeCustomPopup(popupQuery) {
   jQuery(popupQuery).removeClass("open");
+}
+
+function navScrollingBehavior() {
+  var lastScrollTop = 0;
+
+  $(window).on("scroll", function () {
+    var st = $(this).scrollTop();
+
+    if (st > lastScrollTop) {
+      // scrolling down → hide navbar
+      $(".navbar").css({
+        transform: "translateY(-90px)",
+        transition: "transform 0.3s ease",
+      });
+    } else {
+      // scrolling up → show navbar
+      $(".navbar").css({
+        transform: "translateY(0)",
+        transition: "transform 0.3s ease",
+      });
+    }
+
+    lastScrollTop = st;
+  });
 }
