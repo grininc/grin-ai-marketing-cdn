@@ -16,6 +16,10 @@ jQuery(document).ready(function ($) {
     }
   });
 
+  $(document).ready(function () {
+    $(".nav-modal").addClass("prepare");
+  });
+
   // Close modal via close button
   $(document).on("click", ".modal .close", function () {
     $(this).closest(".modal").removeClass("active");
