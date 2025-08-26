@@ -12,11 +12,6 @@
   border-radius: 4px;
 }
 
-.nav-modal.prepare {
-  pointer-events: all;
-  opacity: 1;
-}
-
 .hubspot-submission {
   display: none;
 }
