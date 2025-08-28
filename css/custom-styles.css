@@ -255,13 +255,13 @@ span.gated-link-button:hover,
 /* CSS */
 .faq {
   color: #ffffff;
-  border-radius: 12px;
   overflow: hidden;
 }
 
 .faq-item {
   background-color: #1e1e1e;
   margin-bottom: 15px;
+  border-radius: 12px;
 }
 
 .faq-question {
@@ -281,15 +281,14 @@ span.gated-link-button:hover,
 .faq-q-text {
   flex: 1 1 auto;
   font-weight: 300;
+  font-size: 18px;
 }
 
 .faq-arrow {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex: 0 0 auto;
   transition: transform 0.4s ease;
-  /* Optional: keep it crisp on dark bg */
-  filter: brightness(0) invert(1);
 }
 
 .faq-item.is-open .faq-arrow {
@@ -304,6 +303,8 @@ span.gated-link-button:hover,
 
 .faq-answer-inner {
   opacity: 0.9;
+  font-size: 14px;
+  color: white;
 }
 
 /* Focus states (accessibility) */
