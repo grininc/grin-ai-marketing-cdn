@@ -254,14 +254,14 @@ span.gated-link-button:hover,
 
 /* CSS */
 .faq {
-  background: #1e1e1e;
   color: #ffffff;
   border-radius: 12px;
   overflow: hidden;
 }
 
-.faq-item + .faq-item {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+.faq-item {
+  background-color: #1e1e1e;
+  margin-bottom: 15px;
 }
 
 .faq-question {
@@ -276,17 +276,11 @@ span.gated-link-button:hover,
   justify-content: space-between;
   gap: 16px;
   cursor: pointer;
-  font:
-    600 1rem/1.3 system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
 }
 
 .faq-q-text {
   flex: 1 1 auto;
+  font-weight: 300;
 }
 
 .faq-arrow {
