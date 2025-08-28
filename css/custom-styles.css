@@ -231,7 +231,6 @@ span.gated-link-button:hover,
   color: white;
   transition-duration: 0.4s;
   font-weight: 300;
-  line-height: 1.1em;
   text-decoration: none;
 }
 
@@ -246,6 +245,7 @@ span.gated-link-button:hover,
 
 #table-of-contents ul li {
   margin-bottom: 12px;
+  line-height: 1.2em;
 }
 
 /* End Blog Styles*/
