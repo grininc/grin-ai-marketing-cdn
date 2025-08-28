@@ -1,6 +1,7 @@
 jQuery(document).ready(function ($) {
   navScrollingBehavior();
   disableScrollOnOpenModal();
+  faqFunctionality();
 
   // Open modal
   $(document).on("click", "[class*='open-modal-']", function () {
@@ -276,4 +277,18 @@ function disableScrollOnOpenModal() {
 
   // Initial evaluation (covers initial states)
   updateLock();
+}
+
+function faqFunctionality() {
+  $(".faq").on("click", ".faq-question", function () {
+    var $btn = $(this);
+    var $item = $btn.closest(".faq-item");
+    var $answer = $item.find(".faq-answer");
+    var isOpen = $item.hasClass("is-open");
+
+    // Toggle UI
+    $item.toggleClass("is-open", !isOpen);
+    $btn.attr("aria-expanded", String(!isOpen));
+    $answer.stop(true, true).slideToggle(200);
+  });
 }

@@ -250,6 +250,76 @@ span.gated-link-button:hover,
 
 /* End Blog Styles*/
 
+/*Start Faq styles*/
+
+/* CSS */
+.faq {
+  background: #1e1e1e;
+  color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.faq-item + .faq-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.faq-question {
+  width: 100%;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  padding: 16px 20px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  font:
+    600 1rem/1.3 system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+}
+
+.faq-q-text {
+  flex: 1 1 auto;
+}
+
+.faq-arrow {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  transition: transform 0.4s ease;
+  /* Optional: keep it crisp on dark bg */
+  filter: brightness(0) invert(1);
+}
+
+.faq-item.is-open .faq-arrow {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  display: none; /* hidden by default; shown via jQuery slideToggle */
+  padding: 0 20px 16px 20px;
+  color: #f0f0f0;
+}
+
+.faq-answer-inner {
+  opacity: 0.9;
+}
+
+/* Focus states (accessibility) */
+.faq-question:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/*End faq styles*/
+
 /*Hubspot Forms */
 
 .hs-form {
