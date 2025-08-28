@@ -142,6 +142,36 @@ span.gated-link-button:hover,
 
 /* End Gated Link Popup and custom popup*/
 
+/* Blog Styles */
+
+.blog-content .post-content p {
+  margin-bottom: 20px;
+}
+
+.blog-content .post-content a {
+  color: #e8fd95;
+}
+
+.blog-content .post-content h2,
+.blog-content .post-content h3 {
+  margin-top: 40px;
+}
+
+.blog-content .post-content figure img,
+.blog-content .post-content figure.w-richtext-figure-type-video iframe {
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.blog-content .post-content .blog-quote {
+  background: #e8fd95;
+  color: black;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+/* End Blog Styles*/
+
 /*Hubspot Forms */
 
 .hs-form {
