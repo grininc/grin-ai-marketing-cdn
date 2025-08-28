@@ -198,7 +198,7 @@ span.gated-link-button:hover,
   .post-content
   .blog-quote
   .bottom-quote-container
-  img.white-logo-bg {
+  img.white-bg-logo {
   padding: 10px;
   background: white;
   border-radius: 10px;
@@ -206,7 +206,10 @@ span.gated-link-button:hover,
 
 .blog-content .post-content .blog-quote a {
   color: #000;
-  text-decoration: underline;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: 500;
+  border-bottom: solid 2px black;
 }
 
 .blog-content .post-content .blog-quote a::after {
@@ -214,6 +217,7 @@ span.gated-link-button:hover,
   width: 25px;
   height: auto;
   filter: grayscale(1) brightness(0);
+  margin-left: 8px;
 }
 
 /* End Blog Styles*/
