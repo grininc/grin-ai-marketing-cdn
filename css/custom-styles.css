@@ -185,12 +185,14 @@ span.gated-link-button:hover,
 .blog-content .post-content .blog-quote p.quoter-title {
   font-size: 16px;
   font-weight: 100;
+  margin-bottom: 0;
+  margin-top: 10px;
 }
 
 .blog-content .post-content .blog-quote .bottom-quote-container {
   display: grid;
   grid-template-columns: 1fr 0.3fr;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
 }
 
@@ -217,11 +219,12 @@ span.gated-link-button:hover,
   margin-left: 8px;
   content: "";
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 15px;
   background-image: url("https://cdn.prod.website-files.com/686bf8b543c9e02cde4ff419/6887d102560431a597a2ddc8_RightArrowYellow.svg");
   background-size: contain; /* or cover, 100% 100%, etc. */
   background-repeat: no-repeat;
+  margin-bottom: 15px;
 }
 
 /* End Blog Styles*/
