@@ -168,6 +168,52 @@ span.gated-link-button:hover,
   color: black;
   border-radius: 20px;
   padding: 30px;
+  margin-bottom: 20px;
+}
+
+.blog-content .post-content .blog-quote .quotation-icon {
+  width: 50px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.blog-content .post-content .blog-quote p {
+  font-size: 22px;
+  line-height: 1.4em;
+  font-weight: 100;
+}
+.blog-content .post-content .blog-quote p.quoter-title {
+  font-size: 16px;
+  font-weight: 100;
+}
+
+.blog-content .post-content .blog-quote .bottom-quote-container {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.blog-content
+  .post-content
+  .blog-quote
+  .bottom-quote-container
+  img.white-logo-bg {
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+}
+
+.blog-content .post-content .blog-quote a {
+  color: #000;
+  text-decoration: underline;
+}
+
+.blog-content .post-content .blog-quote a::after {
+  content: url("https://cdn.prod.website-files.com/686bf8b543c9e02cde4ff419/6887d102560431a597a2ddc8_RightArrowYellow.svg");
+  width: 25px;
+  height: auto;
+  filter: grayscale(1) brightness(0);
 }
 
 /* End Blog Styles*/
