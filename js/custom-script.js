@@ -89,6 +89,11 @@ jQuery(document).ready(function ($) {
       closeCustomPopup(".custom-popup");
     }
   });
+
+  // Run only if URL contains /blog/
+  if (window.location.pathname.indexOf("/blog/") !== -1) {
+    generateTOC();
+  }
 });
 
 function executeTextRotation(wordsArray) {
@@ -135,4 +140,33 @@ function navScrollingBehavior() {
 
     lastScrollTop = st;
   });
+}
+
+function generateTOC() {
+  var $tocContainer = $("#table-of-contents");
+  var $tocHeading = $("#TOC-heading");
+  var $list = $("<ul></ul>");
+
+  $("#post-content h2").each(function () {
+    var headingText = $(this).text().trim();
+    // Create a safe ID by lowercasing, replacing spaces with hyphens, and removing non-alphanumeric chars
+    var headingId = headingText
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, "") // remove non-alphanumeric except spaces
+      .replace(/\s+/g, "-"); // replace spaces with dashes
+
+    // Set the ID on the H2 if it doesn’t have one yet
+    $(this).attr("id", headingId);
+
+    // Create the link
+    var $link = $("<a></a>")
+      .attr("href", "#" + headingId)
+      .text(headingText);
+
+    // Add to list
+    $list.append($("<li></li>").append($link));
+  });
+
+  // Append after #TOC-heading inside #table-of-contents
+  $tocHeading.after($list);
 }

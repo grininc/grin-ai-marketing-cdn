@@ -224,7 +224,19 @@ span.gated-link-button:hover,
   background-image: url("https://cdn.prod.website-files.com/686bf8b543c9e02cde4ff419/6887d102560431a597a2ddc8_RightArrowYellow.svg");
   background-size: contain; /* or cover, 100% 100%, etc. */
   background-repeat: no-repeat;
-  margin-bottom: 15px;
+}
+
+#table-of-contents a {
+  font-size: 16px;
+  color: white;
+  transition-duration: 0.4s;
+  font-weight: 300;
+  margin-bottom: 10px;
+  line-height: 1.3em;
+}
+
+#table-of-contents a:hover {
+  color: #e8fd95;
 }
 
 /* End Blog Styles*/
