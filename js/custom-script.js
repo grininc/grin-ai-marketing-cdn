@@ -173,48 +173,107 @@ function generateTOC() {
 }
 
 function disableScrollOnOpenModal() {
-  // Detecting if it is an iOS device, true/false
+  // iOS detection (simple heuristic)
   var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 
-  // Defining that "overlay" is the element that has a changing display value
+  // Webflow nav overlay (may not exist immediately)
   var overlay = document.querySelector(".w-nav-overlay");
 
-  // Creating our mutation observer, which we attach to overlay later
-  var observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutationRecord) {
-      // Checking if it's the style attribute got changed and if display value now set to 'none'?
-      if (
-        mutationRecord.attributeName === "style" &&
-        window.getComputedStyle(overlay).getPropertyValue("display") !== "none"
-      ) {
-        //Overlay's  display value is no longer 'none', now changing the "body" styles:
-        if (iOS) {
-          // for iOS devices:
-          var x = $(window).scrollTop().toFixed();
+  // ---- lock manager (shared across overlay + modals) ----
+  var locked = false;
+  var lastScrollY = 0;
 
-          $("body").css({
-            overflow: "hidden",
-            position: "fixed",
-            top: "-" + x + "px",
-            width: "100vw",
-          });
+  function shouldLock() {
+    var overlayVisible = false;
+    if (overlay) {
+      overlayVisible =
+        window.getComputedStyle(overlay).getPropertyValue("display") !== "none";
+    }
+    var modalActive = document.querySelectorAll(".modal.active").length > 0;
+    return overlayVisible || modalActive;
+  }
+
+  function lockScroll() {
+    if (locked) return;
+    locked = true;
+
+    if (iOS) {
+      // preserve current scroll position
+      lastScrollY = Math.round(
+        window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop ||
+          0
+      );
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = "-" + lastScrollY + "px";
+      document.body.style.width = "100vw";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function unlockScroll() {
+    if (!locked) return;
+    locked = false;
+
+    if (iOS) {
+      document.body.style.overflow = "auto";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "100vw";
+      // restore scroll position
+      window.scrollTo(0, lastScrollY);
+    } else {
+      document.body.style.overflow = "";
+    }
+  }
+
+  function updateLock() {
+    if (shouldLock()) {
+      lockScroll();
+    } else {
+      unlockScroll();
+    }
+  }
+
+  // ---- Observe Webflow nav overlay (style changes) ----
+  if (overlay) {
+    var overlayObserver = new MutationObserver(function (mutations) {
+      for (var m of mutations) {
+        if (m.attributeName === "style") {
+          updateLock();
         }
-        // for all other devices:
-        $("body").css("overflow", "hidden");
-      }
-      //Overlay's  display value back to 'none' , now changing the "body" styles again:
-      else {
-        if (iOS) {
-          //  for iOS devices:
-          var t = $("body").css("top").replace("-", "").replace("px", "");
-          $("body").css({ overflow: "auto", position: "", width: "100vw" });
-          $("body").animate({ scrollTop: t }, 0);
-        }
-        // for all other devices:
-        $("body").css("overflow", "");
       }
     });
+    overlayObserver.observe(overlay, {
+      attributes: true,
+      attributeFilter: ["style"],
+    });
+  }
+
+  // ---- Observe any .modal becoming active/inactive ----
+  // Watch the whole body for class changes and added/removed nodes.
+  var modalObserver = new MutationObserver(function (mutations) {
+    // If any mutation could affect .modal.active presence, re-evaluate.
+    for (var m of mutations) {
+      if (
+        (m.type === "attributes" && m.attributeName === "class") ||
+        m.type === "childList"
+      ) {
+        updateLock();
+        break;
+      }
+    }
   });
-  // Attach the mutation observer to overlay, and only when attribute values change
-  observer.observe(overlay, { attributes: true, attributeFilter: ["style"] });
+  modalObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"],
+    subtree: true,
+    childList: true,
+  });
+
+  // Initial evaluation (covers initial states)
+  updateLock();
 }
