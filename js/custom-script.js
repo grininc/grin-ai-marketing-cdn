@@ -127,13 +127,13 @@ function navScrollingBehavior() {
 
     if (st > lastScrollTop) {
       // scrolling down → hide navbar
-      $(".navbar").css({
+      $(".navbar:not(.absolute)").css({
         transform: "translateY(-90px)",
         transition: "transform 0.3s ease",
       });
     } else {
       // scrolling up → show navbar
-      $(".navbar").css({
+      $(".navbar:not(.absolute)").css({
         transform: "translateY(0)",
         transition: "transform 0.3s ease",
       });
