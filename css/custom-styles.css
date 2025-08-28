@@ -227,16 +227,25 @@ span.gated-link-button:hover,
 }
 
 #table-of-contents a {
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   transition-duration: 0.4s;
   font-weight: 300;
-  margin-bottom: 10px;
-  line-height: 1.3em;
+  line-height: 1.1em;
+  text-decoration: none;
 }
 
 #table-of-contents a:hover {
   color: #e8fd95;
+}
+
+#table-of-contents ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#table-of-contents ul li {
+  margin-bottom: 12px;
 }
 
 /* End Blog Styles*/
