@@ -274,6 +274,10 @@ a.more-arrow::after {
   text-overflow: ellipsis;
 }
 
+.collection-list.w-row:before {
+  content: unset;
+}
+
 /*Start Faq styles*/
 
 /* CSS */
