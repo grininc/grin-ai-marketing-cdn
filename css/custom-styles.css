@@ -142,6 +142,17 @@ span.gated-link-button:hover,
 
 /* End Gated Link Popup and custom popup*/
 
+/*Policy pages*/
+.rich-text.policy p,
+.rich-text.policy h2,
+.rich-text.policy h3,
+.rich-text.policy h4,
+.rich-text.policy h5,
+.rich-text.policy h6 {
+  margin-bottom: 20px;
+}
+/*End Policy pages*/
+
 /* Blog Styles */
 
 .blog-content .post-content p {
