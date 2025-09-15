@@ -985,6 +985,22 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+.dark-rounded-form .hs-form-field .choices__list--dropdown {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  margin-top: 0.25em;
+  z-index: 1000;
+}
+
+/* each choice */
+.dark-rounded-form .hs-form-field .choices__list--dropdown .choices__list-item {
+  background-color: #1e1e1e;
+  color: #fff;
+  transition-duration: 0.4s;
+}
+
 .form-target.dark-rounded-form:not(.blog-subscription) input::placeholder,
 .form-target.dark-rounded-form:not(.blog-subscription)
   ::-webkit-input-placeholder {
