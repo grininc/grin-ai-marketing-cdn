@@ -994,6 +994,19 @@ input::-webkit-inner-spin-button {
   z-index: 1000;
 }
 
+.dark-rounded-form .choices__placeholder {
+  color: #b2b2b2;
+}
+
+.dark-rounded-form
+  .choices__list--dropdown
+  .choices__item--selectable.is-highlighted,
+.dark-rounded-form
+  .choices__list[aria-expanded]
+  .choices__item--selectable.is-highlighted {
+  background-color: #444;
+}
+
 /* each choice */
 .dark-rounded-form .hs-form-field .choices__list--dropdown .choices__list-item {
   background-color: #1e1e1e;
