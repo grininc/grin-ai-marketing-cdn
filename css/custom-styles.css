@@ -538,7 +538,7 @@ form.hs-form fieldset.form-columns-1 .input .hs-input {
   background-color: transparent;
   color: #fff;
   padding-right: 2.5em; /* room for your arrow */
-  background-image: url("/wp-content/uploads/2024/12/ArrowDown-1.webp");
+  background-image: url("https://cdn.prod.website-files.com/686bf8b543c9e02cde4ff419/68c845546859f9f8e2e978eb_ArrowDown-1.webp");
   background-repeat: no-repeat;
   background-position: right 0.75em center;
   background-size: 10px;
@@ -725,7 +725,7 @@ form.hs-form .input .hs-form-booleancheckbox .hs-input[type="checkbox"] {
 
 /* Change the background image when checked */
 .hs-input[type="checkbox"]:checked + span:before {
-  background-image: url("/wp-content/uploads/2022/09/custom-checkbox.svg");
+  background-image: url("https://cdn.prod.website-files.com/686bf8b543c9e02cde4ff419/68c845c260c963ca4e063f00_custom-checkbox.svg");
   border-color: #696eff;
   background-position: center;
   background-size: 15px;
@@ -977,6 +977,7 @@ input::-webkit-inner-spin-button {
 .dark-rounded-form .hs-input[type="email"],
 .dark-rounded-form .hs-input[type="tel"],
 .dark-rounded-form .hs-form-field select,
+.dark-rounded-form .hs-form-field .choices__inner,
 .dark-rounded-form .hs-input[type="number"] {
   background: #1e1e1e;
   border: 1px solid #b2b2b2;
