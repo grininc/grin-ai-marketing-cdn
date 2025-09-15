@@ -995,15 +995,10 @@ input::-webkit-inner-spin-button {
 }
 
 .dark-rounded-form .hs-form-field .choices__inner {
-  background-color: transparent;
-  color: #fff;
-  padding-right: 2.5em;
   background-image: url("https://cdn.prod.website-files.com/686bf8b543c9e02cde4ff419/68c845546859f9f8e2e978eb_ArrowDown-1.webp");
   background-repeat: no-repeat;
   background-position: right 0.75em center;
   background-size: 10px;
-  border-radius: 4px;
-  border-width: 1px;
 }
 
 .dark-rounded-form .choices__placeholder {
