@@ -1070,6 +1070,15 @@ input::-webkit-inner-spin-button {
   color: black;
 }
 
+.dark-rounded-form.yellow-submit .hs_submit input {
+  background: #e8fd95;
+  color: black;
+}
+
+.dark-rounded-form.center-submit .hs_submit {
+  justify-content: center;
+}
+
 .dark-rounded-form
   .hs-form
   .hs-form-field.hs-fieldtype-booleancheckbox
