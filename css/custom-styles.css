@@ -43,6 +43,27 @@
   opacity: 1;
 }
 
+/*Partner banner slick styles*/
+.partnerlogos-slick-banner .slick-slide {
+  height: 40px;
+  width: 150px;
+  margin: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.partnerlogos-slick-banner img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.partnerlogos-slick-banner .slick-arrow {
+  display: none;
+}
+
+/* End Partner banner slick styles*/
+
 /* Gated Link Popup and Custom Popup*/
 .gated-link-popup,
 .custom-popup {
