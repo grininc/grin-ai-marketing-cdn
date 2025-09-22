@@ -3,6 +3,19 @@ jQuery(document).ready(function ($) {
   disableScrollOnOpenModal();
   faqFunctionality();
 
+  jQuery(".partnerlogos-slick-banner").slick({
+    infinite: true,
+    arrows: false,
+    slidesToScroll: 1,
+    slidesToShow: 1,
+    variableWidth: true,
+    autoplay: true,
+    autoplaySpeed: 0,
+    speed: 4500,
+    cssEase: "linear",
+    pauseOnHover: false,
+  });
+
   // Open modal
   $(document).on("click", "[class*='open-modal-']", function () {
     var classList = $(this).attr("class").split(/\s+/);
