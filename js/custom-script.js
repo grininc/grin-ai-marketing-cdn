@@ -68,7 +68,7 @@ jQuery(document).ready(function ($) {
   });
 
   var wordsArray = [
-    "Get your free affiliate marketing proposal.",
+    "Get your free Brand Intelligence Report.",
     "Access brand, audience, and competitor insights.",
     "See how Gia would run your program for maximum impact.",
     "Uncover your fastest paths to growth.",
