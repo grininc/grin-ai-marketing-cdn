@@ -74,35 +74,57 @@ jQuery(document).ready(function ($) {
     );
   }
 
-  // Function to populate UTM parameters
-  function populateUtmParameters(form) {
-    try {
-      var hsContext = form.querySelector('input[name="hs_context"]').value;
-      var contextData = JSON.parse(hsContext);
+  // Helper that sets value, mirrors to attribute, and fires events
+  function setFieldAndNotify(form, name, val) {
+    const $inputs = jQuery(`input[name="${name}"]`, form);
+    if (!$inputs.length) return false;
+    $inputs
+      .val(val)
+      .attr("value", val)
+      .each(function () {
+        this.dispatchEvent(new Event("input", { bubbles: true }));
+        this.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+    return true;
+  }
 
-      if (contextData.urlParams) {
-        $('input[name="source_last_utm_campaign__c"]', form).val(
-          contextData.urlParams.utm_campaign || ""
-        );
-        $('input[name="source_last_utm_term__c"]', form).val(
-          contextData.urlParams.utm_term || ""
-        );
-        $('input[name="source_last_utm_content__c"]', form).val(
-          contextData.urlParams.utm_content || ""
-        );
-        $('input[name="source_last_utm_medium__c"]', form).val(
-          contextData.urlParams.utm_medium || ""
-        );
-        $('input[name="source_last_utm_source__c"]', form).val(
-          contextData.urlParams.utm_source || ""
-        );
-        $('input[name="gclid__c"]', form).val(
-          contextData.urlParams.gclid || ""
-        );
-      }
+  function populateUtmParameters(form) {
+    let contextData;
+    try {
+      const hsContext =
+        form.querySelector('input[name="hs_context"]')?.value || "{}";
+      contextData = JSON.parse(hsContext);
     } catch (e) {
       console.error("Failed to parse hs_context:", e);
+      return;
     }
+
+    const p = (contextData && contextData.urlParams) || {};
+    // Nothing to do?
+    if (!p || Object.keys(p).length === 0) return;
+
+    const mappings = [
+      ["source_last_utm_campaign__c", p.utm_campaign || ""],
+      ["source_last_utm_term__c", p.utm_term || ""],
+      ["source_last_utm_content__c", p.utm_content || ""],
+      ["source_last_utm_medium__c", p.utm_medium || ""],
+      ["source_last_utm_source__c", p.utm_source || ""],
+      ["gclid__c", p.gclid || ""],
+    ];
+
+    // A single application pass
+    const apply = () => {
+      mappings.forEach(([name, val]) => {
+        if (val === "") return; // skip empty
+        setFieldAndNotify(form, name, val);
+      });
+    };
+
+    // 1) Apply immediately
+    apply();
+
+    // 2) Retry a few times (handles late field injections by ZoomInfo/HS)
+    [1000, 3000].forEach((ms) => setTimeout(apply, ms));
   }
 
   // Select all divs with the class 'form-target'
@@ -134,7 +156,6 @@ jQuery(document).ready(function ($) {
           handleInputChanges(form);
 
           populateUtmParameters(form);
-          populateLiFatId(form); //populate linked in id from url param
 
           // Populate the visited_pages field if it exists
           var visitedPagesField = $('input[name="visited_pages"]', form);
@@ -422,15 +443,5 @@ function attachSubmitClickError($form, isDemo) {
         );
         complianceLabel.find(".checkbox-error").hide();
       });
-  }
-}
-
-function populateLiFatId(form) {
-  // parse the URL params
-  var params = new URLSearchParams(window.location.search);
-  var liFatId = params.get("li_fat_id");
-  if (liFatId) {
-    // set the hidden input’s value
-    $('input[name="li_fat_id"]', form).val(liFatId);
   }
 }
