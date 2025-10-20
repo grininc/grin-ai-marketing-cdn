@@ -254,6 +254,14 @@ function webflowDataPushForHubspotForm(formId) {
 //function for pushing to dataLayer for Google Analytics
 function gaDataPushForHubspotForm(formId, data) {
   let formsData = {
+    "745d5fcf-e7fd-4007-b63f-32d3e35f2211": {
+      name: "Join Waitlist (Phase 1)",
+      type: "waitlist",
+    },
+    "cfd14c16-675a-447e-aaf1-eea4ebba1006": {
+      name: "Get Report Form",
+      type: "get report",
+    },
     "f33b536d-0861-486a-b700-d64d5c811821": { name: "Demo", type: "demo" },
     "1c127825-94d4-4152-8ca1-62d8bf73699f": { name: "Demo", type: "demo" }, //this is the feb 2025 version of the demo form
     "5e2cda40-62c6-454a-a324-2b132f2aafee": {
