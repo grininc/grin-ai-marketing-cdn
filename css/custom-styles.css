@@ -1329,7 +1329,7 @@ input::-webkit-inner-spin-button {
   overflow: visible;
   font-family: "Roobert";
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 22px;
   position: relative;
 }
@@ -1402,13 +1402,13 @@ input::-webkit-inner-spin-button {
 
 @media screen and (max-width: 992px) {
   .gia-answer {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.2em;
   }
 }
 @media screen and (max-width: 576px) {
   .gia-answer {
-    font-size: 16px;
+    font-size: 15px;
     text-align: left;
   }
   .large-gia-answer .gia-answer {
