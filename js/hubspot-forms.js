@@ -2,32 +2,6 @@ jQuery(document).ready(function ($) {
   var region = "na1";
   var portalId = "45956814";
 
-  function activateOnValidEmailInput(form, targetClass) {
-    // Find the email input element within the form
-    var emailInput = $('input[name="email"]', form);
-
-    // Check if the email input exists in the form
-    if (emailInput.length) {
-      // Listen for input events on the email input field
-      emailInput.on("input", function () {
-        var targetElement = $(form).find("." + targetClass);
-
-        // Get the current value of the email input
-        var emailValue = $(this).val();
-
-        // Email validation regex
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        // Validate the email and toggle the 'active' class
-        if (emailRegex.test(emailValue)) {
-          targetElement.addClass("active");
-        } else {
-          targetElement.removeClass("active");
-        }
-      });
-    }
-  }
-
   // Function to add 'float-label' class to parent of pre-filled inputs
   function addFilledInClass(form) {
     form
@@ -150,8 +124,7 @@ jQuery(document).ready(function ($) {
           var form = $form.get(0);
           var isDemo = false;
 
-          activateOnValidEmailInput(form, "hs_how_did_you_hear_about_us"); //makes this field appear when email is filled in
-
+          ensureFieldsetLegends(form);
           addFilledInClass(form);
           handleInputChanges(form);
 
@@ -347,6 +320,38 @@ function gaDataPushForHubspotForm(formId, data) {
   } catch {
     console.log("Error pushing data layer");
   }
+}
+
+function ensureFieldsetLegends(formEl) {
+  const form = formEl instanceof jQuery ? formEl.get(0) : formEl;
+  if (!form) return;
+
+  // per-form counter, only for fieldsets missing a legend
+  let n = 1;
+
+  const addLegends = () => {
+    form.querySelectorAll("fieldset").forEach((fs) => {
+      // ignore hidden/presentational groups
+      if (fs.matches('[aria-hidden="true"], [hidden], [role="presentation"]'))
+        return;
+
+      // already has a (direct child) legend?
+      if ([...fs.children].some((ch) => ch.tagName === "LEGEND")) return;
+
+      const legend = document.createElement("legend");
+      // if you prefer visible legends, remove this class
+      legend.className = "sr-only";
+      legend.textContent = `Fieldset ${n++}`;
+      fs.insertBefore(legend, fs.firstChild);
+    });
+  };
+
+  // initial pass
+  addLegends();
+
+  // watch for HubSpot injecting more fieldsets/fields
+  const mo = new MutationObserver(() => addLegends());
+  mo.observe(form, { childList: true, subtree: true });
 }
 
 function attachCombinedValidation($form, isDemo) {
