@@ -1267,3 +1267,154 @@ input::-webkit-inner-spin-button {
 }
 
 /*END PDF VIEWER*/
+
+/*start gia styles*/
+.yellow-gia-animated-bg {
+  background-color: #e8fd95;
+  height: 100%;
+  width: 140px;
+  border-radius: 170px;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 1s ease-in-out;
+}
+.yellow-gia-animated-bg.expanded {
+  width: 100%;
+}
+
+.yellow-gia-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(232, 253, 149, 0.7);
+  border-radius: inherit;
+  opacity: 0;
+  transform: scale(1, 1);
+}
+.yellow-gia-pulse.start-pulse {
+  animation: gia-pulse 3.5s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* 
+  We want “grow + fade” to take up the first 2s (→ 66.667% of 3s),
+  then sit at opacity:0 until the 3s mark (100%).
+*/
+@keyframes gia-pulse {
+  /* 0% (t=0 s): start at parent size, semi‐opaque */
+  0% {
+    transform: scale(1, 1);
+    opacity: 0.7;
+  }
+
+  /* 66.667% (t≈2 s): reach end scale/fade out */
+  66.667% {
+    transform: scale(1.05, 1.18);
+    opacity: 0;
+  }
+
+  /* 100% (t=3 s): stay at end state (invisible & scaled) */
+  100% {
+    transform: scale(1.05, 1.18);
+    opacity: 0;
+  }
+}
+
+.gia-answer {
+  margin: 0 20px;
+  overflow: visible;
+  font-family: "Roobert";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  position: relative;
+}
+
+.invisible-answer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.invisible-answer p,
+.invisible-answer li {
+  margin-bottom: 20px;
+}
+
+.gia-inner span.li strong:last-of-type {
+  margin-right: 5px;
+}
+
+.gia-inner span.li {
+  display: inline-block;
+  margin-left: 1em;
+  padding-left: 1.2em; /* space for your “bullet” */
+  text-indent: -1.2em; /* pull the first line back over the bullet */
+}
+
+.gia-inner span.li::before {
+  content: "•";
+  font-size: 28px;
+  margin-right: 5px;
+  vertical-align: text-bottom;
+  padding-right: 0.2em; /* space between bullet and text */
+}
+
+.gia-answer .gia-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* CSS */
+.gia-text {
+  /* normal wrapping */
+  margin-top: auto;
+  margin-bottom: auto;
+  white-space: pre-wrap;
+}
+
+.gia-caret {
+  display: inline-block;
+  width: 0;
+  height: 1em;
+  /* make it transparent by default */
+  border-right: 0.15em solid transparent;
+}
+
+.gia-caret.blinking {
+  /* restore the visible caret and animation only when blinking */
+  border-right-color: currentColor;
+  animation: blink-caret 0.75s steps(1) infinite;
+}
+
+@keyframes blink-caret {
+  0%,
+  100% {
+    border-color: currentColor;
+  }
+  50% {
+    border-color: transparent;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .gia-answer {
+    font-size: 14px;
+    line-height: 1.2em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .gia-answer {
+    font-size: 16px;
+    text-align: left;
+  }
+  .large-gia-answer .gia-answer {
+    margin-right: 0px;
+  }
+}
+
+/*end gia styles*/
