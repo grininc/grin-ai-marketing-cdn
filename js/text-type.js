@@ -234,17 +234,6 @@ jQuery(document).ready(function ($) {
     if (node) obs.observe(node);
   }
 
-  // $(".gia-answer").each(function () {
-  //   const $ans = $(this);
-  //   const answerText = $ans.find(".invisible-answer").text().trim();
-
-  //   // climb up two levels to the #answer-outer-* container
-  //   const $wrapper = $ans.parent().parent();
-
-  //   // now init
-  //   initTyping("#" + $wrapper.attr("id"), answerText);
-  // });
-
   $(".gia-answer").each(function () {
     const $ans = $(this);
     // climb up two levels to the #answer-outer-* container

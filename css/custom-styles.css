@@ -1325,11 +1325,11 @@ input::-webkit-inner-spin-button {
 }
 
 .gia-answer {
-  margin: 0 20px;
+  margin: 0;
   overflow: visible;
   font-family: "Roobert";
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 22px;
   position: relative;
 }
@@ -1339,9 +1339,8 @@ input::-webkit-inner-spin-button {
   pointer-events: none;
 }
 
-.invisible-answer p,
-.invisible-answer li {
-  margin-bottom: 20px;
+.invisible-answer p {
+  margin-bottom: 0px;
 }
 
 .gia-inner span.li strong:last-of-type {
