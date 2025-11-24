@@ -14,9 +14,23 @@
 
 .hs-form-field.hs-recaptcha {
   position: fixed;
-  z-index: 10000;
-  bottom: 20px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  bottom: 0;
   left: 0;
+}
+
+.recaptcha-disclosure {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #ddd;
+  margin-top: 8px;
+}
+
+.recaptcha-disclosure a {
+  color: #e8fd95;
+  text-decoration: underline;
 }
 
 .sr-only {

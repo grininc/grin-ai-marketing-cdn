@@ -149,6 +149,33 @@ jQuery(document).ready(function ($) {
               });
             });
           }
+          // === Add reCAPTCHA disclosure ===
+          try {
+            // Only add once per form
+            if (!$form.find(".recaptcha-disclosure").length) {
+              var disclosureHtml = $(
+                '<p class="recaptcha-disclosure">' +
+                  "This site is protected by reCAPTCHA and the Google " +
+                  '<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> ' +
+                  "and " +
+                  '<a href="https://www.google.com/intl/en/policies/terms/" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.' +
+                  "</p>"
+              );
+
+              // append near the submit area
+              var submitWrapper = $form.find(
+                ".hs_submit, .actions, .hs-submit"
+              );
+              if (submitWrapper.length) {
+                submitWrapper.after(disclosureHtml);
+              } else {
+                // fallback: just append at the end of the form
+                $form.append(disclosureHtml);
+              }
+            }
+          } catch (e) {
+            console.error("Failed to add reCAPTCHA disclosure", e);
+          }
         },
         onFormSubmitted: function ($form, data) {
           //SUCCESSFUL SUBMISSION
