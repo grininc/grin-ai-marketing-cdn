@@ -24,8 +24,10 @@
 .recaptcha-disclosure {
   font-size: 12px;
   line-height: 1.4;
-  color: #ddd;
-  margin-top: 8px;
+  color: #fff;
+  margin-top: 4px;
+  margin-bottom: 0;
+  opacity: 0.9;
 }
 
 .recaptcha-disclosure a {
