@@ -149,10 +149,13 @@ jQuery(document).ready(function ($) {
               });
             });
           }
-          // === Add reCAPTCHA disclosure ===
+
+          // === Add reCAPTCHA disclosure BELOW the form embed ===
           try {
-            // Only add once per form
-            if (!$form.find(".recaptcha-disclosure").length) {
+            const $target = $form.parent(); // .form-target wrapper
+
+            // Only add once per form container
+            if (!$target.next().hasClass("recaptcha-disclosure")) {
               var disclosureHtml = $(
                 '<p class="recaptcha-disclosure">' +
                   "This site is protected by reCAPTCHA and the Google " +
@@ -162,16 +165,7 @@ jQuery(document).ready(function ($) {
                   "</p>"
               );
 
-              // append near the submit area
-              var submitWrapper = $form.find(
-                ".hs_submit, .actions, .hs-submit"
-              );
-              if (submitWrapper.length) {
-                submitWrapper.after(disclosureHtml);
-              } else {
-                // fallback: just append at the end of the form
-                $form.append(disclosureHtml);
-              }
+              $target.after(disclosureHtml);
             }
           } catch (e) {
             console.error("Failed to add reCAPTCHA disclosure", e);
