@@ -101,8 +101,7 @@ jQuery(document).ready(function ($) {
     [1000, 3000].forEach((ms) => setTimeout(apply, ms));
   }
 
-  // Select all divs with the class 'form-target'
-  var targets = document.querySelectorAll(".form-target");
+  var targets = document.querySelectorAll(".form-target, .hs-form-html");
 
   targets.forEach(function (target, index) {
     var formId = target.getAttribute("data-form-id");
