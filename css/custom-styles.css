@@ -166,9 +166,13 @@
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-TextInput {
   font-size: 16px;
   background: #1e1e1e;
-  border: 1px solid white;
+  border: 1px solid #b2b2b2;
   margin-bottom: 0;
   border-radius: 25px;
+}
+
+[data-hsfc-id="Renderer"] .hsfc-TextInput::placeholder {
+  color: #b2b2b2;
 }
 
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-ErrorAlert {
