@@ -39,6 +39,9 @@
 .hs-form-html [data-hsfc-id="Renderer"] .hsfc-NavigationRow {
   margin-top: 0px;
 }
+.hs-form-html .hsfc-FormWrapper .hsfc-Step__Content p:last-of-type {
+  margin-bottom: 0;
+}
 
 .recaptcha-disclosure {
   font-size: 12px;
@@ -54,7 +57,7 @@
   text-decoration: underline;
 }
 
-[data-hsfc-id="Renderer"] .hsfc-ReCaptchaV2 .grecaptcha-badge {
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-ReCaptchaV2 .grecaptcha-badge {
   display: none;
 }
 
@@ -171,7 +174,7 @@
   border-radius: 25px;
 }
 
-[data-hsfc-id="Renderer"] .hsfc-TextInput::placeholder {
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextInput::placeholder {
   color: #b2b2b2;
 }
 
