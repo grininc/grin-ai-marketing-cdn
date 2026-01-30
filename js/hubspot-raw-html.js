@@ -202,3 +202,73 @@
     observeHsRawHtmlContainers();
   }
 })();
+
+//get utm params for eligibility check form:
+(function ($) {
+  const FORM_ID = "b1633f2c-788c-405a-9766-b804c59fabd8";
+  const FORM_SELECTOR = `.hs-form-html[data-form-id="${FORM_ID}"]`;
+
+  function getParams() {
+    const out = {};
+    const qs = window.location.search.slice(1);
+    if (!qs) return out;
+
+    qs.split("&").forEach((pair) => {
+      if (!pair) return;
+      const [kRaw, vRaw = ""] = pair.split("=");
+      const k = decodeURIComponent(kRaw.replace(/\+/g, " "));
+      const v = decodeURIComponent(vRaw.replace(/\+/g, " "));
+      if (k) out[k] = v;
+    });
+
+    return out;
+  }
+
+  function setAndNotify($inputs, val) {
+    if (!$inputs.length) return false;
+
+    $inputs.each(function () {
+      $(this).val(val).attr("value", val);
+      this.dispatchEvent(new Event("input", { bubbles: true }));
+      this.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+
+    return true;
+  }
+
+  function fillForm(container) {
+    const p = getParams();
+    if (!p.first_name && !p.last_name && !p.email) return;
+
+    const $c = $(container);
+
+    if (p.first_name) {
+      setAndNotify($c.find('input[name$="/firstname"]'), p.first_name);
+    }
+    if (p.last_name) {
+      setAndNotify($c.find('input[name$="/lastname"]'), p.last_name);
+    }
+    if (p.email) {
+      setAndNotify($c.find('input[name$="/email"]'), p.email);
+    }
+  }
+
+  function boot() {
+    const $container = $(FORM_SELECTOR);
+    if (!$container.length) return;
+
+    // Run immediately
+    fillForm($container);
+
+    // Retry (HubSpot injects fields late)
+    [300, 1000, 2500].forEach((ms) =>
+      setTimeout(() => fillForm($container), ms)
+    );
+
+    // Watch only THIS container for injected fields
+    const mo = new MutationObserver(() => fillForm($container));
+    mo.observe($container.get(0), { childList: true, subtree: true });
+  }
+
+  $(boot);
+})(window.jQuery);
