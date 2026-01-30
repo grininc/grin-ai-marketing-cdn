@@ -47,12 +47,15 @@
   margin-top: 14px;
   margin-bottom: 0;
   opacity: 0.9;
-  text-align: center;
 }
 
 .recaptcha-disclosure a {
   color: #e8fd95;
   text-decoration: underline;
+}
+
+[data-hsfc-id="Renderer"] .hsfc-ReCaptchaV2 .grecaptcha-badge {
+  display: none;
 }
 
 /*New hubspot form editor*/
@@ -81,8 +84,8 @@
   margin-bottom: 0px;
 }
 
-.hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-RichText ul {
-  margin-inline: 30px;
+.hs-form-html .hsfc-FormWrapper .hsfc-DropdownField label {
+  display: none;
 }
 
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content label {
@@ -162,9 +165,10 @@
 
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-TextInput {
   font-size: 16px;
-  background: black;
+  background: #1e1e1e;
   border: 1px solid white;
   margin-bottom: 0;
+  border-radius: 25px;
 }
 
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-ErrorAlert {
