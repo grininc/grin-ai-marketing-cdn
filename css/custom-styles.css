@@ -12,6 +12,10 @@
   border-radius: 4px;
 }
 
+#hubspot-messages-iframe-container.widget-align-right {
+  display: none !important;
+}
+
 .hs-form-field.hs-recaptcha {
   position: fixed;
   z-index: 0;
