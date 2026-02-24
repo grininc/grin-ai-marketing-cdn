@@ -1248,6 +1248,7 @@ input::-webkit-inner-spin-button {
 
 .dark-rounded-form.get-report .hs-form {
   grid-template-columns: 1fr 0.35fr;
+  align-items: center;
 }
 
 .dark-rounded-form.get-report .hs_brand_website input {
@@ -1267,7 +1268,7 @@ input::-webkit-inner-spin-button {
   pointer-events: none;
 }
 .dark-rounded-form .hs_submit {
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
