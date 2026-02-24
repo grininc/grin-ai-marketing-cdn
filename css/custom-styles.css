@@ -1171,6 +1171,9 @@ input::-webkit-inner-spin-button {
 .dark-rounded-form.get-report .hs-form {
   gap: 0 10px;
 }
+.dark-rounded-form .hs-form .hs-form-field.hs_brand_website {
+  margin-bottom: 0px;
+}
 .dark-rounded-form .hs-form .hs-form-field {
   margin-bottom: 12px;
 }
@@ -1265,7 +1268,7 @@ input::-webkit-inner-spin-button {
 }
 .dark-rounded-form .hs_submit {
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .dark-rounded-form .hs_submit input {
@@ -1321,6 +1324,9 @@ input::-webkit-inner-spin-button {
   }
   .dark-rounded-form.get-report .hs-form {
     grid-template-columns: 1fr;
+  }
+  .dark-rounded-form .hs-form .hs-form-field.hs_brand_website {
+    margin-bottom: 12px;
   }
 }
 

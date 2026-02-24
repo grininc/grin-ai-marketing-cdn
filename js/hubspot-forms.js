@@ -319,9 +319,6 @@ jQuery(document).ready(function ($) {
       },
       true
     );
-    console.log(
-      "[brand_website] submit + click listeners attached (capture=true)"
-    );
   }
 
   function removeLabelsForHiddenInputs(form) {
