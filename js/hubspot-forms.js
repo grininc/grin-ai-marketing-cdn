@@ -233,29 +233,13 @@ jQuery(document).ready(function ($) {
         : "https://" + trimmed;
       var url = new URL(toParse);
       if (url.protocol !== "http:" && url.protocol !== "https:") {
-        console.log("[brand_website isValidUrl]", {
-          value: trimmed,
-          ok: false,
-          reason: "bad protocol",
-        });
         return false;
       }
       var hostname = (url.hostname || "").toLowerCase();
       var eTLD = getEtld(hostname);
       var ok = !!eTLD;
-      console.log("[brand_website isValidUrl]", {
-        value: trimmed,
-        hostname: hostname,
-        eTLD: eTLD,
-        ok: ok,
-      });
       return ok;
     } catch (e) {
-      console.log("[brand_website isValidUrl]", {
-        value: trimmed,
-        ok: false,
-        error: e.message,
-      });
       return false;
     }
   }
@@ -267,11 +251,6 @@ jQuery(document).ready(function ($) {
   function attachBrandWebsiteValidation($form) {
     var form = $form.get(0);
     var $input = $form.find('input[name="brand_website"]');
-    console.log("[brand_website] attachBrandWebsiteValidation called", {
-      formId: form.id || form.getAttribute("data-form-id"),
-      hasBrandWebsiteInput: $input.length > 0,
-      inputName: $input.length ? $input.attr("name") : null,
-    });
     if (!$input.length) return;
 
     var $field = $input.closest(".hs-form-field, .field");
@@ -291,12 +270,6 @@ jQuery(document).ready(function ($) {
       var isEmpty = !val.trim();
       var urlValid = isValidUrl(val);
       var valid = isEmpty || urlValid;
-      console.log("[brand_website] validateAndShowError", {
-        val: val,
-        isEmpty: isEmpty,
-        urlValid: urlValid,
-        valid: valid,
-      });
       if (!valid) {
         $error.show();
         return false;
@@ -314,12 +287,7 @@ jQuery(document).ready(function ($) {
     form.addEventListener(
       "submit",
       function (e) {
-        console.log("[brand_website] form submit event fired", {
-          defaultPrevented: e.defaultPrevented,
-          target: e.target.tagName,
-        });
         if (!validateAndShowError()) {
-          console.log("[brand_website] BLOCKING submit (invalid URL)");
           e.preventDefault();
           e.stopPropagation();
           $input.one("focus", function () {
@@ -328,7 +296,6 @@ jQuery(document).ready(function ($) {
           $input[0].focus();
           return false;
         }
-        console.log("[brand_website] allowing submit");
       },
       true
     );
@@ -341,12 +308,7 @@ jQuery(document).ready(function ($) {
           (t.tagName === "INPUT" && t.getAttribute("type") === "submit") ||
           (t.tagName === "BUTTON" && t.getAttribute("type") === "submit")
         ) {
-          console.log("[brand_website] submit button clicked", {
-            tag: t.tagName,
-            type: t.getAttribute("type"),
-          });
           if (!validateAndShowError()) {
-            console.log("[brand_website] BLOCKING click (invalid URL)");
             e.preventDefault();
             e.stopPropagation();
             $error.show();
