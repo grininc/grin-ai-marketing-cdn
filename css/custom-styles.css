@@ -1199,6 +1199,19 @@ input::-webkit-inner-spin-button {
   color: white;
 }
 
+.dark-rounded-form.get-report.v2 .hs-form {
+  display: block;
+  position: relative;
+}
+.dark-rounded-form.get-report.v2 .hs-form .hs_submit {
+  display: inline-flex;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: auto;
+  transform: translateY(-50%);
+}
+
 .dark-rounded-form .hs-form-field .choices__list--dropdown {
   background-color: #1e1e1e;
   color: #fff;
