@@ -1217,9 +1217,17 @@ input::-webkit-inner-spin-button {
   transform: translateY(-50%);
 }
 .dark-rounded-form.get-report.v2 .hs_submit input {
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 600;
   padding: 10px 20px;
+  box-shadow: 0 4px 20px rgba(105, 110, 255, 0.5);
+}
+
+.dark-rounded-form.get-report.v2 .hs_submit input:hover {
+  background: #7b80ff;
+  box-shadow: 0 4px 32px rgba(105, 110, 255, 0.7);
+  transform: translateY(-1px);
+  color: #fff;
 }
 
 .dark-rounded-form .hs-form-field .choices__list--dropdown {
