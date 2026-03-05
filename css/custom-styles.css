@@ -1203,13 +1203,23 @@ input::-webkit-inner-spin-button {
   display: block;
   position: relative;
 }
+.dark-rounded-form.get-report.v2 .hs-form input[type="text"] {
+  border-radius: 12px;
+  padding: 20px 175px 20px 50px;
+  border: #696eff38 solid 1px;
+}
 .dark-rounded-form.get-report.v2 .hs-form .hs_submit {
   display: inline-flex;
   position: absolute;
-  right: 0;
+  right: 20px;
   top: 50%;
   width: auto;
   transform: translateY(-50%);
+}
+.dark-rounded-form.get-report.v2 .hs_submit input {
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 10px 20px;
 }
 
 .dark-rounded-form .hs-form-field .choices__list--dropdown {
