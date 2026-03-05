@@ -1,0 +1,2028 @@
+<style>
+  .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content label {
+    color: black;
+  }
+
+  .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content input {
+    color: white;
+  }
+
+  :root {
+    --navy: #0f172a;
+    --teal: #0d9488;
+    --teal-light: #14b8a6;
+    --teal-bg: #f0fdfa;
+    --light-bg: #f8fafc;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1e293b;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --indigo: #6366f1;
+    --indigo-bg: #eef2ff;
+    --indigo-light: #818cf8;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Roobert", sans-serif;
+    background: var(--light-bg);
+    color: var(--gray-700);
+    line-height: 1.6;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--gray-800) 100%);
+    padding: 2rem 2rem 2.5rem;
+    position: relative;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      var(--indigo),
+      var(--teal),
+      var(--amber)
+    );
+  }
+  .header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .brand {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--indigo-light);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .header h1 {
+    font-family: "Roobert", serif;
+    font-size: 1.65rem;
+    color: var(--white);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+  .header p {
+    color: var(--gray-400);
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .badges {
+    margin-top: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+  }
+  .badge-time {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: var(--indigo-light);
+  }
+  .badge-gift {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: var(--amber);
+  }
+  .badge-conf {
+    background: rgba(13, 148, 136, 0.15);
+    border: 1px solid rgba(13, 148, 136, 0.3);
+    color: var(--teal-light);
+  }
+
+  .section {
+    background: var(--light-bg);
+  }
+
+  .question-card label {
+    margin-bottom: 0;
+  }
+
+  .question-card.invalid {
+    border: 1px solid #ef4444;
+    background: #fef2f2;
+  }
+
+  .question-card.invalid .error-text {
+    display: block;
+  }
+
+  .error-text {
+    display: none;
+    color: #ef4444;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  .invalid {
+    border: 2px solid #e11d48 !important;
+    background: #fff1f2;
+  }
+
+  .field-error-msg {
+    color: #e11d48;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  .progress-bar {
+    max-width: 720px;
+    margin: 1.5rem auto 0;
+    padding: 0 2rem;
+  }
+  .progress-track {
+    height: 4px;
+    background: var(--gray-200);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--indigo), var(--teal));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.3rem;
+    font-size: 0.7rem;
+    color: var(--gray-400);
+    font-weight: 500;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 3rem;
+  }
+  .section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .section.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .section-header {
+    margin-bottom: 1.25rem;
+  }
+  .section-num {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--indigo);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .section-header h2 {
+    font-family: "Roobert", serif;
+    font-size: 1.25rem;
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .section-header p {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    margin-top: 0.25rem;
+  }
+
+  .question-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+  }
+  .question-card:hover {
+    border-color: var(--gray-300);
+  }
+  .question-card.focused {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.08);
+  }
+  .q-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.65rem;
+    line-height: 1.4;
+  }
+  .q-hint {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+    margin-bottom: 0.65rem;
+    line-height: 1.5;
+  }
+
+  .explainer {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 1.25rem 1.35rem;
+    margin-bottom: 1.25rem;
+  }
+  .explainer h3 {
+    font-family: "Roobert", serif;
+    font-size: 1rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .explainer p {
+    font-size: 0.84rem;
+    color: var(--gray-600);
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+  .explainer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .context-box {
+    background: var(--indigo-bg);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 10px;
+    padding: 1.15rem 1.35rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    color: var(--gray-700);
+  }
+  .context-box strong {
+    color: var(--navy);
+  }
+  .context-box .hl {
+    display: inline-block;
+    background: var(--indigo);
+    color: var(--white);
+    font-weight: 700;
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+  }
+
+  .scenario-box {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 1.15rem 1.35rem;
+    margin-bottom: 1.25rem;
+    color: var(--gray-300);
+    font-size: 0.84rem;
+    line-height: 1.7;
+  }
+  .scenario-box strong {
+    color: var(--white);
+  }
+  .scenario-box .scenario-title {
+    font-family: "Roobert", serif;
+    font-size: 0.95rem;
+    color: var(--teal-light);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .capability-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin: 0.75rem 0;
+  }
+  .cap-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 0.75rem;
+  }
+  .cap-card .cap-icon {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+  .cap-card .cap-name {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 0.82rem;
+    margin-bottom: 0.15rem;
+  }
+  .cap-card .cap-desc {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    line-height: 1.45;
+  }
+  .cap-card .cap-tasks {
+    font-size: 0.7rem;
+    color: var(--teal);
+    font-weight: 600;
+    margin-top: 0.25rem;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--gray-200);
+    margin: 1rem 0;
+  }
+
+  select,
+  input[type="number"],
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.9rem;
+    color: var(--navy);
+    background: var(--gray-50);
+  }
+  select:focus,
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.08);
+    background: var(--white);
+  }
+  textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.85rem;
+    color: var(--navy);
+    resize: vertical;
+    min-height: 70px;
+    background: var(--gray-50);
+  }
+
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .input-row .dollar {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-400);
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--gray-50);
+  }
+  .radio-option:hover {
+    background: var(--teal-bg);
+    border-color: var(--teal);
+  }
+  .radio-option input[type="radio"],
+  .radio-option input[type="checkbox"] {
+    accent-color: var(--teal);
+    cursor: pointer;
+  }
+  .radio-option label {
+    font-size: 0.85rem;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .scale-group {
+    display: flex;
+    gap: 0.35rem;
+  }
+  .scale-btn {
+    flex: 1;
+    padding: 0.5rem 0;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    background: var(--gray-50);
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .scale-btn:hover {
+    background: var(--teal-bg);
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+  .scale-btn.selected {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: var(--white);
+  }
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.25rem;
+    font-size: 0.65rem;
+    color: var(--gray-400);
+  }
+
+  .price-ladder {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .price-step {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    background: var(--gray-50);
+    transition: all 0.15s;
+  }
+  .price-step:hover {
+    background: var(--teal-bg);
+    border-color: var(--teal);
+  }
+  .price-step .price-tag {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--navy);
+    min-width: 55px;
+  }
+  .price-step .price-unit {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+    flex: 1;
+  }
+  .intent-btns {
+    display: flex;
+    gap: 0.3rem;
+    margin-left: auto;
+  }
+  .intent-btn {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    background: var(--white);
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--gray-600);
+  }
+  .intent-btn:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+  .intent-btn.yes {
+    background: var(--teal);
+    color: var(--white);
+    border-color: var(--teal);
+  }
+  .intent-btn.no {
+    background: #fee2e2;
+    color: #dc2626;
+    border-color: #fecaca;
+  }
+
+  .tradeoff {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0.5rem;
+    align-items: stretch;
+    margin-bottom: 1rem;
+  }
+  .tradeoff-option {
+    background: var(--gray-50);
+    border: 2px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .tradeoff-option:hover {
+    border-color: var(--teal);
+    background: var(--teal-bg);
+  }
+  .tradeoff-option.selected {
+    border-color: var(--teal);
+    background: var(--teal-bg);
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+  }
+  .tradeoff-option .to-price {
+    font-family: "Fraunces", serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.35rem;
+  }
+  .tradeoff-option .to-desc {
+    font-size: 0.78rem;
+    color: var(--gray-600);
+    line-height: 1.4;
+  }
+  .tradeoff-vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--gray-400);
+    letter-spacing: 1px;
+  }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    gap: 0.75rem;
+  }
+  .btn {
+    padding: 0.65rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-back {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    color: var(--gray-600);
+  }
+  .btn-back:hover {
+    background: var(--gray-100);
+  }
+  .btn-next {
+    background: var(--indigo);
+    color: var(--white);
+    margin-left: auto;
+  }
+  .btn-next:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+  .btn-submit {
+    background: var(--navy);
+    color: var(--white);
+    margin-left: auto;
+    padding: 0.65rem 2rem;
+  }
+  .btn-submit:hover {
+    background: var(--gray-800);
+    transform: translateY(-1px);
+  }
+
+  .thank-you {
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+  .thank-you .check {
+    width: 64px;
+    height: 64px;
+    background: var(--teal);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    font-size: 1.75rem;
+    color: var(--white);
+  }
+  .thank-you h2 {
+    font-family: "Roobert", serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .thank-you p {
+    color: var(--gray-500);
+    font-size: 0.9rem;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .thank-you .gift-note {
+    margin-top: 1.25rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--amber-light);
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--gray-700);
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .header {
+      padding: 1.5rem 1.25rem 2rem;
+    }
+    .header h1 {
+      font-size: 1.35rem;
+    }
+    .container {
+      padding: 1.25rem 1.25rem 2.5rem;
+    }
+    .capability-grid {
+      grid-template-columns: 1fr;
+    }
+    .tradeoff {
+      grid-template-columns: 1fr;
+    }
+    .tradeoff-vs {
+      padding: 0.25rem 0;
+    }
+  }
+</style>
+<div class="header">
+  <div class="header-inner">
+    <div class="brand">PRICING RESEARCH</div>
+    <h1>AI-Powered Creator Program Management: What Would You Pay?</h1>
+    <p>
+      We're researching pricing for a new kind of platform — one that uses AI to
+      automate and optimize every part of running a creator program. This isn't
+      a hypothetical: the platform exists and is heading to market. Your
+      feedback will directly influence its pricing.
+    </p>
+    <div class="badges">
+      <span class="badge badge-time">⏱ 10–12 minutes</span>
+      <span class="badge badge-gift">🎁 $75 gift card upon completion</span>
+      <span class="badge badge-conf">🔒 All responses confidential</span>
+    </div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+  </div>
+  <div class="progress-label">
+    <span id="progressText">Section 1 of 8</span
+    ><span id="progressPct">0%</span>
+  </div>
+</div>
+
+<div class="container">
+  <!-- SECTION 1: SEGMENTATION -->
+  <div class="section active" id="s1">
+    <div class="section-header">
+      <div class="section-num">Section 1</div>
+      <h2>About Your Creator Program</h2>
+      <p>Help us understand your current setup.</p>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">Your brand name</div>
+      <input
+        type="text"
+        id="q_brand"
+        data-hubspot="0-1/company"
+        placeholder="e.g., Acme Inc."
+      />
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">
+        How many creators does your brand actively work with?
+      </div>
+      <select
+        id="q_size"
+        data-hubspot="0-2/how_many_creators_does_your_brand_actively_work_with_"
+      >
+        <option value="">Select...</option>
+        <option>Fewer than 50</option>
+        <option>50–200</option>
+        <option>200–500</option>
+        <option>500–1,000</option>
+        <option>1,000–5,000</option>
+        <option>5,000+</option>
+      </select>
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+    <div class="question-card">
+      <div class="q-label">
+        Approximate annual budget for creator marketing (creator payments +
+        tools + team)?
+      </div>
+      <select
+        id="q_budget"
+        data-hubspot="0-1/approximate_annual_budget_for_creator_marketing__creator_payments___tools___team__"
+      >
+        <option value="">Select...</option>
+        <option>Under $100K</option>
+        <option>$100K–$500K</option>
+        <option>$500K–$1M</option>
+        <option>$1M–$5M</option>
+        <option>$5M+</option>
+      </select>
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+    <div class="question-card">
+      <div class="q-label">How do you manage creator operations today?</div>
+      <div
+        class="radio-group"
+        data-name="q_tools"
+        data-hubspot="0-1/how_do_you_manage_creator_operations_today"
+      >
+        <div class="radio-option">
+          <input type="radio" name="q_tools" id="tl1" /><label for="tl1"
+            >Mostly spreadsheets, email, and manual work</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="q_tools" id="tl2" /><label for="tl2"
+            >A dedicated influencer/creator platform (e.g. Grin, CreatorIQ,
+            Aspire)</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="q_tools" id="tl3" /><label for="tl3"
+            >Mix of platforms, CRMs, and manual processes</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="q_tools" id="tl4" /><label for="tl4"
+            >Agency handles most of it</label
+          >
+        </div>
+      </div>
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+    <div class="question-card">
+      <div class="q-label">
+        How many full-time people manage creator operations?
+      </div>
+      <select
+        id="q_hc"
+        data-hubspot="0-1/how_many_full_time_people_manage_creator_operations_"
+      >
+        <option value="">Select...</option>
+        <option>1 (part of a broader role)</option>
+        <option>1–2 dedicated</option>
+        <option>3–5 dedicated</option>
+        <option>6+ dedicated</option>
+      </select>
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+    <div class="question-card">
+      <div class="q-label">
+        What percentage of your team's time goes to logistics vs. strategy?
+      </div>
+      <div
+        class="radio-group"
+        data-name="q_time"
+        data-hubspot="0-1/what_percentage_of_your_team_s_time_goes_to_logistics_vs__strategy_"
+      >
+        <div class="radio-option">
+          <input type="radio" name="q_time" id="tm1" /><label for="tm1"
+            >~80% logistics, 20% strategy</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="q_time" id="tm2" /><label for="tm2"
+            >~60% logistics, 40% strategy</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="q_time" id="tm3" /><label for="tm3"
+            >~40% logistics, 60% strategy</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="q_time" id="tm4" /><label for="tm4"
+            >Mostly strategy — ops is well automated</label
+          >
+        </div>
+      </div>
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn btn-next" onclick="goTo(2)">Next →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 2: PRODUCT CONCEPT (DEEP CONTEXT) -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <div class="section-num">Section 2</div>
+      <h2>The Platform</h2>
+      <p>
+        Before we ask about pricing, we want you to fully understand what this
+        platform does. Please read through each section carefully.
+      </p>
+    </div>
+
+    <div class="explainer">
+      <h3>The problem it solves</h3>
+      <p>
+        Running a creator program at scale means hiring coordinators to do
+        repetitive work: vetting creators one by one, chasing shipments and
+        follow-ups, pulling reports that show numbers but don't explain what
+        happened. As your program grows, you add headcount — but the work stays
+        manual and the insights stay shallow.
+      </p>
+      <p>
+        This platform replaces 2–3 coordinators with AI that doesn't just
+        automate tasks — it makes intelligent decisions. It scores creators,
+        detects churn risk, reallocates budgets, drafts briefs, and generates
+        reports that explain <em>why</em> results changed, not just what the
+        numbers are.
+      </p>
+    </div>
+
+    <div class="explainer">
+      <h3>What it includes</h3>
+      <p>
+        <strong>Core operations (included in every subscription):</strong>
+        Automated outreach sequences, shipment tracking, content collection,
+        creator payments, compliance monitoring, CRM with full communication
+        history, and standard reporting.
+      </p>
+      <p>
+        <strong>AI intelligence layer (via optional workflows):</strong> Each
+        workflow automates a major program function. The AI performs 5–9
+        discrete tasks per creator — scoring, analysis, optimization, and
+        reporting. You choose which workflows to activate based on what your
+        program needs.
+      </p>
+      <p>
+        <strong>AI chat assistant:</strong> Ask any question about your program
+        — "Which creators drove the most revenue last quarter?" or "What should
+        I do about declining engagement?" — and get an instant answer grounded
+        in your data. Included with the platform, no usage caps.
+      </p>
+    </div>
+
+    <div class="explainer">
+      <h3>The five AI workflows</h3>
+      <p>
+        Each workflow handles a complete function. Here's what each one does and
+        the specific AI tasks it performs:
+      </p>
+      <div class="capability-grid">
+        <div class="cap-card">
+          <div class="cap-icon">🔍</div>
+          <div class="cap-name">Sourcing</div>
+          <div class="cap-desc">
+            Finds creators who match your brand. Scores fit across audience
+            quality, engagement patterns, brand safety, and content style.
+            Personalizes outreach messaging for each creator.
+          </div>
+          <div class="cap-tasks">~5 AI tasks per outreach</div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">🎁</div>
+          <div class="cap-name">Activation & Gifting</div>
+          <div class="cap-desc">
+            Drafts personalized briefs, optimizes gifting mix (what products,
+            when), runs follow-up sequences, pre-screens compliance, and
+            re-engages dormant creators.
+          </div>
+          <div class="cap-tasks">~6 AI tasks per creator</div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">🤝</div>
+          <div class="cap-name">Relationship & Retention</div>
+          <div class="cap-desc">
+            Monitors relationship health, flags creators at risk of disengaging,
+            surfaces VIP context before meetings, manages incentive tiers, and
+            triggers milestone messages.
+          </div>
+          <div class="cap-tasks">~6 AI tasks per creator</div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">📊</div>
+          <div class="cap-name">Performance Optimization</div>
+          <div class="cap-desc">
+            Identifies trends and anomalies, recommends budget reallocation,
+            provides creative insights, offers content coaching, generates
+            program health scores, and runs scenario models.
+          </div>
+          <div class="cap-tasks">~9 AI tasks per creator</div>
+        </div>
+      </div>
+      <div
+        class="capability-grid"
+        style="grid-template-columns: 1fr; max-width: 50%"
+      >
+        <div class="cap-card">
+          <div class="cap-icon">📋</div>
+          <div class="cap-name">Campaign Management</div>
+          <div class="cap-desc">
+            AI brief drafts, cohort recommendations, compliance screening,
+            content quality assessment, forecasting, and post-campaign
+            intelligence reports.
+          </div>
+          <div class="cap-tasks">~7 AI tasks per creator</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">
+        Based on this description, how valuable would this platform be for your
+        team?
+      </div>
+      <div
+        class="scale-group"
+        data-name="q_value"
+        data-hubspot="0-1/based_on_this_description_how_valuable_would_this_platform_be_for_your_team"
+      >
+        <button class="scale-btn" onclick="selectScale(this)">1</button
+        ><button class="scale-btn" onclick="selectScale(this)">2</button
+        ><button class="scale-btn" onclick="selectScale(this)">3</button
+        ><button class="scale-btn" onclick="selectScale(this)">4</button
+        ><button class="scale-btn" onclick="selectScale(this)">5</button>
+      </div>
+      <div class="scale-labels">
+        <span>Not valuable at all</span><span>Extremely valuable</span>
+      </div>
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">Which capability interests you most?</div>
+      <div
+        class="radio-group"
+        data-name="q_cap"
+        data-hubspot="0-1/which_capability_interests_you_most_"
+      >
+        <div class="radio-option">
+          <input type="radio" name="q_cap" id="cap1" /><label for="cap1"
+            >Automated operations (outreach, tracking, compliance,
+            payments)</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="q_cap" id="cap2" /><label for="cap2"
+            >AI intelligence (scoring, attribution, churn prediction,
+            optimization)</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="q_cap" id="cap3" /><label for="cap3"
+            >AI chat assistant for instant program questions</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="q_cap" id="cap4" /><label for="cap4"
+            >All equally — I need the whole package</label
+          >
+        </div>
+      </div>
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">
+        Which workflows would you be most interested in?
+      </div>
+      <div
+        class="radio-group"
+        data-name="q_workflows"
+        data-hubspot="0-1/which_workflows_would_you_be_most_interested_in"
+      >
+        <div class="radio-option">
+          <input type="checkbox" id="wfc1" /><label for="wfc1">Sourcing</label>
+        </div>
+        <div class="radio-option">
+          <input type="checkbox" id="wfc2" /><label for="wfc2"
+            >Activation & Gifting</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="checkbox" id="wfc3" /><label for="wfc3"
+            >Relationship & Retention</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="checkbox" id="wfc4" /><label for="wfc4"
+            >Performance Optimization</label
+          >
+        </div>
+        <div class="radio-option">
+          <input type="checkbox" id="wfc5" /><label for="wfc5"
+            >Campaign Management</label
+          >
+        </div>
+      </div>
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn btn-back" onclick="goTo(1)">← Back</button
+      ><button class="btn btn-next" onclick="goTo(3)">Next →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 3: GABOR-GRANGER WORKFLOW PRICING -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <div class="section-num">Section 3</div>
+      <h2>Workflow Pricing</h2>
+      <p>
+        Now let's test specific price points. For each price, tell us if you'd
+        buy.
+      </p>
+    </div>
+
+    <div class="scenario-box">
+      <div class="scenario-title">Scenario: Activation & Gifting Workflow</div>
+      <strong>What it does:</strong> For every creator in this workflow, the AI
+      automatically drafts personalized briefs, optimizes your gifting mix, runs
+      follow-up sequences, pre-screens compliance, and re-activates dormant
+      creators. That's
+      <strong>6 discrete AI tasks per creator, every month</strong>, running
+      continuously without your team lifting a finger.<br /><br />
+      <strong>What it replaces:</strong> A coordinator spending 15–20 minutes
+      per creator per month on these tasks manually. At 200 creators, that's
+      50–65 hours/month — roughly a third of a full-time hire.
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">
+        At each price point, would you pay for this workflow?
+      </div>
+      <div class="q-hint">
+        Price is per creator in the workflow, per month. Think about your
+        program size when considering each price.
+      </div>
+      <div
+        class="price-ladder price-ladder-1"
+        data-name="price-ladder-1"
+        data-hubspot="0-1/at_each_price_point__would_you_pay_for_this_workflow_"
+      >
+        <div class="price-step" data-price-index="0">
+          <span class="price-tag">$0.25</span
+          ><span class="price-unit">per creator / month</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+        <div class="price-step" data-price-index="1">
+          <span class="price-tag">$0.50</span
+          ><span class="price-unit">per creator / month</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+        <div class="price-step" data-price-index="2">
+          <span class="price-tag">$0.75</span
+          ><span class="price-unit">per creator / month</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+        <div class="price-step" data-price-index="3">
+          <span class="price-tag">$1.00</span
+          ><span class="price-unit">per creator / month</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+        <div class="price-step" data-price-index="4">
+          <span class="price-tag">$1.50</span
+          ><span class="price-unit">per creator / month</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+        <div class="price-step" data-price-index="5">
+          <span class="price-tag">$2.00</span
+          ><span class="price-unit">per creator / month</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="scenario-box">
+      <div class="scenario-title">Scenario: AI-Powered Sourcing</div>
+      <strong>What it does:</strong> For each outreach, the AI scores
+      creator-brand fit across hundreds of signals (audience quality, engagement
+      authenticity, brand safety, content style), then crafts a personalized
+      outreach message. That's
+      <strong>~5 AI tasks per outreach</strong>.<br /><br />
+      <strong>What it replaces:</strong> A team member spending 10–15 minutes
+      per creator researching profiles, checking audience quality, and writing
+      custom outreach. At 1,000 outreach/month, that's 165–250 hours — more than
+      a full FTE.
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">
+        At each price point, would you pay for AI-powered sourcing?
+      </div>
+      <div
+        class="price-ladder price-ladder-2"
+        data-name="price-ladder-2"
+        data-hubspot="0-1/at_each_price_point_would_you_pay_for_aipowered_sourcing"
+      >
+        <div class="price-step" data-price-index="0">
+          <span class="price-tag">$0.10</span
+          ><span class="price-unit">per outreach</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+        <div class="price-step" data-price-index="1">
+          <span class="price-tag">$0.20</span
+          ><span class="price-unit">per outreach</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+        <div class="price-step" data-price-index="2">
+          <span class="price-tag">$0.35</span
+          ><span class="price-unit">per outreach</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+        <div class="price-step" data-price-index="3">
+          <span class="price-tag">$0.50</span
+          ><span class="price-unit">per outreach</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+        <div class="price-step" data-price-index="4">
+          <span class="price-tag">$0.75</span
+          ><span class="price-unit">per outreach</span>
+          <div class="intent-btns">
+            <button class="intent-btn" onclick="setIntent(this,'yes')">
+              Yes</button
+            ><button class="intent-btn" onclick="setIntent(this,'no')">
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="error-text">Please complete this required field.</div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn btn-back" onclick="goTo(2)">← Back</button
+      ><button class="btn btn-next" onclick="goTo(4)">Next →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- SECTION 4: SEAT TIER + ACTIVE CREATOR PRICING -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <div class="section-num">Section 4</div>
+      <h2>Base Platform & Creator Pricing</h2>
+      <p>Now let's test the other two pricing components: the monthly seat fee and the per-creator fee.</p>
+    </div>
+
+    <div class="scenario-box">
+      <div class="scenario-title">Component 1: Base AI Seat</div>
+      <strong>What it covers:</strong> The seat fee gives you access to the entire core platform — automated outreach sequences, shipment tracking, content collection, creator payments, compliance monitoring, CRM, and standard reporting. It also includes an <strong>AI chat assistant</strong> you can ask anything about your program ("Which creators should I double down on?", "Why did engagement drop last month?") and full AI intelligence — assessment, analysis, and program optimization with no usage caps.<br><br>
+      <strong>Current price being considered: $399/seat/month</strong><br><br>
+      <strong>What it replaces:</strong> The combination of your current creator management platform subscription plus hours your team spends pulling reports and answering basic program questions manually.
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">At each price point for the base AI seat, would you pay? (per seat / month)</div>
+      <div class="q-hint">This covers the full core platform + AI chat + intelligence with no caps. One seat per team.</div>
+      <div class="price-ladder price-ladder-3" data-name="price-ladder-3" data-hubspot="0-1/at_each_price_point_for_the_base_ai_seat_would_you_pay_per_seat__month">
+        <div class="price-step" data-price-index="0"><span class="price-tag">$149</span><span class="price-unit">per seat / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+        <div class="price-step" data-price-index="1"><span class="price-tag">$199</span><span class="price-unit">per seat / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+        <div class="price-step" data-price-index="2"><span class="price-tag">$299</span><span class="price-unit">per seat / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+        <div class="price-step" data-price-index="3"><span class="price-tag">$399</span><span class="price-unit">per seat / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+        <div class="price-step" data-price-index="4"><span class="price-tag">$499</span><span class="price-unit">per seat / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+      </div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="scenario-box">
+      <div class="scenario-title">Component 2: Active Creator Fee</div>
+      <strong>What it covers:</strong> For every creator who is actively engaged in your program — they posted content, clicked a link, converted, or received a gift — you pay a small per-creator fee. This covers the platform storing their data, tracking their activity, managing communications, processing payments, and running compliance checks.<br><br>
+      <strong>Important details:</strong><br>
+      • <strong>Prospective creators are free</strong> — you only pay once a creator actively engages<br>
+      • <strong>Volume discounts apply:</strong> the rate drops as your program scales (e.g., from $2.00 at 200 creators down to $1.25 at 1,000+)<br>
+      • <strong>Annual commitment locks your rate</strong> — your discount is guaranteed for the year<br><br>
+      <strong>What it replaces:</strong> The per-creator overhead your team incurs managing each relationship — tracking activity, logging communications, processing payments, and monitoring compliance. At scale, this work adds up to significant coordination cost per creator.
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">At each price point per active creator per month, would you pay?</div>
+      <div class="q-hint">Remember: prospective/inactive creators are free. You only pay for creators who engage.</div>
+      <div class="price-ladder price-ladder-4" data-name="price-ladder-4" data-hubspot="0-1/at_each_price_point_per_active_creator_per_month_would_you_pay">
+        <div class="price-step" data-price-index="0"><span class="price-tag">$0.50</span><span class="price-unit">per active creator / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+        <div class="price-step" data-price-index="1"><span class="price-tag">$1.00</span><span class="price-unit">per active creator / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+        <div class="price-step" data-price-index="2"><span class="price-tag">$1.50</span><span class="price-unit">per active creator / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+        <div class="price-step" data-price-index="3"><span class="price-tag">$2.00</span><span class="price-unit">per active creator / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+        <div class="price-step" data-price-index="4"><span class="price-tag">$3.00</span><span class="price-unit">per active creator / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+        <div class="price-step" data-price-index="5"><span class="price-tag">$5.00</span><span class="price-unit">per active creator / month</span><div class="intent-btns"><button class="intent-btn" onclick="setIntent(this,'yes')">Yes</button><button class="intent-btn" onclick="setIntent(this,'no')">No</button></div></div>
+      </div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">At what volume discount tier would you commit to an annual contract?</div>
+      <div class="radio-group" data-name="q_discount" data-hubspot="0-1/at_what_volume_discount_tier_would_you_commit_to_an_annual_contract">
+        <div class="radio-option"><input type="radio" name="q_discount" id="d1"><label for="d1">I'd commit at <strong>10% off</strong> (e.g., $2.00 → $1.80)</label></div>
+        <div class="radio-option"><input type="radio" name="q_discount" id="d2"><label for="d2">I'd need <strong>20–25% off</strong> to commit annually (e.g., $2.00 → $1.50)</label></div>
+        <div class="radio-option"><input type="radio" name="q_discount" id="d3"><label for="d3">I'd need <strong>35%+ off</strong> to lock in a year (e.g., $2.00 → $1.25)</label></div>
+        <div class="radio-option"><input type="radio" name="q_discount" id="d4"><label for="d4">I wouldn't commit annually — I prefer monthly flexibility</label></div>
+      </div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="nav-buttons"><button class="btn btn-back" onclick="goTo(3)">← Back</button><button class="btn btn-next" onclick="goTo(5)">Next →</button></div>
+  </div>
+
+  <!-- SECTION 5: TRADE-OFFS -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <div class="section-num">Section 5</div>
+      <h2>Trade-offs</h2>
+      <p>For each pair, pick the option you'd prefer. There are no wrong answers — we're trying to understand what matters most to you.</p>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">How would you prefer to buy AI workflows?</div>
+      <div class="tradeoff tradeoff-1" data-name="tradeoff-1" data-hubspot="0-1/how_would_you_prefer_to_buy_ai_workflows">
+        <div class="tradeoff-option" onclick="selectTradeoff(this,'to1')">
+          <div class="to-price">À la carte: $0.50/creator</div>
+          <div class="to-desc">Pick only the workflows you need. Full flexibility. Pay for 1 or all 5 — your choice.</div>
+        </div>
+        <div class="tradeoff-vs">OR</div>
+        <div class="tradeoff-option" onclick="selectTradeoff(this,'to1')">
+          <div class="to-price">Bundle: $1.75/creator for all 5</div>
+          <div class="to-desc">Get every workflow at a 30% discount. Simpler billing, full coverage.</div>
+        </div>
+      </div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">Would you prefer a single seat with full AI access, or multiple cheaper seats?</div>
+      <div class="tradeoff tradeoff-2" data-name="tradeoff-2" data-hubspot="0-1/would_you_prefer_a_single_seat_with_full_ai_access__or_multiple_cheaper_seats_">
+        <div class="tradeoff-option" onclick="selectTradeoff(this,'to2')">
+          <div class="to-price">1 seat at $399/month</div>
+          <div class="to-desc">Full AI intelligence, chat, and platform access for your team. Shared login, no caps.</div>
+        </div>
+        <div class="tradeoff-vs">OR</div>
+        <div class="tradeoff-option" onclick="selectTradeoff(this,'to2')">
+          <div class="to-price">3 seats at $199/month each</div>
+          <div class="to-desc">Each team member gets their own login and AI access. $597/month total but individual accounts.</div>
+        </div>
+      </div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">How would you prefer the platform to be structured?</div>
+      <div class="tradeoff tradeoff-3" data-name="tradeoff-3" data-hubspot="0-1/how_would_you_prefer_the_platform_to_be_structured_">
+        <div class="tradeoff-option" onclick="selectTradeoff(this,'to3')">
+          <div class="to-price">$199/seat + workflows extra</div>
+          <div class="to-desc">Lower base cost. Add workflows and creators on top. You control the total by choosing what to activate.</div>
+        </div>
+        <div class="tradeoff-vs">OR</div>
+        <div class="tradeoff-option" onclick="selectTradeoff(this,'to3')">
+          <div class="to-price">$499/seat, all workflows included</div>
+          <div class="to-desc">One predictable seat fee covers all AI features and workflows. Only per-creator fees on top.</div>
+        </div>
+      </div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="nav-buttons"><button class="btn btn-back" onclick="goTo(4)">← Back</button><button class="btn btn-next" onclick="goTo(6)">Next →</button></div>
+  </div>
+
+  <!-- SECTION 5: COMPETITIVE ANCHOR -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <div class="section-num">Section 6</div>
+      <h2>What You Pay Today</h2>
+      <p>Help us understand your current spending so we can position the value correctly.</p>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">What do you currently pay per month for creator/influencer management tools (not including creator payments)?</div>
+      <div class="input-row"><span class="dollar">$</span><input type="number" min="0" placeholder="monthly tool spend" id="q_current" data-name="q_current" data-hubspot="0-1/what_do_you_currently_pay_per_month_for_creatorinfluencer_management_tools"></div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+    <div class="question-card">
+      <div class="q-label">What's the fully loaded annual cost of the team that manages creator operations (salaries + benefits)?</div>
+      <select id="q_teamcost" data-name="q_teamcost" data-hubspot="0-1/whats_the_fully_loaded_annual_cost_of_the_team_that_manages_creator_operations_salaries__benefits"><option value="">Select...</option><option>Under $75K</option><option>$75K–$150K</option><option>$150K–$300K</option><option>$300K–$500K</option><option>$500K+</option></select>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+    <div class="question-card">
+      <div class="q-label">If this platform could genuinely replace 1–2 people on your team, what would you be willing to pay annually for it?</div>
+      <select id="q_wtp" data-name="q_wtp" data-hubspot="0-1/if_this_platform_could_genuinely_help_what_would_you_be_willing_to_pay_annually_for_it"><option value="">Select...</option><option>Under $10K/year</option><option>$10K–$25K/year</option><option>$25K–$50K/year</option><option>$50K–$100K/year</option><option>$100K+/year</option></select>
+      <div class="error-text">
+      Please complete this required field.
+    </div>
+    </div>
+    <div class="question-card">
+      <div class="q-label">What would most make you switch from your current approach?</div>
+      <div class="radio-group" data-name="q_switch" data-hubspot="0-1/what_would_most_make_you_switch_from_your_current_approach">
+        <div class="radio-option"><input type="radio" name="q_switch" id="sw1"><label for="sw1">Clear cost savings vs. headcount + current tools</label></div>
+        <div class="radio-option"><input type="radio" name="q_switch" id="sw2"><label for="sw2">Better results — higher ROI per creator</label></div>
+        <div class="radio-option"><input type="radio" name="q_switch" id="sw3"><label for="sw3">Time savings — my team gets 10+ hours/week back</label></div>
+        <div class="radio-option"><input type="radio" name="q_switch" id="sw4"><label for="sw4">Intelligence I can't get today — churn prediction, attribution, optimization</label></div>
+        <div class="radio-option"><input type="radio" name="q_switch" id="sw5"><label for="sw5">All of the above</label></div>
+      </div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="nav-buttons"><button class="btn btn-back" onclick="goTo(5)">← Back</button><button class="btn btn-next" onclick="goTo(7)">Next →</button></div>
+  </div>
+
+  <!-- SECTION 6: VALUE PERCEPTION -->
+  <div class="section" id="s7">
+    <div class="section-header">
+      <div class="section-num">Section 7</div>
+      <h2>Value Perception</h2>
+      <p>A few questions about how you think about the value of AI in this context.</p>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">If the platform showed you a dashboard every month saying "AI performed 3,200 work units for your program this month" — with each work unit being a discrete task like scoring a creator, drafting a brief, or flagging churn risk — how useful would that be?</div>
+      <div class="scale-group" data-name="q_gwu_value" data-hubspot="0-1/if_the_platform_showed_you_a_dashboard_every_month__how_useful_would_that_be"><button class="scale-btn" onclick="selectScale(this)">1</button><button class="scale-btn" onclick="selectScale(this)">2</button><button class="scale-btn" onclick="selectScale(this)">3</button><button class="scale-btn" onclick="selectScale(this)">4</button><button class="scale-btn" onclick="selectScale(this)">5</button></div>
+      <div class="scale-labels"><span>Not useful</span><span>Extremely useful</span></div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">Would seeing the number of AI tasks completed help you justify the platform's cost internally?</div>
+      <div class="radio-group" data-name="q_justify" data-hubspot="0-1/would_seeing_the_number_of_ai_tasks_completed_help_you_justify_the_platforms_cost_internally">
+        <div class="radio-option"><input type="radio" name="q_justify" id="j1"><label for="j1">Yes — that's exactly what my CFO would want to see</label></div>
+        <div class="radio-option"><input type="radio" name="q_justify" id="j2"><label for="j2">Somewhat — I'd also need to see business outcomes (revenue, engagement)</label></div>
+        <div class="radio-option"><input type="radio" name="q_justify" id="j3"><label for="j3">No — I only care about business results, not how many tasks the AI runs</label></div>
+      </div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">Should more complex workflows (9 AI tasks) cost more than simpler ones (5 AI tasks)?</div>
+      <div class="radio-group" data-name="q_tiered" data-hubspot="0-1/should_more_complex_workflows_9_ai_tasks_cost_more_than_simpler_ones_5_ai_tasks">
+        <div class="radio-option"><input type="radio" name="q_tiered" id="ti1"><label for="ti1">Yes — I'd expect to pay more for workflows that do more work</label></div>
+        <div class="radio-option"><input type="radio" name="q_tiered" id="ti2"><label for="ti2">No — keep it simple, one price per workflow regardless of complexity</label></div>
+        <div class="radio-option"><input type="radio" name="q_tiered" id="ti3"><label for="ti3">Depends — I'd want to see what each workflow actually delivers first</label></div>
+      </div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="nav-buttons"><button class="btn btn-back" onclick="goTo(6)">← Back</button><button class="btn btn-next" onclick="goTo(8)">Next →</button></div>
+  </div>
+
+  <!-- SECTION 7: WRAP-UP -->
+  <div class="section" id="s8">
+    <div class="section-header">
+      <div class="section-num">Section 8</div>
+      <h2>Final Thoughts</h2>
+      <p>Last step!</p>
+    </div>
+
+    <div class="question-card">
+      <div class="q-label">How likely would you be to evaluate this platform in the next 6 months?</div>
+      <div class="scale-group" data-name="q_eval" data-hubspot="0-1/how_likely_would_you_be_to_evaluate_this_platform_in_the_next_6_months"><button class="scale-btn" onclick="selectScale(this)">1</button><button class="scale-btn" onclick="selectScale(this)">2</button><button class="scale-btn" onclick="selectScale(this)">3</button><button class="scale-btn" onclick="selectScale(this)">4</button><button class="scale-btn" onclick="selectScale(this)">5</button></div>
+      <div class="scale-labels"><span>Very unlikely</span><span>Very likely</span></div>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+    <div class="question-card">
+      <div class="q-label">What's the single most important factor in your pricing decision for a tool like this?</div>
+      <textarea id="q_factor" data-name="q_factor" data-hubspot="0-1/whats_the_single_most_important_factor_in_your_pricing_decision_for_a_tool_like_this" placeholder="E.g., predictability, ROI proof, flexibility, ease of budgeting, competitive comparison..."></textarea>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+    <div class="question-card">
+      <div class="q-label">Any other feedback on the pricing approach or the platform concept?</div>
+      <textarea id="q_feedback" data-name="q_feedback" data-hubspot="0-1/any_other_feedback_on_the_pricing_approach_or_the_platform_concept" placeholder="Optional — anything you'd change, concerns, or suggestions."></textarea>
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+    <div class="question-card">
+      <div class="q-label">Your email (for the $75 gift card)</div>
+      <input 
+      type="email" 
+      id="q_email2" 
+      placeholder="you@company.com" 
+      required
+      data-hubspot="0-1/email">
+      <div class="error-text">
+    Please complete this required field.
+  </div>
+    </div>
+
+    <div class="nav-buttons"><button class="btn btn-back" onclick="goTo(7)">← Back</button></div>
+  </div>
+
+  <!-- THANK YOU -->
+  <div class="section" id="thanks">
+    <div class="thank-you">
+      <div class="check">✓</div>
+      <h2>Thank you!</h2>
+      <p>Your responses are incredibly valuable and will directly influence how this platform is priced and packaged.</p>
+      <div class="gift-note">🎁 Your $75 gift card will be sent to the email you provided within 5 business days.</div>
+    </div>
+  </div>
+
+</div>
+
+<button class="btn btn-submit" >Submit & Claim $75 Gift Card →</button>
+
+<div
+  class="hs-form-html pricing-survey"
+  data-region="na1"
+  data-portal-id="45956814"
+  data-form-id="5c26e863-9ccd-4585-8082-abe9f85b2718">
+</div>
+
+<script>
+function syncHubspotDropdown(fakeEl, hubspotName) {
+
+  const hiddenInput = document.querySelector(
+    `input[type="hidden"][name="${hubspotName}"]`
+  );
+
+  if (!hiddenInput) return;
+
+  hiddenInput.value = fakeEl.value;
+
+  hiddenInput.dispatchEvent(new Event("input", { bubbles: true }));
+  hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
+
+  // Also update visible readonly combobox input (optional but cleaner)
+  const visibleInput = hiddenInput
+    .closest(".hsfc-DropdownInput")
+    ?.querySelector('input[type="text"][readonly]');
+
+  if (visibleInput) {
+    visibleInput.value = fakeEl.value;
+  }
+}
+
+function syncHubspotNumber(hubspotName, rawValue) {
+
+  const hiddenInput = document.querySelector(
+    `input[type="hidden"][name="${hubspotName}"]`
+  );
+
+  if (!hiddenInput) return;
+
+  // Clean the value (remove commas, $ etc.)
+  const cleaned = rawValue
+    .replace(/[^0-9.]/g, "")   // keep digits + decimal
+    .trim();
+
+  hiddenInput.value = cleaned;
+
+  hiddenInput.dispatchEvent(new Event("input", { bubbles: true }));
+  hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
+
+  // Optional: keep visible HS input in sync (purely cosmetic)
+  const visibleInput = hiddenInput
+    .closest(".hsfc-NumberInput")
+    ?.querySelector('input[type="text"]');
+
+  if (visibleInput) {
+    visibleInput.value = cleaned;
+  }
+}
+
+function syncHubspotScale(fakeWrapper, hubspotName, selectedText) {
+
+  const realRadios = document.querySelectorAll(
+    `input[type="radio"][name="${hubspotName}"]`
+  );
+
+  realRadios.forEach(radio => {
+
+    const label = radio.closest("label");
+    if (!label) return;
+
+    const text = label.innerText.trim();
+
+    if (text === selectedText) {
+      radio.checked = true;
+      radio.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  });
+}
+
+function syncHubspotPriceLadder(fakeWrapper, hubspotName, priceText, shouldCheck) {
+
+  const realCheckboxes = document.querySelectorAll(
+    `input[type="checkbox"][name="${hubspotName}"]`
+  );
+
+  realCheckboxes.forEach(checkbox => {
+
+    const label = checkbox.closest("label");
+    if (!label) return;
+
+    // Normalize text (remove extra spaces & nbsp)
+    const hubspotText = label.innerText
+      .replace(/\u00a0/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const normalizedPrice = priceText
+      .replace(/\u00a0/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (hubspotText.includes(normalizedPrice)) {
+
+      checkbox.checked = shouldCheck;
+
+      checkbox.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  });
+}
+
+function syncHubspotTradeoff(hubspotName, selectedText) {
+
+  const hiddenInput = document.querySelector(
+    `input[type="hidden"][name="${hubspotName}"]`
+  );
+
+  if (!hiddenInput) return;
+
+  // Normalize whitespace
+  const normalized = selectedText
+    .replace(/\u00a0/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  hiddenInput.value = normalized;
+
+  hiddenInput.dispatchEvent(new Event("input", { bubbles: true }));
+  hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
+
+  // Optional: update visible combobox text
+  const visibleInput = hiddenInput
+    .closest(".hsfc-DropdownInput")
+    ?.querySelector('input[type="text"][readonly]');
+
+  if (visibleInput) {
+    visibleInput.value = normalized;
+  }
+}
+
+  document.addEventListener("DOMContentLoaded", function () {
+    /* =========================
+       1. Utility: Wait for element
+    ========================== */
+    function waitForElement(selector, callback) {
+      const interval = setInterval(() => {
+        const el = document.querySelector(selector);
+        if (el) {
+          clearInterval(interval);
+          callback(el);
+        }
+      }, 200);
+    }
+
+
+
+    setupSubmitBridge();
+
+    /* =========================
+     SUBMIT BRIDGE
+     (Fake button → HubSpot submit → Success detection)
+    ========================== */
+
+    function setupSubmitBridge() {
+      const fakeBtn = document.querySelector(".btn-submit");
+      if (!fakeBtn) return;
+
+      const interval = setInterval(() => {
+        const hubspotSubmit = document.querySelector(
+          '.hsfc-Button[type="submit"]',
+        );
+
+        const hubspotForm = hubspotSubmit?.closest("form");
+
+        if (!hubspotSubmit || !hubspotForm) return;
+
+        clearInterval(interval);
+
+        // ---- When fake button clicked ----
+        fakeBtn.addEventListener("click", function () {
+          // Trigger HubSpot validation + submit
+          hubspotSubmit.click();
+        });
+
+        // ---- Listen for successful submission ----
+        hubspotForm.addEventListener("submit", function (e) {
+          // Wait one tick so HubSpot validation runs first
+          setTimeout(() => {
+            const hasErrors = hubspotForm.querySelector(
+              '[aria-invalid="true"], .hs-error-msg',
+            );
+
+            if (hasErrors) {
+              const hasFakeErrors = syncHubspotErrors();
+
+              if (hasFakeErrors) {
+                const firstInvalid = document.querySelector(".invalid");
+                firstInvalid?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
+              }
+
+              return;
+            }
+
+            // If no errors → show thank you
+            showThankYou();
+          }, 100);
+        });
+      }, 200);
+    }
+
+    /* =========================
+      SYNC HUBSPOT ERRORS → FAKE FIELDS
+    ========================== */
+    function connectHubspotErrorSync() {
+
+      const fakeFields = document.querySelectorAll("[data-hubspot]");
+
+      fakeFields.forEach(fake => {
+
+        const hubspotName = fake.dataset.hubspot;
+        if (!hubspotName) return;
+
+        const interval = setInterval(() => {
+
+          const hubspotInputs = document.querySelectorAll(
+            `[name="${hubspotName}"]`
+          );
+
+          if (!hubspotInputs.length) return;
+
+          clearInterval(interval);
+
+          hubspotInputs.forEach(input => {
+
+            const observer = new MutationObserver(() => {
+              syncErrorState(fake, hubspotName);
+            });
+
+            observer.observe(input, {
+              attributes: true,
+              attributeFilter: ["aria-invalid"]
+            });
+
+          });
+
+          // initial sync
+          syncErrorState(fake, hubspotName);
+
+        }, 200);
+      });
+    }
+
+    function syncErrorState(fake, hubspotName) {
+
+      const hubspotInput = document.querySelector(
+        `[name="${hubspotName}"]`
+      );
+
+      if (!hubspotInput) return;
+
+      const isInvalid =
+        hubspotInput.getAttribute("aria-invalid") === "true";
+
+      const wrapper =
+        fake.closest(".question-card") || fake;
+
+      if (isInvalid) {
+        wrapper.classList.add("invalid");
+      } else {
+        wrapper.classList.remove("invalid");
+      }
+    }
+
+
+  function connectAllHubspotMirrors() {
+
+    const fakeFields = document.querySelectorAll("[data-hubspot]");
+
+    fakeFields.forEach(fake => {
+
+      const hubspotName = fake.dataset.hubspot;
+      if (!hubspotName) return;
+
+      const interval = setInterval(() => {
+
+        const realFields = document.querySelectorAll(
+          `[name="${hubspotName}"]`
+        );
+
+        if (!realFields.length) return;
+
+        clearInterval(interval);
+
+        // --------------------------------------------------
+        // SIMPLE INPUTS (text, email, textarea)
+        // --------------------------------------------------
+        if (
+          fake.tagName === "INPUT" ||
+          fake.tagName === "TEXTAREA"
+        ) {
+
+          const syncSimple = () => {
+            realFields.forEach(real => {
+              real.value = fake.value;
+              real.dispatchEvent(new Event("input", { bubbles: true }));
+              real.dispatchEvent(new Event("change", { bubbles: true }));
+            });
+          };
+
+          fake.addEventListener("input", syncSimple);
+          fake.addEventListener("change", syncSimple);
+        }
+        
+        // --------------------------------------------------
+        // NUMBER
+        // --------------------------------------------------
+        if (fake.type === "number") {
+
+          fake.addEventListener("input", () => {
+            syncHubspotNumber(
+              hubspotName,
+              fake.value
+            );
+          });
+        }
+        
+        // --------------------------------------------------
+        // SELECT
+        // --------------------------------------------------
+        if (fake.tagName === "SELECT") {
+          fake.addEventListener("change", () => {
+            syncHubspotDropdown(fake, hubspotName);
+          });
+        }
+
+        // --------------------------------------------------
+        // RADIO GROUP
+        // --------------------------------------------------
+        if (fake.classList.contains("radio-group")) {
+
+          fake.addEventListener("change", (e) => {
+            const input = e.target.closest("input[type='radio']");
+            if (!input) return;
+
+            const label = fake.querySelector(`label[for="${input.id}"]`);
+            if (!label) return;
+
+            const selectedText = label.innerText.trim().toLowerCase();
+
+            realFields.forEach(real => {
+              const realLabel = real.closest("label");
+              if (!realLabel) return;
+
+              if (realLabel.innerText.trim().toLowerCase() === selectedText) {
+                real.checked = true;
+                real.dispatchEvent(new Event("change", { bubbles: true }));
+              }
+            });
+          });
+        }
+
+        // --------------------------------------------------
+        // CHECKBOX GROUP
+        // --------------------------------------------------
+        if (fake.querySelector("input[type='checkbox']")) {
+
+          fake.addEventListener("change", (e) => {
+
+            const input = e.target.closest("input[type='checkbox']");
+            if (!input) return;
+
+            const label = fake.querySelector(`label[for="${input.id}"]`);
+            if (!label) return;
+
+            const selectedText = label.innerText.trim().toLowerCase();
+
+            realFields.forEach(real => {
+              const realLabel = real.closest("label");
+              if (!realLabel) return;
+
+              if (realLabel.innerText.trim().toLowerCase() === selectedText) {
+                real.checked = input.checked;
+                real.dispatchEvent(new Event("change", { bubbles: true }));
+              }
+            });
+          });
+        }
+
+        // --------------------------------------------------
+        // SCALE GROUP (1–5 buttons)
+        // --------------------------------------------------
+        if (fake.classList.contains("scale-group")) {
+
+          fake.addEventListener("click", (e) => {
+
+            const btn = e.target.closest(".scale-btn");
+            if (!btn) return;
+
+            const selected = btn.innerText.trim();
+
+            syncHubspotScale(fake, hubspotName, selected);
+          });
+        }
+
+        // --------------------------------------------------
+        // PRICE LADDER
+        // --------------------------------------------------
+        if (fake.classList.contains("price-ladder")) {
+
+          fake.addEventListener("click", (e) => {
+
+            const btn = e.target.closest(".intent-btn");
+            if (!btn) return;
+
+            const step = btn.closest(".price-step");
+            if (!step) return;
+
+            const priceTag = step.querySelector(".price-tag");
+            if (!priceTag) return;
+
+            const priceText = priceTag.innerText.trim();
+
+            // Adjust this depending on your UI logic
+            const shouldCheck = btn.innerText
+              .toLowerCase()
+              .includes("yes");
+
+            syncHubspotPriceLadder(
+              fake,
+              hubspotName,
+              priceText,
+              shouldCheck
+            );
+          });
+        }
+
+        // --------------------------------------------------
+        // TRADEOFF
+        // --------------------------------------------------
+        if (fake.classList.contains("tradeoff")) {
+
+          fake.addEventListener("click", (e) => {
+
+            const option = e.target.closest(".tradeoff-option");
+            if (!option) return;
+
+            const selectedText = option.innerText.trim();
+
+            syncHubspotTradeoff(
+              hubspotName,
+              selectedText
+            );
+          });
+        }
+
+      }, 200);
+    });
+  }
+
+    connectAllHubspotMirrors();
+    connectHubspotErrorSync();
+  }); // end first DOMContentLoaded (line 1693)
+
+  function showThankYou() {
+    document.getElementById("s" + currentSection).classList.remove("active");
+
+    document.getElementById("thanks").classList.add("active");
+
+    document.getElementById("progressFill").style.width = "100%";
+    document.getElementById("progressText").textContent = "Complete";
+    document.getElementById("progressPct").textContent = "100%";
+  }
+</script>
