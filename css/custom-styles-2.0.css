@@ -1238,6 +1238,15 @@ input::-webkit-inner-spin-button {
 .dark-rounded-form.get-report.v2 .hs-form .hs-form-field label.hs-error-msg {
   font-weight: 500;
   font-size: 12px;
+  color: #f95717;
+}
+
+.dark-rounded-form.get-report.v2 .brand-website-url-error {
+  color: #f95717;
+  margin-top: 0;
+  top: 2px;
+  left: 50px;
+  position: absolute;
 }
 
 .dark-rounded-form.get-report.v2 .hs_submit input:hover {
