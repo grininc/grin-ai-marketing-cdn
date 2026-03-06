@@ -1226,7 +1226,7 @@ input::-webkit-inner-spin-button {
 .dark-rounded-form.get-report.v2 .hs-form .hs-form-field .hs-error-msgs {
   position: absolute;
   left: 50px;
-  bottom: 6px;
+  bottom: 4px;
   font-weight: 300;
   margin-bottom: 0;
 }
@@ -1242,11 +1242,12 @@ input::-webkit-inner-spin-button {
 }
 
 .dark-rounded-form.get-report.v2 .brand-website-url-error {
-  color: #f95717;
-  margin-top: 0;
+  color: #f95717 !important;
+  margin-top: 0 !important;
   top: 2px;
   left: 50px;
   position: absolute;
+  font-size: 12px !important;
 }
 
 .dark-rounded-form.get-report.v2 .hs_submit input:hover {
