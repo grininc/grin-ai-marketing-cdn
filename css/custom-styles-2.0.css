@@ -50,10 +50,8 @@
 .recaptcha-disclosure {
   font-size: 12px;
   line-height: 1.4;
-  color: #000;
-  margin-top: 14px;
-  margin-bottom: 0;
-  opacity: 0.9;
+  color: var(--_🎨-color--tokens---tone--medium);
+  margin-bottom: 3px;
 }
 
 .recaptcha-disclosure a {
