@@ -352,6 +352,13 @@ span.gated-link-button:hover,
 /* End Gated Link Popup and custom popup*/
 
 /*Policy pages*/
+.rich-text a {
+  color: #696eff;
+}
+.rich-text a:hover {
+  text-decoration: underline;
+}
+
 .rich-text.policy p,
 .rich-text.policy h2,
 .rich-text.policy h3,
