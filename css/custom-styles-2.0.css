@@ -1665,3 +1665,9 @@ input::-webkit-inner-spin-button {
 }
 
 /*end gia styles*/
+
+@media screen and (max-width: 479px) {
+  .widget_table-2 .table_row {
+    grid-template-columns: 0.8fr 1fr 1fr;
+  }
+}
