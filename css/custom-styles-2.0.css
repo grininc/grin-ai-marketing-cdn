@@ -12,6 +12,10 @@
   border-radius: 4px;
 }
 
+.right_home-b video {
+  object-position: top;
+}
+
 #hubspot-messages-iframe-container.widget-align-right {
   display: none !important;
 }
