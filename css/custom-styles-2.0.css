@@ -16,6 +16,10 @@
   object-position: top;
 }
 
+.image-wrap_scroll.third.desktop {
+  background-size: cover !important;
+}
+
 #hubspot-messages-iframe-container.widget-align-right {
   display: none !important;
 }
