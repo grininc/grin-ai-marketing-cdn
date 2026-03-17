@@ -185,6 +185,7 @@
   border-radius: 12px;
   padding: 14px;
   color: white;
+  font-family: "Roobert", sans-serif;
 }
 
 .hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextareaInput {
@@ -195,7 +196,7 @@
   padding: 14px;
   font-size: 16px;
   font-family: "Roobert", sans-serif;
-  line-height: 1.2em;
+  line-height: 1.3em;
   color: white;
 }
 
