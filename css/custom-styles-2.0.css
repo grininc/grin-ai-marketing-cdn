@@ -76,9 +76,8 @@
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content label,
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-FieldDescription,
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-RichText,
-.hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-TextInput,
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content ul {
-  color: white;
+  color: black;
   font-family: "Roobert", sans-serif;
   line-height: 1.2em !important;
 }
@@ -185,6 +184,7 @@
   margin-bottom: 0;
   border-radius: 12px;
   padding: 14px;
+  color: white;
 }
 
 .hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextareaInput {
