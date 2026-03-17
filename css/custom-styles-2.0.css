@@ -206,6 +206,11 @@
   color: #b2b2b2;
 }
 
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-PostSubmit {
+  text-align: center;
+  font-family: "Roobert", sans-serif;
+}
+
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-ErrorAlert {
   font-size: 12px;
 }
