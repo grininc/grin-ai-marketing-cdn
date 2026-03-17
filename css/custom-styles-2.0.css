@@ -104,6 +104,7 @@
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content label {
   font-size: 16px;
   margin-bottom: 3px;
+  display: none;
 }
 
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-CheckboxField label,
@@ -139,11 +140,11 @@
   .hsfc-Step__Content
   .hsfc-Button[type="submit"] {
   margin-right: auto;
-  background: #e8fd95;
   font-family: Roobert;
-  font-weight: 300;
-  color: black;
-  border-radius: 25px 25px 25px 2px;
+  font-weight: 500;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(105, 110, 255, 0.5);
   transition:
     transform 0.2s ease-out,
     background-color 0.2s linear,
@@ -164,7 +165,8 @@
   .hsfc-FormWrapper
   .hsfc-Step__Content
   .hsfc-Button[type="submit"]:hover {
-  border-radius: 25px 25px 25px 25px;
+  box-shadow: 0 4px 32px rgba(105, 110, 255, 0.7);
+  transform: translateY(-1px);
 }
 
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-FieldLabel a {
@@ -179,9 +181,22 @@
 .hs-form-html .hsfc-FormWrapper .hsfc-Step__Content .hsfc-TextInput {
   font-size: 16px;
   background: #1e1e1e;
-  border: 1px solid #b2b2b2;
+  border: 0;
   margin-bottom: 0;
-  border-radius: 25px;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextareaInput {
+  background: #1e1e1e;
+  border: 0;
+  margin-bottom: 0;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 16px;
+  font-family: "Roobert", sans-serif;
+  line-height: 1.2em;
+  color: white;
 }
 
 .hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextInput::placeholder {
