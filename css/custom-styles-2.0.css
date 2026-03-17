@@ -198,6 +198,7 @@
   font-family: "Roobert", sans-serif;
   line-height: 1.3em;
   color: white;
+  min-height: 120px;
 }
 
 .hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextInput::placeholder,
