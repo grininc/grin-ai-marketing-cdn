@@ -139,9 +139,9 @@
   .hsfc-FormWrapper
   .hsfc-Step__Content
   .hsfc-Button[type="submit"] {
-  margin-right: auto;
+  margin: 0 auto 10px auto;
   font-family: Roobert;
-  font-weight: 500;
+  font-weight: 600;
   color: white;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(105, 110, 255, 0.5);
@@ -199,7 +199,8 @@
   color: white;
 }
 
-.hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextInput::placeholder {
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextInput::placeholder,
+.hs-form-html [data-hsfc-id="Renderer"] .hsfc-TextareaInput::placeholder {
   color: #b2b2b2;
 }
 
